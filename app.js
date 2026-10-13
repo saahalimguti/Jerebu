@@ -84,16 +84,19 @@ function handleMapZoom() {
  */
 async function loadLiveData(isBackground = false) {
   const refreshBtn = document.getElementById('refreshBtn');
-  if (!isBackground && refreshBtn) {
-    refreshBtn.classList.add('spinning');
+  const drawerRefreshBtn = document.getElementById('drawerRefreshBtn');
+  if (!isBackground) {
+    if (refreshBtn) refreshBtn.classList.add('spinning');
+    if (drawerRefreshBtn) drawerRefreshBtn.classList.add('spinning');
   }
 
   try {
     let dataset = null;
+    const cacheBuster = `t=${Date.now()}`;
 
     // 1. Try Live API endpoint (/api/live)
     try {
-      const response = await fetch('/api/live');
+      const response = await fetch(`/api/live?${cacheBuster}`);
       if (response.ok) {
         dataset = await response.json();
       }
@@ -104,7 +107,7 @@ async function loadLiveData(isBackground = false) {
     // 2. Fallback to bundled dataset (/data/ipu_latest.json) if API is unavailable or static hosting
     if (!dataset || !dataset.summary) {
       try {
-        const fallbackResp = await fetch('/data/ipu_latest.json');
+        const fallbackResp = await fetch(`/data/ipu_latest.json?${cacheBuster}`);
         if (fallbackResp.ok) {
           dataset = await fallbackResp.json();
         }
@@ -124,6 +127,9 @@ async function loadLiveData(isBackground = false) {
   } finally {
     if (refreshBtn) {
       setTimeout(() => refreshBtn.classList.remove('spinning'), 500);
+    }
+    if (drawerRefreshBtn) {
+      setTimeout(() => drawerRefreshBtn.classList.remove('spinning'), 500);
     }
   }
 }
@@ -586,19 +592,21 @@ function setupEventListeners() {
     refreshBtn.addEventListener('click', async () => {
       refreshBtn.classList.add('spinning');
       try {
-        await fetch('/api/scrape', { method: 'POST' });
-        setTimeout(() => loadLiveData(), 1200);
-      } catch (e) {
-        console.error('Trigger scrape error:', e);
-        loadLiveData();
-      }
+        fetch('/api/scrape', { method: 'POST' }).catch(() => {});
+      } catch (e) {}
+      await loadLiveData(false);
+      setTimeout(() => refreshBtn.classList.remove('spinning'), 500);
     });
   }
 
   // Drawer mini-refresh button
   const drawerRefreshBtn = document.getElementById('drawerRefreshBtn');
   if (drawerRefreshBtn) {
-    drawerRefreshBtn.addEventListener('click', () => loadLiveData());
+    drawerRefreshBtn.addEventListener('click', async () => {
+      drawerRefreshBtn.classList.add('spinning');
+      await loadLiveData(false);
+      setTimeout(() => drawerRefreshBtn.classList.remove('spinning'), 500);
+    });
   }
 
   // Navigation Tab Switching
