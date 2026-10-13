@@ -5,7 +5,7 @@
  */
 
 // Application State
-const state = {
+const state = window.appState = {
   data: null,
   map: null,
   markers: [],
@@ -22,6 +22,7 @@ const state = {
 document.addEventListener('DOMContentLoaded', () => {
   initMap();
   setupEventListeners();
+  setupViewportZoomLock();
   loadLiveData();
 
   // Auto-refresh poll every 60 seconds
@@ -49,13 +50,14 @@ function initMap() {
     wheelPxPerZoomLevel: 120
   });
 
-  // Fit bounds precisely to Malaysia (Peninsular on West, Sabah & Sarawak on East)
+  // Fit bounds precisely to Malaysia with responsive padding for mobile portrait
+  const isMobilePortrait = window.innerWidth <= 768;
   state.map.fitBounds([
-    [0.85, 99.6],  // Southwest Peninsular
-    [7.4, 119.3]   // Northeast Sabah
+    [0.6, 99.2],  // Southwest Peninsular (includes Johor & Singapore border)
+    [7.6, 119.5]  // Northeast Sabah
   ], {
-    paddingTopLeft: [30, 20],
-    paddingBottomRight: [30, 20]
+    paddingTopLeft: isMobilePortrait ? [75, 12] : [30, 20],
+    paddingBottomRight: isMobilePortrait ? [120, 12] : [30, 20]
   });
 
   // High-Resolution Satellite Imagery with butter-smooth tile caching
@@ -937,4 +939,81 @@ if ('serviceWorker' in navigator) {
         console.warn('[PWA] Service Worker registration failed:', err);
       });
   });
+}
+
+
+/**
+ * Strict Viewport Zoom Lock & Apple-Style Bottom Sheet (Mobile Portrait)
+ * Disallows browser viewport pinch/zoom and double-tap zoom so ONLY the Leaflet map zooms.
+ */
+function setupViewportZoomLock() {
+  // Prevent pinch-zoom on document outside map
+  ['gesturestart', 'gesturechange', 'gestureend'].forEach(evt => {
+    document.addEventListener(evt, (e) => {
+      if (!e.target.closest('#mapContainer')) {
+        e.preventDefault();
+      }
+    }, { passive: false });
+  });
+
+  // Prevent double-tap to zoom on UI chrome
+  let lastTouchEnd = 0;
+  document.addEventListener('touchend', (e) => {
+    const now = Date.now();
+    if (now - lastTouchEnd <= 300) {
+      if (!e.target.closest('#mapContainer')) {
+        e.preventDefault();
+      }
+    }
+    lastTouchEnd = now;
+  }, { passive: false });
+
+  // Prevent multi-touch pinch on UI chrome
+  document.addEventListener('touchstart', (e) => {
+    if (e.touches.length > 1 && !e.target.closest('#mapContainer')) {
+      e.preventDefault();
+    }
+  }, { passive: false });
+
+  document.addEventListener('touchmove', (e) => {
+    if (e.touches.length > 1 && !e.target.closest('#mapContainer')) {
+      e.preventDefault();
+    }
+  }, { passive: false });
+
+  // Setup Apple-Style Bottom Sheet Toggle & Swipe Gestures
+  const sheetDragHandle = document.getElementById('sheetDragHandle');
+  const summaryHeader = document.querySelector('#summaryCard .card-header');
+  const leftSidebar = document.getElementById('leftSidebar');
+
+  const toggleSheet = () => {
+    if (window.innerWidth <= 768 && leftSidebar) {
+      leftSidebar.classList.toggle('sheet-collapsed');
+    }
+  };
+
+  if (sheetDragHandle) sheetDragHandle.addEventListener('click', toggleSheet);
+  if (summaryHeader) summaryHeader.addEventListener('click', toggleSheet);
+
+  // Touch swipe support on drag handle & header
+  let startY = 0;
+  const touchTarget = sheetDragHandle || summaryHeader;
+  if (touchTarget && leftSidebar) {
+    touchTarget.addEventListener('touchstart', (e) => {
+      if (e.touches.length === 1) {
+        startY = e.touches[0].clientY;
+      }
+    }, { passive: true });
+
+    touchTarget.addEventListener('touchend', (e) => {
+      if (e.changedTouches.length === 1 && window.innerWidth <= 768) {
+        const deltaY = e.changedTouches[0].clientY - startY;
+        if (deltaY > 30) {
+          leftSidebar.classList.add('sheet-collapsed');
+        } else if (deltaY < -30) {
+          leftSidebar.classList.remove('sheet-collapsed');
+        }
+      }
+    }, { passive: true });
+  }
 }

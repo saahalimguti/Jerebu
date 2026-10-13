@@ -58,15 +58,45 @@
 }
 
 html, body {
-  overscroll-behavior-y: none;
-  height: 100vh;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
   height: 100dvh;
-  width: 100vw;
+  overflow: hidden;
+  position: fixed;
+  overscroll-behavior: none;
+  -webkit-overscroll-behavior: none;
+  touch-action: pan-x pan-y;
+  -webkit-text-size-adjust: 100%;
 }
 
 html, body, button, a, input, select {
   -webkit-tap-highlight-color: transparent;
-  touch-action: manipulation;
+}
+
+/* UI chrome disallows browser viewport pinch/zoom (ONLY map can zoom) */
+.top-nav,
+.left-sidebar,
+.card,
+.station-drawer,
+.map-control-cluster,
+.legend-card,
+.modal-overlay,
+.modal-dialog {
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Scrollable containers allow vertical scroll inside */
+.station-items-list,
+.drawer-body,
+.table-responsive,
+.modal-body {
+  touch-action: pan-y;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
 }
 
 button, .nav-tab, .filter-tab, .brand-logo, .pwa-badge, .legend-toggle {
@@ -864,9 +894,11 @@ body.dark-theme {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 12px;
+  width: 100%;
   font-size: 0.82rem;
   cursor: pointer;
-  padding: 4px 6px;
+  padding: 5px 8px;
   border-radius: var(--radius-sm);
   transition: background var(--duration-fast) var(--ease-out);
 }
@@ -878,6 +910,8 @@ body.dark-theme {
   display: flex;
   align-items: center;
   gap: 8px;
+  min-width: 0;
+  flex: 1;
 }
 
 .region-bullet {
@@ -885,16 +919,49 @@ body.dark-theme {
   height: 8px;
   border-radius: 50%;
   background: #22C55E;
+  flex-shrink: 0;
 }
 
 .region-name {
   color: var(--text-muted);
   font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-right: 8px; /* Clean gap so label never touches the number */
 }
 
 .region-val {
-  font-weight: 700;
+  font-weight: 800;
   color: #FFFFFF;
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
+  text-align: right;
+  min-width: 28px;
+}
+
+/* Sheet Drag Handle for Mobile Portrait (Apple Design) */
+.sheet-drag-handle {
+  display: none;
+  width: 100%;
+  padding: 6px 0 10px 0;
+  justify-content: center;
+  align-items: center;
+  cursor: grab;
+  touch-action: none;
+}
+
+.sheet-handle-pill {
+  width: 36px;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.32);
+  transition: background var(--duration-fast) var(--ease-out), width var(--duration-fast) var(--ease-out);
+}
+
+.sheet-drag-handle:active .sheet-handle-pill {
+  background: rgba(255, 255, 255, 0.6);
+  width: 44px;
 }
 
 /* Station List Card */
@@ -1883,69 +1950,214 @@ body.dark-theme {
 
 /* Mobile Breakpoint (<= 768px) */
 @media (max-width: 768px) {
+  /* Dynamic Island & Safe-Area Aware Navbar */
   .top-nav {
-    height: 56px;
-    padding: 0 12px;
+    height: calc(56px + env(safe-area-inset-top, 0px));
+    padding: env(safe-area-inset-top, 0px) 10px 0 10px;
+    background: rgba(11, 21, 40, 0.90);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    gap: 8px;
+    justify-content: space-between;
+  }
+  .nav-left {
+    min-width: 0;
+    flex-shrink: 0;
+    gap: 6px;
+  }
+  .brand-logo {
+    gap: 6px;
+  }
+  .brand-logo-img {
+    height: 26px;
+    width: auto;
+  }
+  .brand-text {
+    min-width: 0;
   }
   .brand-title {
-    font-size: 1.05rem;
+    font-size: 0.86rem;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    gap: 4px;
+  }
+  .brand-subtitle {
+    display: none; /* Hide long subtitle on mobile portrait to avoid squishing */
   }
   .time-badge {
     display: none;
   }
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    flex-shrink: 0;
+  }
   .search-box {
-    width: 130px;
+    width: 88px;
+    height: 30px;
+    padding: 0 6px 0 8px;
+    gap: 4px;
+    transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   }
   .search-box:focus-within {
-    width: 160px;
+    width: 130px;
+  }
+  .search-icon {
+    width: 13px;
+    height: 13px;
+    flex-shrink: 0;
+  }
+  .search-box input {
+    font-size: 0.70rem;
+    width: 100%;
+  }
+  .search-box input::placeholder {
+    font-size: 0.70rem;
+  }
+  .status-pill {
+    padding: 3px 6px;
+    font-size: 0.68rem;
+    white-space: nowrap;
+    gap: 4px;
+  }
+  .status-pill .pulse-dot {
+    width: 5px;
+    height: 5px;
+  }
+  .btn-icon {
+    width: 30px;
+    height: 30px;
   }
 
+  /* Apple-Style Collapsible Bottom Sheet / Dock */
   .left-sidebar {
     position: absolute;
     top: auto;
-    bottom: 16px;
-    left: 16px;
-    right: 16px;
+    bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+    left: 12px;
+    right: 12px;
     width: auto;
-    max-height: 48vh;
+    max-height: 52vh;
+    z-index: 600;
+    pointer-events: none;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   }
-  .station-list-card {
-    display: none; /* Switch to station drawer on mobile */
-  }
-  .summary-card {
-    padding: 12px 16px;
-  }
-  .summary-body {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-  }
-  .regions-list {
-    border-top: none;
-    border-left: 1px solid rgba(255, 255, 255, 0.08);
-    padding-top: 0;
-    padding-left: 14px;
+  .left-sidebar > * {
+    pointer-events: auto;
   }
 
+  .station-list-card {
+    display: none;
+  }
+
+  .summary-card {
+    padding: 8px 14px 14px 14px;
+    border-radius: 20px;
+    background: rgba(13, 25, 48, 0.92);
+    backdrop-filter: blur(28px);
+    -webkit-backdrop-filter: blur(28px);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.75);
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Drag handle visible on mobile portrait */
+  .sheet-drag-handle {
+    display: flex;
+  }
+
+  .summary-card .card-header {
+    margin-bottom: 10px;
+    cursor: pointer;
+  }
+  .summary-card .card-title {
+    font-size: 0.95rem;
+  }
+  .summary-card .card-subtitle {
+    font-size: 0.70rem;
+  }
+
+  /* Perfectly Balanced Summary Body in Portrait Mode */
+  .summary-body {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .gauge-wrapper {
+    flex-shrink: 0;
+    width: 100px;
+    height: 100px;
+  }
+  .gauge-val {
+    font-size: 1.8rem;
+  }
+  .gauge-label {
+    font-size: 0.70rem;
+  }
+
+  .regions-list {
+    flex: 1;
+    min-width: 0;
+    border-top: none;
+    border-left: 1px solid rgba(255, 255, 255, 0.12);
+    padding-top: 0;
+    padding-left: 14px;
+    gap: 6px;
+  }
+  .region-item {
+    padding: 3px 4px;
+    gap: 8px;
+  }
+  .region-name {
+    font-size: 0.75rem;
+    margin-right: 6px;
+  }
+  .region-val {
+    font-size: 0.85rem;
+  }
+
+  /* Collapsed Mini-Dock Mode (Peek state allows 100% full map visibility) */
+  .left-sidebar.sheet-collapsed {
+    transform: translateY(calc(100% - 46px));
+  }
+  .left-sidebar.sheet-collapsed .summary-card {
+    padding: 6px 14px 8px 14px;
+    border-radius: 16px 16px 0 0;
+    background: rgba(13, 25, 48, 0.96);
+  }
+  .left-sidebar.sheet-collapsed .summary-body {
+    display: none;
+  }
+  .left-sidebar.sheet-collapsed .card-header {
+    margin-bottom: 0;
+  }
+
+  /* Full Screen Station Drawer on Mobile */
   .station-drawer {
     top: auto;
     bottom: 0;
     left: 0;
     right: 0;
     width: 100%;
-    height: 75vh;
+    height: 80vh;
     border-radius: 24px 24px 0 0;
     transform: translateY(100%);
+    box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.8);
   }
   .station-drawer.open {
     transform: translateY(0);
   }
 
   .legend-card {
-    display: none; /* Hide legend on small mobile screens to keep view clean */
+    display: none;
   }
   .map-control-cluster {
-    top: 68px;
+    top: calc(66px + env(safe-area-inset-top, 0px));
     right: 12px;
   }
 }
