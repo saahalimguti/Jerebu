@@ -1,0 +1,44 @@
+name: Hourly IPU Scraper
+
+on:
+  schedule:
+    # Berjalan pada minit ke-20 setiap jam (08:20, 09:20, 10:20 MYT ...)
+    # Memberi ruang 20 minit untuk Jabatan Alam Sekitar mengira purata jam baharu
+    - cron: '20 * * * *'
+  workflow_dispatch: # Membenarkan anda menekan butang 'Run workflow' secara manual bila-bila masa
+
+permissions:
+  contents: write
+
+jobs:
+  scrape-and-sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install Dependencies & Patchright Chromium
+        run: |
+          pip install patchright schedule
+          patchright install chromium --with-deps
+
+      - name: Execute Scraper (DOE & AQICN)
+        run: |
+          python scraper.py
+
+      - name: Commit and Push Updated Dataset
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/ipu_latest.json
+          if ! git diff --quiet data/ipu_latest.json || ! git diff --staged --quiet; then
+            git commit -m "chore(data): auto-update hourly IPU dataset [skip ci]"
+            git push origin main
+          else
+            echo "Tiada perubahan data baharu untuk dikomit."
+          fi
