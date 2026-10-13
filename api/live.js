@@ -157,8 +157,8 @@ module.exports = async (req, res) => {
 
       const latestRecordDt = doeStations[0]?.record_dt || new Date().toISOString();
       const dateObj = new Date();
-      const dateStr = dateObj.toLocaleDateString("ms-MY", { day: "2-digit", month: "short", year: "numeric" });
-      const timeStr = dateObj.toLocaleTimeString("ms-MY", { hour: "2-digit", minute: "2-digit", hour12: false });
+      const dateStr = dateObj.toLocaleDateString("ms-MY", { timeZone: "Asia/Kuala_Lumpur", day: "2-digit", month: "short", year: "numeric" });
+      const timeStr = dateObj.toLocaleTimeString("ms-MY", { timeZone: "Asia/Kuala_Lumpur", hour: "2-digit", minute: "2-digit", hour12: false });
 
       const dataset = {
         timestamp: new Date().toISOString(),

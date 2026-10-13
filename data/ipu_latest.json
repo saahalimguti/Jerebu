@@ -2397,5 +2397,6 @@
       "delta_label": "-4",
       "explanation": "DOE menggunakan formula Indeks Pencemaran Udara JAS (Purata bergerak 24-jam/1-jam), manakala AQICN menggunakan skala US-EPA AQI."
     }
-  ]
+  ],
+  "latest_record_dt": "2026-10-13 09:00:00"
 }
