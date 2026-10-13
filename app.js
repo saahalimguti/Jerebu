@@ -19,7 +19,7 @@ const state = window.appState = {
 };
 
 // Initialize Application
-document.addEventListener('DOMContentLoaded', () => {
+function initApp() {
   initMap();
   setupEventListeners();
   setupViewportZoomLock();
@@ -29,7 +29,13 @@ document.addEventListener('DOMContentLoaded', () => {
   setInterval(() => {
     loadLiveData(true);
   }, 60000);
-});
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initApp);
+} else {
+  initApp();
+}
 
 /**
  * Initialize 3D Satellite Relief Leaflet Map
@@ -629,14 +635,16 @@ function openStationDrawer(station) {
   const deltaTagElem = document.getElementById('sbsDeltaTag');
 
   if (comp) {
-    doeValElem.textContent = comp.doe_api;
-    aqicnValElem.textContent = comp.aqicn_aqi;
-    deltaTagElem.textContent = comp.delta_label + ' Δ';
-    deltaTagElem.style.color = comp.delta > 0 ? '#FACC15' : '#4ADE80';
+    if (doeValElem) doeValElem.textContent = comp.doe_api;
+    if (aqicnValElem) aqicnValElem.textContent = comp.aqicn_aqi;
+    if (deltaTagElem) {
+      deltaTagElem.textContent = comp.delta_label + ' Δ';
+      deltaTagElem.style.color = comp.delta > 0 ? '#FACC15' : '#4ADE80';
+    }
   } else {
-    doeValElem.textContent = station.api;
-    aqicnValElem.textContent = Math.round(station.api * 1.05);
-    deltaTagElem.textContent = '+3 Δ';
+    if (doeValElem) doeValElem.textContent = station.api;
+    if (aqicnValElem) aqicnValElem.textContent = Math.round(station.api * 1.05);
+    if (deltaTagElem) deltaTagElem.textContent = '+3 Δ';
   }
 
   // Pollutants Breakdown Table
@@ -657,16 +665,32 @@ function openStationDrawer(station) {
   // Show drawer with Emil Kowalski ease-out enter
   drawer.classList.add('open');
   drawer.setAttribute('aria-hidden', 'false');
+  drawer.style.transform = '';
+
+  const backdrop = document.getElementById('drawerBackdrop');
+  if (backdrop) {
+    backdrop.classList.add('active');
+    backdrop.setAttribute('aria-hidden', 'false');
+  }
 }
 
 /**
  * Close Station Detail Drawer
  */
+window.openStationDrawer = openStationDrawer;
+window.closeStationDrawer = closeStationDrawer;
+
 function closeStationDrawer() {
   const drawer = document.getElementById('stationDrawer');
   if (drawer) {
     drawer.classList.remove('open');
     drawer.setAttribute('aria-hidden', 'true');
+    drawer.style.transform = '';
+  }
+  const backdrop = document.getElementById('drawerBackdrop');
+  if (backdrop) {
+    backdrop.classList.remove('active');
+    backdrop.setAttribute('aria-hidden', 'true');
   }
 }
 
@@ -739,9 +763,71 @@ function renderTrendBars() {
  * Wire Up All User Interactions & Modals
  */
 function setupEventListeners() {
-  // Drawer close button
+  // Drawer close button & Backdrop tap to close
   const drawerBackBtn = document.getElementById('drawerBackBtn');
   if (drawerBackBtn) drawerBackBtn.addEventListener('click', closeStationDrawer);
+
+  const drawerBackdrop = document.getElementById('drawerBackdrop');
+  if (drawerBackdrop) {
+    drawerBackdrop.addEventListener('click', closeStationDrawer);
+    drawerBackdrop.addEventListener('touchstart', (e) => {
+      e.preventDefault();
+      closeStationDrawer();
+    }, { passive: false });
+  }
+
+  // Drag header downward to close drawer gesture
+  const drawerDragHandle = document.getElementById('drawerDragHandle');
+  const drawerHeader = document.querySelector('.drawer-header');
+  const stationDrawer = document.getElementById('stationDrawer');
+
+  let dragStartY = 0;
+  let dragCurrentY = 0;
+  let isDraggingDrawer = false;
+
+  function handleDragStart(e) {
+    if (!stationDrawer || !stationDrawer.classList.contains('open')) return;
+    const touch = e.touches ? e.touches[0] : e;
+    dragStartY = touch.clientY;
+    dragCurrentY = dragStartY;
+    isDraggingDrawer = true;
+    stationDrawer.style.transition = 'none';
+  }
+
+  function handleDragMove(e) {
+    if (!isDraggingDrawer || !stationDrawer) return;
+    const touch = e.touches ? e.touches[0] : e;
+    dragCurrentY = touch.clientY;
+    const deltaY = dragCurrentY - dragStartY;
+    if (deltaY > 0) {
+      stationDrawer.style.transform = `translateY(${deltaY}px)`;
+    }
+  }
+
+  function handleDragEnd() {
+    if (!isDraggingDrawer || !stationDrawer) return;
+    isDraggingDrawer = false;
+    stationDrawer.style.transition = '';
+    const deltaY = dragCurrentY - dragStartY;
+    if (deltaY > 45) {
+      closeStationDrawer();
+    } else {
+      stationDrawer.style.transform = '';
+    }
+  }
+
+  if (drawerDragHandle) {
+    drawerDragHandle.addEventListener('touchstart', handleDragStart, { passive: true });
+    drawerDragHandle.addEventListener('touchmove', handleDragMove, { passive: true });
+    drawerDragHandle.addEventListener('touchend', handleDragEnd);
+    drawerDragHandle.addEventListener('click', closeStationDrawer);
+  }
+
+  if (drawerHeader) {
+    drawerHeader.addEventListener('touchstart', handleDragStart, { passive: true });
+    drawerHeader.addEventListener('touchmove', handleDragMove, { passive: true });
+    drawerHeader.addEventListener('touchend', handleDragEnd);
+  }
 
   // Search Input in Header
   const searchInput = document.getElementById('searchInput');

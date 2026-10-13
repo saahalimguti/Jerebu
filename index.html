@@ -253,8 +253,15 @@
       </div>
     </div>
 
+    <!-- STATION DETAIL BACKDROP OVERLAY (Touch outside to close) -->
+    <div class="drawer-backdrop" id="drawerBackdrop" aria-hidden="true"></div>
+
     <!-- STATION DETAIL MODAL / DRAWER (Exact match to Mobile & Tablet showcase) -->
     <div class="station-drawer" id="stationDrawer" aria-hidden="true">
+      <!-- Mobile Drag Handle for Closing -->
+      <div class="drawer-drag-handle" id="drawerDragHandle" role="button" aria-label="Tutup Panel" tabindex="0">
+        <span class="sheet-handle-pill"></span>
+      </div>
       <div class="drawer-header">
         <button class="drawer-back-btn" id="drawerBackBtn" aria-label="Tutup panel">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
@@ -288,20 +295,15 @@
 
         <!-- Side-by-Side Live Comparison Box (DOE APIMS vs AQICN) -->
         <div class="side-by-side-card">
-          <div class="sbs-header">
-            <h4>⚖️ Perbandingan Side-by-Side (Masa Nyata)</h4>
-            <span class="badge-tag">Stesen Berpadanan</span>
-          </div>
+          <!-- Gambar 2: Header text removed completely -->
           <div class="sbs-comparison-grid">
             <div class="sbs-col doe-col">
               <div class="sbs-source">DOE APIMS (JAS)</div>
               <div class="sbs-val" id="sbsDoeVal">62</div>
               <div class="sbs-standard">Indeks Malaysia</div>
             </div>
-            <div class="sbs-vs">
-              <span class="vs-text">vs</span>
-              <span class="delta-tag" id="sbsDeltaTag">+3 Δ</span>
-            </div>
+            <!-- Gambar 3: Minimalist vertical line replacing text comparison -->
+            <div class="sbs-divider" aria-hidden="true"></div>
             <div class="sbs-col aqicn-col">
               <div class="sbs-source">AQICN (WAQI)</div>
               <div class="sbs-val" id="sbsAqicnVal">65</div>

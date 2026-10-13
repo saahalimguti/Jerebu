@@ -1311,6 +1311,26 @@ body.dark-theme {
 /* ==========================================================================
    STATION DETAIL DRAWER / MODAL (Emil Kowalski Physics & Refinement)
    ========================================================================== */
+.drawer-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(4, 9, 20, 0.55);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 590;
+  transition: opacity var(--duration-fast) var(--ease-out);
+}
+
+.drawer-backdrop.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
 .station-drawer {
   position: absolute;
   top: 84px;
@@ -1336,6 +1356,29 @@ body.dark-theme {
   transform: translateX(0);
   opacity: 1;
   pointer-events: auto;
+}
+
+.drawer-drag-handle {
+  display: none;
+  width: 100%;
+  padding: 8px 0 4px 0;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+}
+
+.drawer-drag-handle .sheet-handle-pill {
+  width: 36px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.28);
+  border-radius: var(--radius-pill);
+  transition: background var(--duration-fast) var(--ease-out);
+}
+
+.drawer-drag-handle:active .sheet-handle-pill {
+  background: rgba(255, 255, 255, 0.5);
 }
 
 .drawer-header {
@@ -1476,22 +1519,7 @@ body.dark-theme {
 }
 
 .sbs-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 12px;
-}
-.sbs-header h4 {
-  font-size: 0.82rem;
-  font-weight: 700;
-  color: #38BDF8;
-}
-.badge-tag {
-  font-size: 0.65rem;
-  background: rgba(56, 189, 248, 0.15);
-  color: #38BDF8;
-  padding: 2px 6px;
-  border-radius: var(--radius-pill);
+  display: none !important;
 }
 
 .sbs-comparison-grid {
@@ -1523,32 +1551,30 @@ body.dark-theme {
   color: var(--text-muted);
 }
 
-.sbs-vs {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 0 8px;
-}
-.vs-text {
-  font-size: 0.7rem;
-  color: var(--text-dim);
-  font-weight: 700;
-}
-.delta-tag {
-  font-size: 0.72rem;
-  font-weight: 800;
-  color: #FACC15;
-  background: rgba(234, 179, 8, 0.15);
-  padding: 1px 6px;
-  border-radius: 4px;
-  margin-top: 2px;
+/* Gambar 3: Minimalist vertical divider replacing comparison text */
+.sbs-divider {
+  width: 1px;
+  height: 38px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(56, 189, 248, 0.55) 50%, rgba(255, 255, 255, 0.05) 100%);
+  margin: 0 10px;
+  flex-shrink: 0;
+  border-radius: 1px;
 }
 
+.sbs-vs {
+  display: none !important;
+}
+
+/* Gambar 4: Justified left and right aligned with comparison box */
 .sbs-note {
   font-size: 0.68rem;
   color: var(--text-dim);
   margin-top: 10px;
-  line-height: 1.35;
+  line-height: 1.4;
+  text-align: justify;
+  text-justify: inter-word;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /* Pollutants Breakdown Grid */
@@ -1609,26 +1635,39 @@ body.dark-theme {
 }
 
 .drawer-footer {
+  position: relative;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   margin-top: auto;
   border-top: 1px solid var(--border-subtle);
-  padding-top: 12px;
+  padding-top: 10px;
+  padding-bottom: 2px;
+  width: 100%;
 }
 .footer-time {
   font-size: 0.68rem;
   color: var(--text-dim);
+  text-align: center;
+  width: 100%;
+  display: block;
 }
 .footer-refresh {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
   background: transparent;
   border: none;
   color: var(--text-muted);
   cursor: pointer;
   padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .footer-refresh:active {
-  transform: scale(0.97);
+  transform: translateY(-50%) scale(0.95);
 }
 .footer-refresh svg {
   width: 16px;
@@ -2137,20 +2176,140 @@ body.dark-theme {
     margin-bottom: 0;
   }
 
-  /* Full Screen Station Drawer on Mobile */
+  /* Zero-Scroll Dynamically Fixed Station Drawer on Mobile */
+  .drawer-drag-handle {
+    display: flex;
+  }
+
   .station-drawer {
     top: auto;
     bottom: 0;
     left: 0;
     right: 0;
     width: 100%;
-    height: 80vh;
+    height: auto;
+    max-height: calc(100dvh - 64px);
     border-radius: 24px 24px 0 0;
-    transform: translateY(100%);
-    box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.8);
+    transform: translateY(105%);
+    box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.85);
+    background: rgba(11, 21, 40, 0.96);
+    backdrop-filter: blur(32px);
+    -webkit-backdrop-filter: blur(32px);
+    padding-bottom: max(10px, env(safe-area-inset-bottom, 10px));
+    touch-action: pan-y;
+    transition: transform var(--duration-enter) var(--ease-out), opacity var(--duration-fast) var(--ease-out);
   }
   .station-drawer.open {
     transform: translateY(0);
+  }
+
+  .drawer-header {
+    padding: 6px 16px 8px 16px;
+    cursor: grab;
+    touch-action: none;
+  }
+  .drawer-station-name {
+    font-size: 1.05rem;
+  }
+  .drawer-station-state {
+    font-size: 0.70rem;
+  }
+
+  .drawer-body {
+    padding: 8px 16px 4px 16px;
+    overflow: hidden; /* Zero-scroll dynamic fit */
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .drawer-gauge-section {
+    padding: 8px 12px;
+    gap: 12px;
+  }
+  .drawer-circular-gauge {
+    width: 68px;
+    height: 68px;
+  }
+  .drawer-api-val {
+    font-size: 1.45rem;
+  }
+  .drawer-api-unit {
+    font-size: 0.60rem;
+  }
+  .health-msg-title {
+    font-size: 0.80rem;
+    margin-bottom: 2px;
+  }
+  .health-msg-desc {
+    font-size: 0.67rem;
+    line-height: 1.3;
+  }
+
+  .side-by-side-card {
+    padding: 8px 12px;
+  }
+  .sbs-comparison-grid {
+    padding: 6px 10px;
+  }
+  .sbs-source {
+    font-size: 0.64rem;
+  }
+  .sbs-val {
+    font-size: 1.25rem;
+    margin: 1px 0;
+  }
+  .sbs-standard {
+    font-size: 0.58rem;
+  }
+  .sbs-divider {
+    height: 34px;
+    margin: 0 8px;
+  }
+  .sbs-note {
+    font-size: 0.64rem;
+    margin-top: 6px;
+    line-height: 1.35;
+    text-align: justify;
+    text-justify: inter-word;
+  }
+
+  .pollutants-section {
+    gap: 6px;
+  }
+  .section-title-row {
+    margin-bottom: 2px;
+  }
+  .section-title {
+    font-size: 0.78rem;
+  }
+  .section-subtitle {
+    font-size: 0.64rem;
+  }
+  .pollutants-grid {
+    gap: 6px;
+  }
+  .pollutant-card {
+    padding: 5px 8px;
+    gap: 6px;
+  }
+  .p-dot {
+    width: 5px;
+    height: 5px;
+  }
+  .p-name {
+    font-size: 0.62rem;
+  }
+  .p-val {
+    font-size: 0.78rem;
+  }
+
+  .drawer-footer {
+    padding-top: 6px;
+    padding-bottom: 0;
+  }
+  .footer-time {
+    font-size: 0.64rem;
   }
 
   .legend-card {
