@@ -89,11 +89,35 @@ async function loadLiveData(isBackground = false) {
   }
 
   try {
-    const response = await fetch('/api/live');
-    if (!response.ok) throw new Error('Network response was not ok');
-    const dataset = await response.json();
-    state.data = dataset;
+    let dataset = null;
 
+    // 1. Try Live API endpoint (/api/live)
+    try {
+      const response = await fetch('/api/live');
+      if (response.ok) {
+        dataset = await response.json();
+      }
+    } catch (apiErr) {
+      console.warn('Live API unreachable, attempting static cache fallback...', apiErr);
+    }
+
+    // 2. Fallback to bundled dataset (/data/ipu_latest.json) if API is unavailable or static hosting
+    if (!dataset || !dataset.summary) {
+      try {
+        const fallbackResp = await fetch('/data/ipu_latest.json');
+        if (fallbackResp.ok) {
+          dataset = await fallbackResp.json();
+        }
+      } catch (fbErr) {
+        console.warn('Static cache fallback failed:', fbErr);
+      }
+    }
+
+    if (!dataset || !dataset.summary) {
+      throw new Error('Unable to load IPU dataset from any source');
+    }
+
+    state.data = dataset;
     renderDashboard(dataset);
   } catch (error) {
     console.error('Error loading IPU data:', error);
