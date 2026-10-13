@@ -1171,16 +1171,27 @@ function closeModal(id) {
   if (mapTab) mapTab.classList.add('active');
 }
 
-// Register PWA Service Worker for Offline & Installability
+// Register PWA Service Worker for Offline & Installability with immediate update check
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/sw.js')
       .then(reg => {
+        // Immediately check for SW updates on every launch
+        reg.update();
         console.log('[PWA] Service Worker registered with scope:', reg.scope);
       })
       .catch(err => {
         console.warn('[PWA] Service Worker registration failed:', err);
       });
+  });
+
+  // Reload page smoothly when a new Service Worker takes over
+  let refreshing = false;
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    if (!refreshing) {
+      refreshing = true;
+      window.location.reload();
+    }
   });
 }
 

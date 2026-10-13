@@ -57,14 +57,29 @@
   padding: 0;
 }
 
-html, body {
+html {
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100%;
   height: 100dvh;
+  height: -webkit-fill-available;
+  overflow: hidden;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  height: 100dvh;
+  height: -webkit-fill-available;
   overflow: hidden;
   position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   overscroll-behavior: none;
   -webkit-overscroll-behavior: none;
   touch-action: pan-x pan-y;
@@ -109,9 +124,15 @@ body.dark-theme {
   background-color: var(--bg-base);
   color: var(--text-main);
   overflow: hidden;
-  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
   height: 100dvh;
-  width: 100vw;
+  height: -webkit-fill-available;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -534,11 +555,15 @@ body.dark-theme {
    DASHBOARD VIEWPORT & MAP
    ========================================================================== */
 .dashboard-viewport {
-  position: relative;
-  width: 100vw;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   height: 100dvh;
+  height: -webkit-fill-available;
   overflow: hidden;
 }
 

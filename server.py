@@ -88,6 +88,14 @@ class IPURequestHandler(http.server.SimpleHTTPRequestHandler):
         # Serve static files
         super().do_GET()
 
+    def end_headers(self):
+        clean_path = self.path.split("?")[0]
+        if clean_path in ["/sw.js", "/", "/index.html"]:
+            self.send_header("Cache-Control", "no-cache, no-store, must-revalidate")
+            self.send_header("Pragma", "no-cache")
+            self.send_header("Expires", "0")
+        super().end_headers()
+
     def do_POST(self):
         clean_path = self.path.split("?")[0]
         if clean_path == "/api/scrape":
