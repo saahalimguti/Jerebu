@@ -1,0 +1,775 @@
+{
+  "version": 1,
+  "meta": {
+    "lastScanned": "2026-10-13T09:01:05.745Z",
+    "fileCount": 23,
+    "hits": 0,
+    "misses": 0,
+    "renderedHash": "d79bfac6a1e3c28e9a1dca4e39c89ad9b1e139fe5bdd33eae77e0c6e1ba84771",
+    "storeUpdatedAt": "2026-10-13T09:01:05.746Z",
+    "rootHash": "8f498ee60cf0f0d3"
+  },
+  "files": {
+    ".github/workflows/hourly_scraper.yml": {
+      "description": "CI: Hourly IPU Scraper",
+      "tokens": 398,
+      "hash": "ba2e18f56b19c7bc",
+      "size": 1391,
+      "mtimeMs": 1791858510335.1978,
+      "updatedAt": "2026-10-13T09:01:05.656Z",
+      "source": "scan",
+      "importance": 0.5405
+    },
+    ".gitignore": {
+      "description": "Git ignore rules",
+      "tokens": 17,
+      "hash": "9c1c762a344ab9da",
+      "size": 62,
+      "mtimeMs": 1791852807535.8481,
+      "updatedAt": "2026-10-13T09:01:05.656Z",
+      "source": "scan",
+      "importance": 0.5405
+    },
+    "AGENTS.md": {
+      "description": "OpenWolf",
+      "tokens": 75,
+      "hash": "e401f79554a8d796",
+      "size": 297,
+      "mtimeMs": 1791882065274.4702,
+      "updatedAt": "2026-10-13T09:01:05.656Z",
+      "source": "scan",
+      "importance": 0.5405
+    },
+    "api/comparison.js": {
+      "description": "Vercel Serverless Function: GET /api/comparison",
+      "tokens": 246,
+      "hash": "719aacf9d98720a9",
+      "size": 858,
+      "mtimeMs": 1791855192854.2776,
+      "updatedAt": "2026-10-13T09:01:05.656Z",
+      "source": "scan",
+      "importance": 0.5405
+    },
+    "api/live.js": {
+      "description": "Vercel Serverless Function: GET /api/live (Real-Time Live APIMS Scraper & Cache)",
+      "tokens": 2139,
+      "hash": "16cbad9aadd28fc6",
+      "size": 7485,
+      "mtimeMs": 1791856099397.325,
+      "updatedAt": "2026-10-13T09:01:05.657Z",
+      "source": "scan",
+      "symbols": [
+        {
+          "name": "determineRegion",
+          "kind": "fn",
+          "startLine": 11,
+          "endLine": 17,
+          "tokens": 68
+        },
+        {
+          "name": "getStatusClass",
+          "kind": "fn",
+          "startLine": 19,
+          "endLine": 27,
+          "tokens": 162
+        },
+        {
+          "name": "fetchDOELive",
+          "kind": "fn",
+          "startLine": 29,
+          "endLine": 57,
+          "tokens": 243
+        },
+        {
+          "name": "readFallback",
+          "kind": "fn",
+          "startLine": 59,
+          "endLine": 74,
+          "tokens": 122
+        }
+      ],
+      "symbolSource": "ts",
+      "skeleton": "function determineRegion(stateName) {\nfunction getStatusClass(apiVal) {\nfunction fetchDOELive() {\nfunction readFallback() {",
+      "importance": 0.5405
+    },
+    "api/status.js": {
+      "description": "Vercel Serverless Function: GET /api/status",
+      "tokens": 112,
+      "hash": "1cf0b9d57dbbc38a",
+      "size": 389,
+      "mtimeMs": 1791855192853.8225,
+      "updatedAt": "2026-10-13T09:01:05.657Z",
+      "source": "scan",
+      "importance": 0.5405
+    },
+    "app.js": {
+      "description": "IPU Malaysia 3D Dashboard — Frontend Application Logic",
+      "tokens": 12372,
+      "hash": "70ae433a961f3df5",
+      "size": 43311,
+      "mtimeMs": 1791881073007.3474,
+      "updatedAt": "2026-10-13T09:01:05.658Z",
+      "source": "scan",
+      "symbols": [
+        {
+          "name": "initApp",
+          "kind": "fn",
+          "startLine": 22,
+          "endLine": 32,
+          "tokens": 59
+        },
+        {
+          "name": "initMap",
+          "kind": "fn",
+          "startLine": 43,
+          "endLine": 113,
+          "tokens": 663
+        },
+        {
+          "name": "handleMapZoom",
+          "kind": "fn",
+          "startLine": 118,
+          "endLine": 135,
+          "tokens": 125
+        },
+        {
+          "name": "loadLiveData",
+          "kind": "fn",
+          "startLine": 140,
+          "endLine": 190,
+          "tokens": 464
+        },
+        {
+          "name": "renderDashboard",
+          "kind": "fn",
+          "startLine": 195,
+          "endLine": 221,
+          "tokens": 212
+        },
+        {
+          "name": "updateHeader",
+          "kind": "fn",
+          "startLine": 226,
+          "endLine": 238,
+          "tokens": 144
+        },
+        {
+          "name": "updateSummaryCard",
+          "kind": "fn",
+          "startLine": 243,
+          "endLine": 280,
+          "tokens": 458
+        },
+        {
+          "name": "renderMapMarkers",
+          "kind": "fn",
+          "startLine": 285,
+          "endLine": 340,
+          "tokens": 568
+        },
+        {
+          "name": "renderHazeFogLayer",
+          "kind": "fn",
+          "startLine": 346,
+          "endLine": 404,
+          "tokens": 538
+        },
+        {
+          "name": "calculateHazeParams",
+          "kind": "fn",
+          "startLine": 406,
+          "endLine": 458,
+          "tokens": 554
+        },
+        {
+          "name": "updateHazeFogScale",
+          "kind": "fn",
+          "startLine": 468,
+          "endLine": 474,
+          "tokens": 98
+        },
+        {
+          "name": "toggleHazeFogLayer",
+          "kind": "fn",
+          "startLine": 476,
+          "endLine": 483,
+          "tokens": 56
+        },
+        {
+          "name": "updateHazeFogVisibility",
+          "kind": "fn",
+          "startLine": 485,
+          "endLine": 517,
+          "tokens": 274
+        },
+        {
+          "name": "getCleanStationName",
+          "kind": "fn",
+          "startLine": 522,
+          "endLine": 536,
+          "tokens": 203
+        },
+        {
+          "name": "renderSearchDropdown",
+          "kind": "fn",
+          "startLine": 541,
+          "endLine": 609,
+          "tokens": 647
+        },
+        {
+          "name": "highlightSearchMatch",
+          "kind": "fn",
+          "startLine": 611,
+          "endLine": 618,
+          "tokens": 118
+        },
+        {
+          "name": "selectSearchStation",
+          "kind": "fn",
+          "startLine": 620,
+          "endLine": 642,
+          "tokens": 220
+        },
+        {
+          "name": "escapeSearchHtml",
+          "kind": "fn",
+          "startLine": 644,
+          "endLine": 646,
+          "tokens": 42
+        },
+        {
+          "name": "renderStationList",
+          "kind": "fn",
+          "startLine": 654,
+          "endLine": 713,
+          "tokens": 536
+        },
+        {
+          "name": "openStationDrawer",
+          "kind": "fn",
+          "startLine": 718,
+          "endLine": 805,
+          "tokens": 1172
+        },
+        {
+          "name": "closeStationDrawer",
+          "kind": "fn",
+          "startLine": 813,
+          "endLine": 825,
+          "tokens": 116
+        },
+        {
+          "name": "renderComparisonTable",
+          "kind": "fn",
+          "startLine": 830,
+          "endLine": 859,
+          "tokens": 435
+        },
+        {
+          "name": "renderTrendBars",
+          "kind": "fn",
+          "startLine": 864,
+          "endLine": 890,
+          "tokens": 289
+        },
+        {
+          "name": "setupEventListeners",
+          "kind": "fn",
+          "startLine": 895,
+          "endLine": 1135,
+          "tokens": 2464
+        },
+        {
+          "name": "handleNavView",
+          "kind": "fn",
+          "startLine": 1140,
+          "endLine": 1156,
+          "tokens": 121
+        },
+        {
+          "name": "openModal",
+          "kind": "fn",
+          "startLine": 1158,
+          "endLine": 1161,
+          "tokens": 34
+        },
+        {
+          "name": "closeModal",
+          "kind": "fn",
+          "startLine": 1163,
+          "endLine": 1172,
+          "tokens": 106
+        },
+        {
+          "name": "setupViewportZoomLock",
+          "kind": "fn",
+          "startLine": 1203,
+          "endLine": 1282,
+          "tokens": 762
+        }
+      ],
+      "symbolSource": "ts",
+      "skeleton": "function initApp() {\nfunction initMap() {\nfunction handleMapZoom() {\nasync function loadLiveData(isBackground = false) {\nfunction renderDashboard(data) {\nfunction updateHeader(data) {\nfunction updateSummaryCard(summary) {\nfunction renderMapMarkers(stations) {\nfunction renderHazeFogLayer(stations) {\nfunction calculateHazeParams(api, zoom, lat, idx) {\nfunction updateHazeFogScale() {\nfunction toggleHazeFogLayer(enabled) {\nfunction updateHazeFogVisibility() {\nfunction getCleanStationName(fullName) {\nfunction renderSearchDropdown(query) {\nfunction highlightSearchMatch(text, query) {\nfunction selectSearchStation(st) {\nfunction escapeSearchHtml(str) {\nfunction renderStationList(stations) {\nfunction openStationDrawer(station) {\nfunction closeStationDrawer() {\nfunction renderComparisonTable(comparisons) {\nfunction renderTrendBars() {\nfunction setupEventListeners() {\nfunction handleNavView(view) {\nfunction openModal(id) {\nfunction closeModal(id) {\nfunction setupViewportZoomLock() {",
+      "importance": 0.5405
+    },
+    "CLAUDE.md": {
+      "description": "OpenWolf",
+      "tokens": 99,
+      "hash": "074d6b42b583729a",
+      "size": 395,
+      "mtimeMs": 1791882065261.681,
+      "updatedAt": "2026-10-13T09:01:05.658Z",
+      "source": "scan",
+      "importance": 0.5405
+    },
+    "data/ipu_latest.json": {
+      "description": "",
+      "tokens": 18953,
+      "hash": "7007e0c40cf85b95",
+      "size": 66333,
+      "mtimeMs": 1791881081736.5813,
+      "updatedAt": "2026-10-13T09:01:05.659Z",
+      "source": "scan",
+      "importance": 0.5405
+    },
+    "GEMINI.md": {
+      "description": "OpenWolf",
+      "tokens": 75,
+      "hash": "e401f79554a8d796",
+      "size": 297,
+      "mtimeMs": 1791882065274.835,
+      "updatedAt": "2026-10-13T09:01:05.659Z",
+      "source": "scan",
+      "importance": 0.5405
+    },
+    "index.html": {
+      "description": "Jerebu Monitor: Sistem Pemantauan IPU Malaysia Masa Nyata",
+      "tokens": 7066,
+      "hash": "d34d567b9befafaf",
+      "size": 26557,
+      "mtimeMs": 1791881073007.9768,
+      "updatedAt": "2026-10-13T09:01:05.660Z",
+      "source": "scan",
+      "importance": 0.5405
+    },
+    "manifest.json": {
+      "description": "",
+      "tokens": 390,
+      "hash": "3e2895f22b3ebc88",
+      "size": 1365,
+      "mtimeMs": 1791855192875.923,
+      "updatedAt": "2026-10-13T09:01:05.660Z",
+      "source": "scan",
+      "importance": 0.5405
+    },
+    "README.md": {
+      "description": "Project documentation",
+      "tokens": 920,
+      "hash": "baf22007a983129c",
+      "size": 3812,
+      "mtimeMs": 1791855192853.1233,
+      "updatedAt": "2026-10-13T09:01:05.660Z",
+      "source": "scan",
+      "importance": 0.5405
+    },
+    "scraper.py": {
+      "description": "Initialize default SSL context",
+      "tokens": 2459,
+      "hash": "05b0486e93e0b4ac",
+      "size": 8606,
+      "mtimeMs": 1791855192876.4258,
+      "updatedAt": "2026-10-13T09:01:05.660Z",
+      "source": "scan",
+      "symbols": [
+        {
+          "name": "determine_region",
+          "kind": "fn",
+          "startLine": 23,
+          "endLine": 35,
+          "tokens": 96
+        },
+        {
+          "name": "get_status_class",
+          "kind": "fn",
+          "startLine": 37,
+          "endLine": 51,
+          "tokens": 145
+        },
+        {
+          "name": "fetch_doe_stations",
+          "kind": "fn",
+          "startLine": 53,
+          "endLine": 98,
+          "tokens": 557
+        },
+        {
+          "name": "fetch_aqicn_stations",
+          "kind": "fn",
+          "startLine": 100,
+          "endLine": 138,
+          "tokens": 485
+        },
+        {
+          "name": "scrape_and_build_dataset",
+          "kind": "fn",
+          "startLine": 140,
+          "endLine": 213,
+          "tokens": 978
+        }
+      ],
+      "symbolSource": "ts",
+      "skeleton": "def determine_region(state_name):\ndef get_status_class(api_val):\ndef fetch_doe_stations():\ndef fetch_aqicn_stations():\ndef scrape_and_build_dataset(data_dir=None):",
+      "importance": 1
+    },
+    "server.py": {
+      "description": "URL configuration",
+      "tokens": 1522,
+      "hash": "a5fad2edfc1107a7",
+      "size": 5325,
+      "mtimeMs": 1791881073008.2273,
+      "updatedAt": "2026-10-13T09:01:05.661Z",
+      "source": "scan",
+      "symbols": [
+        {
+          "name": "hourly_scraper_worker",
+          "kind": "fn",
+          "startLine": 19,
+          "endLine": 30,
+          "tokens": 146
+        },
+        {
+          "name": "IPURequestHandler",
+          "kind": "class",
+          "startLine": 32,
+          "endLine": 116,
+          "tokens": 1025
+        },
+        {
+          "name": "IPURequestHandler.translate_path",
+          "kind": "method",
+          "startLine": 33,
+          "endLine": 42,
+          "tokens": 141
+        },
+        {
+          "name": "IPURequestHandler.do_GET",
+          "kind": "method",
+          "startLine": 44,
+          "endLine": 89,
+          "tokens": 542
+        },
+        {
+          "name": "IPURequestHandler.end_headers",
+          "kind": "method",
+          "startLine": 91,
+          "endLine": 97,
+          "tokens": 97
+        },
+        {
+          "name": "IPURequestHandler.do_POST",
+          "kind": "method",
+          "startLine": 99,
+          "endLine": 116,
+          "tokens": 226
+        },
+        {
+          "name": "run_server",
+          "kind": "fn",
+          "startLine": 118,
+          "endLine": 133,
+          "tokens": 217
+        }
+      ],
+      "symbolSource": "ts",
+      "imports": [
+        "scraper.py"
+      ],
+      "importance": 0.5405
+    },
+    "static/app.js": {
+      "description": "IPU Malaysia 3D Dashboard — Frontend Application Logic",
+      "tokens": 12372,
+      "hash": "70ae433a961f3df5",
+      "size": 43311,
+      "mtimeMs": 1791881073008.5315,
+      "updatedAt": "2026-10-13T09:01:05.661Z",
+      "source": "scan",
+      "symbols": [
+        {
+          "name": "initApp",
+          "kind": "fn",
+          "startLine": 22,
+          "endLine": 32,
+          "tokens": 59
+        },
+        {
+          "name": "initMap",
+          "kind": "fn",
+          "startLine": 43,
+          "endLine": 113,
+          "tokens": 663
+        },
+        {
+          "name": "handleMapZoom",
+          "kind": "fn",
+          "startLine": 118,
+          "endLine": 135,
+          "tokens": 125
+        },
+        {
+          "name": "loadLiveData",
+          "kind": "fn",
+          "startLine": 140,
+          "endLine": 190,
+          "tokens": 464
+        },
+        {
+          "name": "renderDashboard",
+          "kind": "fn",
+          "startLine": 195,
+          "endLine": 221,
+          "tokens": 212
+        },
+        {
+          "name": "updateHeader",
+          "kind": "fn",
+          "startLine": 226,
+          "endLine": 238,
+          "tokens": 144
+        },
+        {
+          "name": "updateSummaryCard",
+          "kind": "fn",
+          "startLine": 243,
+          "endLine": 280,
+          "tokens": 458
+        },
+        {
+          "name": "renderMapMarkers",
+          "kind": "fn",
+          "startLine": 285,
+          "endLine": 340,
+          "tokens": 568
+        },
+        {
+          "name": "renderHazeFogLayer",
+          "kind": "fn",
+          "startLine": 346,
+          "endLine": 404,
+          "tokens": 538
+        },
+        {
+          "name": "calculateHazeParams",
+          "kind": "fn",
+          "startLine": 406,
+          "endLine": 458,
+          "tokens": 554
+        },
+        {
+          "name": "updateHazeFogScale",
+          "kind": "fn",
+          "startLine": 468,
+          "endLine": 474,
+          "tokens": 98
+        },
+        {
+          "name": "toggleHazeFogLayer",
+          "kind": "fn",
+          "startLine": 476,
+          "endLine": 483,
+          "tokens": 56
+        },
+        {
+          "name": "updateHazeFogVisibility",
+          "kind": "fn",
+          "startLine": 485,
+          "endLine": 517,
+          "tokens": 274
+        },
+        {
+          "name": "getCleanStationName",
+          "kind": "fn",
+          "startLine": 522,
+          "endLine": 536,
+          "tokens": 203
+        },
+        {
+          "name": "renderSearchDropdown",
+          "kind": "fn",
+          "startLine": 541,
+          "endLine": 609,
+          "tokens": 647
+        },
+        {
+          "name": "highlightSearchMatch",
+          "kind": "fn",
+          "startLine": 611,
+          "endLine": 618,
+          "tokens": 118
+        },
+        {
+          "name": "selectSearchStation",
+          "kind": "fn",
+          "startLine": 620,
+          "endLine": 642,
+          "tokens": 220
+        },
+        {
+          "name": "escapeSearchHtml",
+          "kind": "fn",
+          "startLine": 644,
+          "endLine": 646,
+          "tokens": 42
+        },
+        {
+          "name": "renderStationList",
+          "kind": "fn",
+          "startLine": 654,
+          "endLine": 713,
+          "tokens": 536
+        },
+        {
+          "name": "openStationDrawer",
+          "kind": "fn",
+          "startLine": 718,
+          "endLine": 805,
+          "tokens": 1172
+        },
+        {
+          "name": "closeStationDrawer",
+          "kind": "fn",
+          "startLine": 813,
+          "endLine": 825,
+          "tokens": 116
+        },
+        {
+          "name": "renderComparisonTable",
+          "kind": "fn",
+          "startLine": 830,
+          "endLine": 859,
+          "tokens": 435
+        },
+        {
+          "name": "renderTrendBars",
+          "kind": "fn",
+          "startLine": 864,
+          "endLine": 890,
+          "tokens": 289
+        },
+        {
+          "name": "setupEventListeners",
+          "kind": "fn",
+          "startLine": 895,
+          "endLine": 1135,
+          "tokens": 2464
+        },
+        {
+          "name": "handleNavView",
+          "kind": "fn",
+          "startLine": 1140,
+          "endLine": 1156,
+          "tokens": 121
+        },
+        {
+          "name": "openModal",
+          "kind": "fn",
+          "startLine": 1158,
+          "endLine": 1161,
+          "tokens": 34
+        },
+        {
+          "name": "closeModal",
+          "kind": "fn",
+          "startLine": 1163,
+          "endLine": 1172,
+          "tokens": 106
+        },
+        {
+          "name": "setupViewportZoomLock",
+          "kind": "fn",
+          "startLine": 1203,
+          "endLine": 1282,
+          "tokens": 762
+        }
+      ],
+      "symbolSource": "ts",
+      "skeleton": "function initApp() {\nfunction initMap() {\nfunction handleMapZoom() {\nasync function loadLiveData(isBackground = false) {\nfunction renderDashboard(data) {\nfunction updateHeader(data) {\nfunction updateSummaryCard(summary) {\nfunction renderMapMarkers(stations) {\nfunction renderHazeFogLayer(stations) {\nfunction calculateHazeParams(api, zoom, lat, idx) {\nfunction updateHazeFogScale() {\nfunction toggleHazeFogLayer(enabled) {\nfunction updateHazeFogVisibility() {\nfunction getCleanStationName(fullName) {\nfunction renderSearchDropdown(query) {\nfunction highlightSearchMatch(text, query) {\nfunction selectSearchStation(st) {\nfunction escapeSearchHtml(str) {\nfunction renderStationList(stations) {\nfunction openStationDrawer(station) {\nfunction closeStationDrawer() {\nfunction renderComparisonTable(comparisons) {\nfunction renderTrendBars() {\nfunction setupEventListeners() {\nfunction handleNavView(view) {\nfunction openModal(id) {\nfunction closeModal(id) {\nfunction setupViewportZoomLock() {",
+      "importance": 0.5405
+    },
+    "static/index.html": {
+      "description": "Jerebu Monitor: Sistem Pemantauan IPU Malaysia Masa Nyata",
+      "tokens": 7066,
+      "hash": "d34d567b9befafaf",
+      "size": 26557,
+      "mtimeMs": 1791881073008.785,
+      "updatedAt": "2026-10-13T09:01:05.662Z",
+      "source": "scan",
+      "importance": 0.5405
+    },
+    "static/manifest.json": {
+      "description": "",
+      "tokens": 390,
+      "hash": "3e2895f22b3ebc88",
+      "size": 1365,
+      "mtimeMs": 1791880923996.5088,
+      "updatedAt": "2026-10-13T09:01:05.662Z",
+      "source": "scan",
+      "importance": 0.5405
+    },
+    "static/style.css": {
+      "description": "Styles: 64 rules, 33 vars, 1 media queries, 3 animations",
+      "tokens": 16312,
+      "hash": "0313b6545ae698a0",
+      "size": 57091,
+      "mtimeMs": 1791881073009.13,
+      "updatedAt": "2026-10-13T09:01:05.662Z",
+      "source": "scan",
+      "importance": 0.5405
+    },
+    "static/sw.js": {
+      "description": "Service Worker for Jerebu Monitor PWA (IPU Malaysia)",
+      "tokens": 1094,
+      "hash": "3b88e65be4a338df",
+      "size": 3827,
+      "mtimeMs": 1791881073009.3774,
+      "updatedAt": "2026-10-13T09:01:05.662Z",
+      "source": "scan",
+      "importance": 0.5405
+    },
+    "style.css": {
+      "description": "Styles: 64 rules, 33 vars, 1 media queries, 3 animations",
+      "tokens": 16312,
+      "hash": "0313b6545ae698a0",
+      "size": 57091,
+      "mtimeMs": 1791881073009.6743,
+      "updatedAt": "2026-10-13T09:01:05.663Z",
+      "source": "scan",
+      "importance": 0.5405
+    },
+    "sw.js": {
+      "description": "Service Worker for Jerebu Monitor PWA (IPU Malaysia)",
+      "tokens": 1094,
+      "hash": "3b88e65be4a338df",
+      "size": 3827,
+      "mtimeMs": 1791881073010.0315,
+      "updatedAt": "2026-10-13T09:01:05.663Z",
+      "source": "scan",
+      "importance": 0.5405
+    },
+    "vercel.json": {
+      "description": "",
+      "tokens": 223,
+      "hash": "1c3a79f68e17a6de",
+      "size": 778,
+      "mtimeMs": 1791855192893.2292,
+      "updatedAt": "2026-10-13T09:01:05.663Z",
+      "source": "scan",
+      "importance": 0.5405
+    }
+  },
+  "preamble": [
+    "> Project structure index. Auto-maintained by OpenWolf hooks and daemon.",
+    "> Run `openwolf scan` to generate, or wait for the first Claude Code session.",
+    "> Status: Pending initial scan"
+  ]
+}
