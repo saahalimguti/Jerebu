@@ -385,21 +385,24 @@ function openStationDrawer(station) {
     circleBar.style.stroke = station.color;
   }
 
-  // Health Message based on IPU
+  // Health Message based on IPU (DBP PRPM & Dual Language Standard)
   const healthTitle = document.getElementById('drawerHealthTitle');
   const healthDesc = document.getElementById('drawerHealthDesc');
   if (station.api <= 50) {
-    healthTitle.textContent = "Kualiti udara Baik";
-    healthDesc.textContent = "Kualiti udara adalah memuaskan dan tiada risiko kesihatan. Sangat sesuai untuk aktiviti luar.";
+    healthTitle.textContent = "Kualiti Udara Baik · Good";
+    healthDesc.textContent = "Kualiti udara memuaskan tanpa risiko kesihatan. Sesuai untuk semua aktiviti luar.";
   } else if (station.api <= 100) {
-    healthTitle.textContent = "Pencemaran udara Sederhana";
-    healthDesc.textContent = "Kualiti udara bagi kebanyakan individu adalah memuaskan. Aktiviti luar boleh diteruskan seperti biasa.";
+    healthTitle.textContent = "Kualiti Udara Sederhana · Moderate";
+    healthDesc.textContent = "Kualiti udara memuaskan bagi kebanyakan individu. Aktiviti luar boleh diteruskan.";
   } else if (station.api <= 200) {
-    healthTitle.textContent = "Pencemaran udara Tidak Sihat";
-    healthDesc.textContent = "Orang awam, terutamanya golongan berisiko tinggi (kanak-kanak & asma), disaran mengehadkan aktiviti luar dan memakai pelitup muka N95.";
+    healthTitle.textContent = "Kualiti Udara Tidak Sihat · Unhealthy";
+    healthDesc.textContent = "Golongan berisiko (kanak-kanak, warga emas dan asma) disaran mengehadkan aktiviti luar dan memakai pelitup muka.";
+  } else if (station.api <= 300) {
+    healthTitle.textContent = "Kualiti Udara Sangat Tidak Sihat · Very Unhealthy";
+    healthDesc.textContent = "Elakkan aktiviti fizikal di luar rumah. Kekal di dalam bangunan berpenapis udara.";
   } else {
-    healthTitle.textContent = "Amaran Jerebu Bahaya";
-    healthDesc.textContent = "Elakkan semua aktiviti fizikal di luar rumah. Pastikan pintu dan tingkap ditutup rapat.";
+    healthTitle.textContent = "Kualiti Udara Berbahaya · Hazardous";
+    healthDesc.textContent = "Tahap bahaya kualiti udara. Kekal di dalam rumah dengan pintu dan tingkap tertutup rapat.";
   }
 
   // Side-by-Side Comparison matching

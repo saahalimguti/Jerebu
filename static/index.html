@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jerebu Monitor — Sistem Pemantauan IPU Malaysia Masa Nyata</title>
+  <title>Jerebu Monitor: Sistem Pemantauan IPU Malaysia Masa Nyata</title>
   <meta name="description" content="Sistem pemantauan IPU masa nyata musim jerebu khas untuk Semenanjung Malaysia, Sabah dan Sarawak dengan data rasmi DOE APIMS dan perbandingan AQICN.">
   
   <!-- PWA Manifest & App Icons -->
@@ -283,14 +283,14 @@
               <div class="sbs-standard">US-EPA Standard</div>
             </div>
           </div>
-          <p class="sbs-note" id="sbsNote">Perbezaan berpunca daripada selang masa pengiraan (DOE: 24-jam purata vs AQICN: NowCast EPA).</p>
+          <p class="sbs-note" id="sbsNote">Perbezaan berpunca daripada formula pengiraan: DOE menggunakan purata bergerak, manakala AQICN menggunakan skala US-EPA NowCast.</p>
         </div>
 
         <!-- Komponen Utama Table (µg/m³) -->
         <div class="pollutants-section">
           <div class="section-title-row">
             <h3 class="section-title">Komponen Utama (µg/m³)</h3>
-            <span class="section-subtitle">Pecahan Pencemar</span>
+            <span class="section-subtitle">Pecahan Pencemar · Pollutants</span>
           </div>
           <div class="pollutants-grid">
             <div class="pollutant-card">
@@ -353,7 +353,7 @@
       <div class="modal-container">
         <div class="modal-header">
           <div>
-            <h2 class="modal-title" id="modalTitle">⚖️ Perbandingan Side-by-Side: DOE APIMS vs AQICN</h2>
+            <h2 class="modal-title" id="modalTitle">⚖️ Perbandingan Bersebelahan: DOE APIMS vs AQICN</h2>
             <p class="modal-subtitle">Semakan silang indeks kualiti udara bagi Semenanjung Malaysia, Sabah dan Sarawak</p>
           </div>
           <button class="modal-close-btn" id="modalCloseBtn" aria-label="Tutup modal">✕</button>
@@ -365,7 +365,7 @@
               <strong>🏛️ Jabatan Alam Sekitar (DOE APIMS):</strong> Menggunakan kaedah Indeks Pencemaran Udara (IPU) Malaysia berasaskan purata bergerak 24-jam/1-jam dengan nilai pencemar dominan.
             </div>
             <div class="info-pill-item">
-              <strong>🌐 World Air Quality Index (AQICN):</strong> Menggunakan algoritma US-EPA NowCast AQI yang memberi bobot lebih tinggi kepada fluktuasi PM2.5 masa nyata serta-merta.
+              <strong>🌐 World Air Quality Index (AQICN):</strong> Menggunakan algoritma US-EPA NowCast AQI yang memberikan wajaran lebih tinggi kepada perubahan segera PM2.5 masa nyata.
             </div>
           </div>
 
@@ -456,23 +456,23 @@
           <div class="info-guide-grid">
             <div class="guide-card border-good">
               <h4 class="color-good">0 – 50: Baik</h4>
-              <p>Kualiti udara adalah bersih dan tiada sekatan aktiviti fizikal di luar rumah.</p>
+              <p>Kualiti udara bersih. Tiada sekatan aktiviti luar fizikal.</p>
             </div>
             <div class="guide-card border-moderate">
               <h4 class="color-moderate">51 – 100: Sederhana</h4>
-              <p>Tiada kesan buruk kesihatan bagi populasi am. Individu sangat sensitif dinasihatkan memantau simptom.</p>
+              <p>Kualiti udara memuaskan. Golongan berisiko dinasihatkan peka terhadap gejala pernafasan.</p>
             </div>
             <div class="guide-card border-unhealthy">
               <h4 class="color-unhealthy">101 – 200: Tidak Sihat</h4>
-              <p>Golongan berisiko tinggi (kanak-kanak, warga emas, pesakit asma) perlu mengehadkan aktiviti luar dan memakai pelitup muka.</p>
+              <p>Golongan berisiko (kanak-kanak, warga emas, pesakit asma) perlu mengehadkan aktiviti luar dan memakai pelitup muka.</p>
             </div>
             <div class="guide-card border-very-unhealthy">
               <h4 class="color-very-unhealthy">201 – 300: Sangat Tidak Sihat</h4>
-              <p>Semua individu dinasihatkan mengelakkan aktiviti fizikal luar. Sekolah boleh ditutup mengikut SOP KPM.</p>
+              <p>Semua individu disaran mengelakkan aktiviti fizikal di luar rumah.</p>
             </div>
             <div class="guide-card border-hazardous">
               <h4 class="color-hazardous">301+: Berbahaya</h4>
-              <p>Amaran kecemasan jerebu. Orang ramai mesti kekal di dalam rumah dan menutup pintu/tingkap.</p>
+              <p>Amaran bahaya kualiti udara. Kekal di dalam rumah dan tutup tingkap serta pintu rapat.</p>
             </div>
           </div>
 
