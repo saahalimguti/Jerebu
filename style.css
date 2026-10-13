@@ -50,11 +50,28 @@
   --radius-pill: 9999px;
 }
 
-/* Base Reset */
+/* Base Reset & Mobile-Native Performance */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+html, body {
+  overscroll-behavior-y: none;
+  height: 100vh;
+  height: 100dvh;
+  width: 100vw;
+}
+
+html, body, button, a, input, select {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+button, .nav-tab, .filter-tab, .brand-logo, .pwa-badge, .legend-toggle {
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 body.dark-theme {
@@ -63,6 +80,7 @@ body.dark-theme {
   color: var(--text-main);
   overflow: hidden;
   height: 100vh;
+  height: 100dvh;
   width: 100vw;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -265,7 +283,7 @@ body.dark-theme {
   outline: none;
   color: #FFFFFF;
   font-family: inherit;
-  font-size: 0.82rem;
+  font-size: 16px; /* Mobile-Native: Prevents iOS auto-zoom on focus */
   width: 100%;
 }
 .search-box input::placeholder {
