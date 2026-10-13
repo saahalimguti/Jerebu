@@ -9,6 +9,9 @@ const state = {
   data: null,
   map: null,
   markers: [],
+  fogMarkers: [],
+  fogEnabled: true,
+  hazeFogPane: null,
   selectedStation: null,
   activeFilter: 'all',
   searchQuery: '',
@@ -51,8 +54,15 @@ function initMap() {
     opacity: 0.95
   }).addTo(state.map);
 
-  // Handle Zoom In / Zoom Out for Progressive Label Disclosure
+  // Create Dedicated Atmospheric Haze Fog Pane (zIndex 350, below pins 600, above tiles 200)
+  state.map.createPane('hazeFogPane');
+  state.hazeFogPane = state.map.getPane('hazeFogPane');
+  state.hazeFogPane.style.zIndex = '350';
+  state.hazeFogPane.style.pointerEvents = 'none';
+
+  // Handle Zoom In / Zoom Out for Progressive Label Disclosure & Dynamic Haze Rescaling
   state.map.on('zoom zoomend moveend', handleMapZoom);
+  state.map.on('zoomend', updateHazeFogScale);
   // Initial check
   handleMapZoom();
 }
@@ -148,6 +158,9 @@ function renderDashboard(data) {
 
   // 3. Render Stations onto Map
   renderMapMarkers(data.stations);
+
+  // 3.5. Render Atmospheric Haze Fog Shroud on Map
+  renderHazeFogLayer(data.stations);
 
   // 4. Render Station List in Sidebar
   renderStationList(data.stations);
@@ -276,6 +289,215 @@ function renderMapMarkers(stations) {
     marker.addTo(state.map);
     state.markers.push(marker);
   });
+}
+
+/**
+ * Render Atmospheric Haze Fog Shroud on Map based on real-time IPU Intensity
+ * Uses authentic particulate scattering mathematics & Emil Kowalski organic drift.
+ */
+function renderHazeFogLayer(stations) {
+  if (!state.map || !stations) return;
+
+  // Ensure custom Leaflet Pane exists at zIndex 350
+  if (!state.hazeFogPane) {
+    if (!state.map.getPane('hazeFogPane')) {
+      state.map.createPane('hazeFogPane');
+    }
+    state.hazeFogPane = state.map.getPane('hazeFogPane');
+    state.hazeFogPane.style.zIndex = '350';
+    state.hazeFogPane.style.pointerEvents = 'none';
+  }
+
+  // Clear existing fog markers
+  if (state.fogMarkers && state.fogMarkers.length > 0) {
+    state.fogMarkers.forEach(m => state.map.removeLayer(m.marker));
+  }
+  state.fogMarkers = [];
+
+  const zoom = state.map.getZoom();
+
+  stations.forEach((st, idx) => {
+    if (!st.lat || !st.lon) return;
+    const api = st.api !== null ? st.api : 50;
+
+    // Pristine clear air for IPU <= 50 (no fog shroud)
+    if (api <= 50) return;
+
+    // Calculate intensity parameters
+    const params = calculateHazeParams(api, zoom, st.lat, idx);
+
+    const fogIcon = L.divIcon({
+      className: 'haze-fog-wrapper',
+      html: `
+        <div class="haze-fog-emitter intensity-${params.intensitySlug}" id="fog-${st.id}"
+             style="width: ${params.diameter}px; height: ${params.diameter}px;
+                    --fog-op-core: ${params.coreOp};
+                    --fog-op-outer: ${params.outerOp};
+                    --fog-delay: ${params.driftDelay}s;
+                    --fog-duration: ${params.driftDuration}s;">
+          <div class="haze-fog-core"></div>
+          <div class="haze-fog-plume"></div>
+          <div class="haze-fog-wisps"></div>
+        </div>
+      `,
+      iconSize: [params.diameter, params.diameter],
+      iconAnchor: [params.diameter / 2, params.diameter / 2]
+    });
+
+    const fogMarker = L.marker([st.lat, st.lon], {
+      icon: fogIcon,
+      interactive: false,
+      pane: 'hazeFogPane'
+    });
+
+    fogMarker.addTo(state.map);
+    state.fogMarkers.push({
+      marker: fogMarker,
+      station: st,
+      id: st.id,
+      idx: idx
+    });
+  });
+
+  // Apply current enabled/disabled visibility state
+  updateHazeFogVisibility();
+}
+
+/**
+ * Calculate authentic atmospheric dispersion parameters based on IPU
+ */
+function calculateHazeParams(api, zoom, lat, idx) {
+  let intensitySlug = 'moderate';
+  let baseRadiusKm = 35;
+  let coreOp = 0.16;
+  let outerOp = 0.08;
+
+  if (api <= 100) {
+    // Sederhana (51 - 100): Ethereal light grayish haze
+    intensitySlug = 'moderate';
+    const t = (api - 50) / 50;
+    baseRadiusKm = 32 + t * 18;     // 32km - 50km
+    coreOp = 0.14 + t * 0.14;       // 0.14 - 0.28
+    outerOp = 0.08 + t * 0.08;      // 0.08 - 0.16
+  } else if (api <= 200) {
+    // Tidak Sihat (101 - 200): Distinct smoky particulate haze shroud
+    intensitySlug = 'unhealthy';
+    const t = (api - 100) / 100;
+    baseRadiusKm = 52 + t * 38;     // 52km - 90km
+    coreOp = 0.32 + t * 0.22;       // 0.32 - 0.54
+    outerOp = 0.18 + t * 0.14;      // 0.18 - 0.32
+  } else if (api <= 300) {
+    // Sangat Tidak Sihat (201 - 300): Heavy dense slate-gray blanket
+    intensitySlug = 'very-unhealthy';
+    const t = (api - 200) / 100;
+    baseRadiusKm = 90 + t * 35;     // 90km - 125km
+    coreOp = 0.56 + t * 0.16;       // 0.56 - 0.72
+    outerOp = 0.34 + t * 0.12;      // 0.34 - 0.46
+  } else {
+    // Berbahaya (301+): Critical opaque dark smog
+    intensitySlug = 'hazardous';
+    baseRadiusKm = 130;
+    coreOp = 0.78;
+    outerOp = 0.52;
+  }
+
+  // Smooth geographic zoom scaling factor
+  // Overview allows regional plumes to coalesce organically (Klang Valley, South Johor, Kuching)
+  const scaleZoomFactor = Math.pow(1.68, Math.max(0, zoom - 5.5));
+  const diameter = Math.round(Math.max(56, baseRadiusKm * 1.65 * scaleZoomFactor));
+
+  // Natural organic offset for drifting and breathing animations (Emil Kowalski)
+  const driftDelay = Number(((lat * 11.3 + idx * 0.7) % 3.5).toFixed(2));
+  const driftDuration = Number((7.0 + ((lat * 5.7) % 4.0)).toFixed(1));
+
+  return {
+    intensitySlug,
+    diameter,
+    coreOp: Number(coreOp.toFixed(2)),
+    outerOp: Number(outerOp.toFixed(2)),
+    driftDelay,
+    driftDuration
+  };
+}
+
+/**
+ * Update fog emitter pixel dimensions when user zooms in or out
+ */
+function updateHazeFogScale() {
+  if (!state.map || !state.fogMarkers || state.fogMarkers.length === 0) return;
+  const zoom = state.map.getZoom();
+
+  state.fogMarkers.forEach(item => {
+    const st = item.station;
+    const api = st.api !== null ? st.api : 50;
+    const params = calculateHazeParams(api, zoom, st.lat, item.idx);
+    
+    // Update marker icon size & anchor
+    const newIcon = L.divIcon({
+      className: 'haze-fog-wrapper',
+      html: `
+        <div class="haze-fog-emitter intensity-${params.intensitySlug}" id="fog-${st.id}"
+             style="width: ${params.diameter}px; height: ${params.diameter}px;
+                    --fog-op-core: ${params.coreOp};
+                    --fog-op-outer: ${params.outerOp};
+                    --fog-delay: ${params.driftDelay}s;
+                    --fog-duration: ${params.driftDuration}s;">
+          <div class="haze-fog-core"></div>
+          <div class="haze-fog-plume"></div>
+          <div class="haze-fog-wisps"></div>
+        </div>
+      `,
+      iconSize: [params.diameter, params.diameter],
+      iconAnchor: [params.diameter / 2, params.diameter / 2]
+    });
+    item.marker.setIcon(newIcon);
+  });
+}
+
+/**
+ * Toggle Haze Fog Shroud Layer on/off
+ */
+function toggleHazeFogLayer(enabled) {
+  if (typeof enabled === 'boolean') {
+    state.fogEnabled = enabled;
+  } else {
+    state.fogEnabled = !state.fogEnabled;
+  }
+  updateHazeFogVisibility();
+}
+
+function updateHazeFogVisibility() {
+  const hazePane = state.map?.getPane('hazeFogPane');
+  if (hazePane) {
+    if (state.fogEnabled) {
+      hazePane.classList.remove('haze-fog-hidden');
+    } else {
+      hazePane.classList.add('haze-fog-hidden');
+    }
+  }
+
+  // Update UI toggles
+  const legendToggle = document.getElementById('legendFogToggle');
+  if (legendToggle) {
+    if (state.fogEnabled) {
+      legendToggle.classList.add('active');
+      legendToggle.setAttribute('aria-checked', 'true');
+    } else {
+      legendToggle.classList.remove('active');
+      legendToggle.setAttribute('aria-checked', 'false');
+    }
+  }
+
+  const quickBtn = document.getElementById('quickFogToggleBtn');
+  if (quickBtn) {
+    if (state.fogEnabled) {
+      quickBtn.classList.add('active');
+      quickBtn.setAttribute('aria-pressed', 'true');
+    } else {
+      quickBtn.classList.remove('active');
+      quickBtn.setAttribute('aria-pressed', 'false');
+    }
+  }
 }
 
 /**
@@ -562,10 +784,28 @@ function setupEventListeners() {
   const legendToggleBtn = document.getElementById('legendToggleBtn');
   const legendCard = document.getElementById('legendCard');
   if (legendToggleBtn && legendCard) {
-    legendToggleBtn.addEventListener('click', () => {
+    legendToggleBtn.addEventListener('click', (e) => {
+      // Avoid collapsing when clicking the toggle inside the legend
+      if (e.target.closest('#legendFogToggle') || e.target.closest('.apple-toggle-switch')) return;
       legendCard.classList.toggle('collapsed');
       const isExpanded = !legendCard.classList.contains('collapsed');
       legendToggleBtn.setAttribute('aria-expanded', isExpanded);
+    });
+  }
+
+  // Atmospheric Haze Fog Shroud Toggles (Legend Apple Switch & Map Control Quick Button)
+  const legendFogToggle = document.getElementById('legendFogToggle');
+  if (legendFogToggle) {
+    legendFogToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleHazeFogLayer();
+    });
+  }
+
+  const quickFogToggleBtn = document.getElementById('quickFogToggleBtn');
+  if (quickFogToggleBtn) {
+    quickFogToggleBtn.addEventListener('click', () => {
+      toggleHazeFogLayer();
     });
   }
 

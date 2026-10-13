@@ -196,6 +196,11 @@
       <button class="map-ctrl-btn" id="resetViewBtn" title="Pusatkan Peta Malaysia" aria-label="Pusatkan Peta">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="locate-icon"><polygon points="3 11 22 2 13 21 11 13 3 11"></polygon></svg>
       </button>
+      <button class="map-ctrl-btn active" id="quickFogToggleBtn" title="Togol Kabut Jerebu Atmosfera" aria-label="Togol Kabut Jerebu" aria-pressed="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="fog-ctrl-icon">
+          <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242M4 18h16M7 21h10"></path>
+        </svg>
+      </button>
     </div>
 
     <!-- BOTTOM RIGHT COLLAPSIBLE LEGEND: "Peta IPU" -->
@@ -224,6 +229,22 @@
         <div class="legend-row">
           <div class="legend-badge bg-hazardous">Berbahaya</div>
           <span class="legend-range">301+</span>
+        </div>
+
+        <div class="legend-divider"></div>
+
+        <!-- Atmospheric Haze Fog Shroud Switch -->
+        <div class="legend-fog-section">
+          <div class="legend-fog-toggle-row">
+            <span class="legend-fog-label">
+              <span class="fog-status-indicator"></span>
+              <span>Kabut Jerebu (Fog)</span>
+            </span>
+            <button class="apple-toggle-switch active" id="legendFogToggle" role="switch" aria-checked="true" title="Togol Kabut Jerebu Atmosfera">
+              <span class="apple-toggle-thumb"></span>
+            </button>
+          </div>
+          <div class="legend-fog-caption">Simulasi kabut kelabu zarah PM2.5/PM10 mengikut intensiti IPU masa nyata</div>
         </div>
       </div>
     </div>
