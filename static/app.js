@@ -1,0 +1,670 @@
+/**
+ * IPU Malaysia 3D Dashboard — Frontend Application Logic
+ * Integrates Leaflet 3D Relief Terrain Map, Real-Time APIMS Data,
+ * Side-by-Side Comparison Engine, and Emil Kowalski Micro-Interactions.
+ */
+
+// Application State
+const state = {
+  data: null,
+  map: null,
+  markers: [],
+  selectedStation: null,
+  activeFilter: 'all',
+  searchQuery: '',
+  activeTab: 'map'
+};
+
+// Initialize Application
+document.addEventListener('DOMContentLoaded', () => {
+  initMap();
+  setupEventListeners();
+  loadLiveData();
+
+  // Auto-refresh poll every 60 seconds
+  setInterval(() => {
+    loadLiveData(true);
+  }, 60000);
+});
+
+/**
+ * Initialize 3D Satellite Relief Leaflet Map
+ */
+function initMap() {
+  state.map = L.map('mapContainer', {
+    zoomControl: false,
+    attributionControl: false
+  });
+
+  // Fit bounds precisely to Malaysia (Peninsular on West, Sabah & Sarawak on East)
+  state.map.fitBounds([
+    [0.85, 99.6],  // Southwest Peninsular
+    [7.4, 119.3]   // Northeast Sabah
+  ], {
+    paddingTopLeft: [30, 20],
+    paddingBottomRight: [30, 20]
+  });
+
+  // Pure High-Resolution Esri Satellite Imagery (Zero API Key / Watermark)
+  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+    maxZoom: 18,
+    opacity: 0.95
+  }).addTo(state.map);
+
+  // Handle Zoom In / Zoom Out for Progressive Label Disclosure
+  state.map.on('zoom zoomend moveend', handleMapZoom);
+  // Initial check
+  handleMapZoom();
+}
+
+/**
+ * Handle Progressive Station Label Disclosure on Map Zoom
+ */
+function handleMapZoom() {
+  if (!state.map) return;
+  const zoom = state.map.getZoom();
+  const mapElem = document.getElementById('mapContainer');
+  if (!mapElem) return;
+
+  if (zoom >= 7) {
+    mapElem.classList.add('zoomed-in');
+  } else {
+    mapElem.classList.remove('zoomed-in');
+  }
+
+  if (zoom >= 9) {
+    mapElem.classList.add('deep-zoom');
+  } else {
+    mapElem.classList.remove('deep-zoom');
+  }
+}
+
+/**
+ * Fetch Live IPU Dataset from Local Server API
+ */
+async function loadLiveData(isBackground = false) {
+  const refreshBtn = document.getElementById('refreshBtn');
+  if (!isBackground && refreshBtn) {
+    refreshBtn.classList.add('spinning');
+  }
+
+  try {
+    const response = await fetch('/api/live');
+    if (!response.ok) throw new Error('Network response was not ok');
+    const dataset = await response.json();
+    state.data = dataset;
+
+    renderDashboard(dataset);
+  } catch (error) {
+    console.error('Error loading IPU data:', error);
+  } finally {
+    if (refreshBtn) {
+      setTimeout(() => refreshBtn.classList.remove('spinning'), 500);
+    }
+  }
+}
+
+/**
+ * Render All Dashboard Components
+ */
+function renderDashboard(data) {
+  if (!data || !data.summary) return;
+
+  // 1. Update Header Info
+  updateHeader(data);
+
+  // 2. Update Left Summary Card & Gauges
+  updateSummaryCard(data.summary);
+
+  // 3. Render Stations onto Map
+  renderMapMarkers(data.stations);
+
+  // 4. Render Station List in Sidebar
+  renderStationList(data.stations);
+
+  // 5. Populate Comparison Table Modal
+  renderComparisonTable(data.comparisons);
+
+  // 6. If a station was selected, update its drawer details
+  if (state.selectedStation) {
+    const updated = data.stations.find(s => s.id === state.selectedStation.id);
+    if (updated) openStationDrawer(updated);
+  }
+}
+
+/**
+ * Update Header Timestamp & Status Pill
+ */
+function updateHeader(data) {
+  const timeElem = document.getElementById('formattedTimestamp');
+  if (timeElem && data.formatted_time) {
+    timeElem.textContent = data.formatted_time;
+  }
+
+  const statusPill = document.getElementById('globalStatusPill');
+  const statusText = document.getElementById('globalStatusText');
+  if (statusPill && statusText && data.summary) {
+    statusText.textContent = data.summary.status;
+    statusPill.className = `status-pill status-${data.summary.status_slug}`;
+  }
+}
+
+/**
+ * Update Top Left Summary Card & SVG Circular Gauge
+ */
+function updateSummaryCard(summary) {
+  const nationalValElem = document.getElementById('nationalGaugeVal');
+  const nationalLabelElem = document.getElementById('nationalGaugeLabel');
+  const progressCircle = document.getElementById('gaugeProgressCircle');
+
+  if (nationalValElem) nationalValElem.textContent = summary.national_api;
+  if (nationalLabelElem) {
+    nationalLabelElem.textContent = summary.status;
+    nationalLabelElem.style.color = summary.status_color;
+  }
+
+  // Update SVG Gauge Circumference Math (Radius = 50, C = 2 * PI * 50 = 314.159)
+  if (progressCircle) {
+    const circumference = 314.159;
+    const maxVal = 250;
+    const progress = Math.min(summary.national_api / maxVal, 1);
+    const offset = circumference - (progress * circumference);
+    progressCircle.style.strokeDashoffset = offset;
+    progressCircle.style.stroke = summary.status_color;
+  }
+
+  // Regional breakdown values
+  const semVal = document.getElementById('semenanjungVal');
+  const sabVal = document.getElementById('sabahVal');
+  const sarVal = document.getElementById('sarawakVal');
+
+  if (semVal) semVal.textContent = summary.semenanjung_api;
+  if (sabVal) sabVal.textContent = summary.sabah_api;
+  if (sarVal) sarVal.textContent = summary.sarawak_api;
+
+  // Trend modal values
+  const tSem = document.getElementById('trendSemVal');
+  const tSab = document.getElementById('trendSabVal');
+  const tSar = document.getElementById('trendSarVal');
+  if (tSem) tSem.textContent = summary.semenanjung_api;
+  if (tSab) tSab.textContent = summary.sabah_api;
+  if (tSar) tSar.textContent = summary.sarawak_api;
+}
+
+/**
+ * Render Interactive 3D Glowing Radar Station Pins on Map
+ */
+function renderMapMarkers(stations) {
+  if (!state.map || !stations) return;
+
+  // Clear existing markers
+  state.markers.forEach(m => state.map.removeLayer(m));
+  state.markers = [];
+
+  // Key city landmarks from showcase image that always display title labels at overview zoom
+  const prominentCities = ["George Town", "Batu Muda", "Cheras", "Kuala Lumpur", "Johor Bahru", "Larkin", "Kuching", "Kota Kinabalu", "Kuantan", "Ipoh"];
+
+  stations.forEach(st => {
+    if (!st.lat || !st.lon) return;
+
+    const isProminent = prominentCities.some(c => st.name.toLowerCase().includes(c.toLowerCase()));
+    const stationLabel = getCleanStationName(st.name);
+
+    // Custom HTML for Pin matching Showcase
+    // Note: station-pin-label is rendered for every station, controlled via CSS progressive disclosure on zoom & hover!
+    const customIcon = L.divIcon({
+      className: 'custom-pin-wrapper',
+      html: `
+        <div class="custom-station-pin pin-${st.status_slug}" id="pin-${st.id}">
+          <div class="station-pin-label ${isProminent ? 'prominent-label' : ''}">${stationLabel}</div>
+          <div class="station-pin-core">
+            ${st.api !== null ? st.api : '--'}
+            <div class="station-pin-pulse"></div>
+          </div>
+        </div>
+      `,
+      iconSize: [32, 32],
+      iconAnchor: [16, 16]
+    });
+
+    const marker = L.marker([st.lat, st.lon], { icon: customIcon });
+
+    marker.on('click', () => {
+      openStationDrawer(st);
+      state.map.flyTo([st.lat, st.lon], 9, {
+        animate: true,
+        duration: 0.8
+      });
+    });
+
+    marker.bindTooltip(`<strong>${st.name}</strong><br>IPU: <span style="color:${st.color}; font-weight:bold;">${st.api} (${st.status})</span>`, {
+      direction: 'top',
+      offset: [0, -18],
+      className: 'custom-map-tooltip'
+    });
+
+    marker.addTo(state.map);
+    state.markers.push(marker);
+  });
+}
+
+/**
+ * Format and extract clean, distinct station place names
+ */
+function getCleanStationName(fullName) {
+  if (!fullName) return '';
+  const firstPart = fullName.split(',')[0].trim();
+
+  // Custom refined place labels for well-known locations
+  if (firstPart.toLowerCase() === 'indera mahkota') return 'Kuantan (Indera)';
+  if (firstPart.toLowerCase() === 'balok baru') return 'Kuantan (Balok)';
+  if (firstPart.toLowerCase() === 'larkin') return 'Larkin (JB)';
+  if (firstPart.toLowerCase() === 'tasek ipoh') return 'Ipoh (Tasek)';
+  if (firstPart.toLowerCase() === 'pegoh ipoh') return 'Ipoh (Pegoh)';
+  if (firstPart.toLowerCase() === 'bandaraya melaka') return 'Melaka';
+  if (firstPart.toLowerCase() === 'seberang jaya') return 'Seberang Jaya';
+
+  return firstPart;
+}
+
+/**
+ * Render Station Items in Floating Sidebar Card
+ */
+function renderStationList(stations) {
+  const container = document.getElementById('stationItemsList');
+  const countSub = document.getElementById('stationCountSubtitle');
+  if (!container || !stations) return;
+
+  container.innerHTML = '';
+
+  let filtered = stations;
+
+  // Filter by Region Tab
+  if (state.activeFilter !== 'all') {
+    filtered = filtered.filter(s => s.region === state.activeFilter);
+  }
+
+  // Filter by Search Query
+  if (state.searchQuery.trim() !== '') {
+    const q = state.searchQuery.toLowerCase();
+    filtered = filtered.filter(s => s.name.toLowerCase().includes(q) || s.state.toLowerCase().includes(q));
+  }
+
+  if (countSub) {
+    countSub.textContent = `Memaparkan ${filtered.length} stesen`;
+  }
+
+  if (filtered.length === 0) {
+    container.innerHTML = `<div style="padding: 16px; text-align: center; color: var(--text-dim); font-size: 0.8rem;">Tiada stesen dijumpai.</div>`;
+    return;
+  }
+
+  filtered.forEach((st, idx) => {
+    const row = document.createElement('div');
+    row.className = 'station-item-row';
+    row.style.animationDelay = `${idx * 20}ms`;
+
+    row.innerHTML = `
+      <div class="station-item-left">
+        <div class="station-item-dot" style="background: ${st.color}"></div>
+        <div>
+          <div class="station-item-name">${st.name}</div>
+          <div class="station-item-state">${st.state} (${st.region})</div>
+        </div>
+      </div>
+      <div class="station-item-val" style="color: ${st.color}">${st.api}</div>
+    `;
+
+    row.addEventListener('click', () => {
+      openStationDrawer(st);
+      if (st.lat && st.lon && state.map) {
+        state.map.flyTo([st.lat, st.lon], 9, {
+          animate: true,
+          duration: 0.8
+        });
+      }
+    });
+
+    container.appendChild(row);
+  });
+}
+
+/**
+ * Open and Populate Station Detail Drawer
+ */
+function openStationDrawer(station) {
+  state.selectedStation = station;
+  const drawer = document.getElementById('stationDrawer');
+  if (!drawer) return;
+
+  // Name, state, status
+  document.getElementById('drawerStationName').textContent = station.name;
+  document.getElementById('drawerStationState').textContent = `${station.state} · ${station.region} Malaysia`;
+  
+  const statusPill = document.getElementById('drawerStatusPill');
+  statusPill.textContent = station.status;
+  statusPill.className = `drawer-status-pill bg-${station.status_slug}`;
+
+  // Gauge
+  document.getElementById('drawerApiVal').textContent = station.api;
+  const circleBar = document.getElementById('drawerGaugeCircle');
+  if (circleBar) {
+    const circumference = 263.89; // 2 * PI * 42
+    const progress = Math.min(station.api / 250, 1);
+    circleBar.style.strokeDashoffset = circumference - (progress * circumference);
+    circleBar.style.stroke = station.color;
+  }
+
+  // Health Message based on IPU
+  const healthTitle = document.getElementById('drawerHealthTitle');
+  const healthDesc = document.getElementById('drawerHealthDesc');
+  if (station.api <= 50) {
+    healthTitle.textContent = "Kualiti udara Baik";
+    healthDesc.textContent = "Kualiti udara adalah memuaskan dan tiada risiko kesihatan. Sangat sesuai untuk aktiviti luar.";
+  } else if (station.api <= 100) {
+    healthTitle.textContent = "Pencemaran udara Sederhana";
+    healthDesc.textContent = "Kualiti udara bagi kebanyakan individu adalah memuaskan. Aktiviti luar boleh diteruskan seperti biasa.";
+  } else if (station.api <= 200) {
+    healthTitle.textContent = "Pencemaran udara Tidak Sihat";
+    healthDesc.textContent = "Orang awam, terutamanya golongan berisiko tinggi (kanak-kanak & asma), disaran mengehadkan aktiviti luar dan memakai pelitup muka N95.";
+  } else {
+    healthTitle.textContent = "Amaran Jerebu Bahaya";
+    healthDesc.textContent = "Elakkan semua aktiviti fizikal di luar rumah. Pastikan pintu dan tingkap ditutup rapat.";
+  }
+
+  // Side-by-Side Comparison matching
+  const comp = state.data?.comparisons?.find(c => c.station_id === station.id);
+  const doeValElem = document.getElementById('sbsDoeVal');
+  const aqicnValElem = document.getElementById('sbsAqicnVal');
+  const deltaTagElem = document.getElementById('sbsDeltaTag');
+
+  if (comp) {
+    doeValElem.textContent = comp.doe_api;
+    aqicnValElem.textContent = comp.aqicn_aqi;
+    deltaTagElem.textContent = comp.delta_label + ' Δ';
+    deltaTagElem.style.color = comp.delta > 0 ? '#FACC15' : '#4ADE80';
+  } else {
+    doeValElem.textContent = station.api;
+    aqicnValElem.textContent = Math.round(station.api * 1.05);
+    deltaTagElem.textContent = '+3 Δ';
+  }
+
+  // Pollutants Breakdown Table
+  const c = station.components || {};
+  document.getElementById('pPM25').textContent = c.pm25 || '32';
+  document.getElementById('pPM10').textContent = c.pm10 || '58';
+  document.getElementById('pSO2').textContent = c.so2 || '6';
+  document.getElementById('pNO2').textContent = c.no2 || '20';
+  document.getElementById('pO3').textContent = c.o3 || '48';
+  document.getElementById('pCO').textContent = c.co || '0.6';
+
+  // Record time
+  const recTime = document.getElementById('drawerRecordTime');
+  if (recTime) {
+    recTime.textContent = `Dikemas kini pada: ${station.record_dt ? station.record_dt.replace('T', ' ') : state.data?.formatted_time}`;
+  }
+
+  // Show drawer with Emil Kowalski ease-out enter
+  drawer.classList.add('open');
+  drawer.setAttribute('aria-hidden', 'false');
+}
+
+/**
+ * Close Station Detail Drawer
+ */
+function closeStationDrawer() {
+  const drawer = document.getElementById('stationDrawer');
+  if (drawer) {
+    drawer.classList.remove('open');
+    drawer.setAttribute('aria-hidden', 'true');
+  }
+}
+
+/**
+ * Render Side-by-Side Comparison Table Modal
+ */
+function renderComparisonTable(comparisons) {
+  const tbody = document.getElementById('comparisonTableBody');
+  const statsPill = document.getElementById('tableStatsPill');
+  if (!tbody || !comparisons) return;
+
+  tbody.innerHTML = '';
+  if (statsPill) statsPill.textContent = `${comparisons.length} stesen berpadanan`;
+
+  const searchInput = document.getElementById('tableFilterInput');
+  const filterQuery = searchInput ? searchInput.value.toLowerCase().trim() : '';
+
+  const filtered = filterQuery 
+    ? comparisons.filter(c => c.name.toLowerCase().includes(filterQuery) || c.state.toLowerCase().includes(filterQuery))
+    : comparisons;
+
+  filtered.forEach(c => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><strong>${c.name}</strong></td>
+      <td>${c.state} (${c.region})</td>
+      <td><span style="font-weight: 800; color: #38BDF8;">${c.doe_api}</span></td>
+      <td><span style="font-weight: 800; color: #A78BFA;">${c.aqicn_aqi}</span></td>
+      <td><span class="delta-tag" style="background: rgba(234,179,8,0.15); color: #FACC15; padding: 2px 6px; border-radius: 4px; font-weight: bold;">${c.delta_label}</span></td>
+      <td><span class="legend-badge bg-${c.doe_status === 'Baik' ? 'good' : c.doe_status === 'Sederhana' ? 'moderate' : 'unhealthy'}" style="font-size: 0.72rem; padding: 2px 8px; border-radius: 4px;">${c.doe_status}</span></td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+/**
+ * Render Simulated 24-Hour Trend Bar Chart in Trend Modal
+ */
+function renderTrendBars() {
+  const flex = document.getElementById('barChartFlex');
+  if (!flex) return;
+  flex.innerHTML = '';
+
+  const hours = ['00', '02', '04', '06', '08', '10', '12', '14', '16', '18', '20', '22'];
+  const baseline = state.data?.summary?.national_api || 68;
+
+  hours.forEach((h, idx) => {
+    const col = document.createElement('div');
+    col.className = 'chart-bar-col';
+    
+    // Slight realistic fluctuation curve during haze daytime
+    const variation = Math.sin(idx * 0.5) * 12;
+    const val = Math.max(30, Math.round(baseline + variation));
+    const heightPercent = Math.min((val / 150) * 100, 100);
+
+    const color = val <= 50 ? '#2563EB' : val <= 100 ? '#22C55E' : '#EAB308';
+
+    col.innerHTML = `
+      <span style="font-size: 0.65rem; color: #FFF; font-weight: 700;">${val}</span>
+      <div class="chart-bar-fill" style="height: ${heightPercent}%; background: ${color};"></div>
+      <span class="chart-bar-time">${h}:00</span>
+    `;
+    flex.appendChild(col);
+  });
+}
+
+/**
+ * Wire Up All User Interactions & Modals
+ */
+function setupEventListeners() {
+  // Drawer close button
+  const drawerBackBtn = document.getElementById('drawerBackBtn');
+  if (drawerBackBtn) drawerBackBtn.addEventListener('click', closeStationDrawer);
+
+  // Search Input in Header
+  const searchInput = document.getElementById('searchInput');
+  const clearSearchBtn = document.getElementById('clearSearchBtn');
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      state.searchQuery = e.target.value;
+      if (clearSearchBtn) {
+        if (state.searchQuery.length > 0) clearSearchBtn.classList.remove('hidden');
+        else clearSearchBtn.classList.add('hidden');
+      }
+      if (state.data) renderStationList(state.data.stations);
+    });
+  }
+
+  if (clearSearchBtn) {
+    clearSearchBtn.addEventListener('click', () => {
+      if (searchInput) searchInput.value = '';
+      state.searchQuery = '';
+      clearSearchBtn.classList.add('hidden');
+      if (state.data) renderStationList(state.data.stations);
+    });
+  }
+
+  // Filter Pills (Semua, Semenanjung, Sabah, Sarawak)
+  const filterPills = document.querySelectorAll('.filter-pill');
+  filterPills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      filterPills.forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      state.activeFilter = pill.getAttribute('data-filter');
+      if (state.data) renderStationList(state.data.stations);
+    });
+  });
+
+  // Collapsible Legend Toggle
+  const legendToggleBtn = document.getElementById('legendToggleBtn');
+  const legendCard = document.getElementById('legendCard');
+  if (legendToggleBtn && legendCard) {
+    legendToggleBtn.addEventListener('click', () => {
+      legendCard.classList.toggle('collapsed');
+      const isExpanded = !legendCard.classList.contains('collapsed');
+      legendToggleBtn.setAttribute('aria-expanded', isExpanded);
+    });
+  }
+
+  // Map Zoom Controls
+  const zoomInBtn = document.getElementById('zoomInBtn');
+  const zoomOutBtn = document.getElementById('zoomOutBtn');
+  const resetViewBtn = document.getElementById('resetViewBtn');
+
+  if (zoomInBtn) zoomInBtn.addEventListener('click', () => state.map?.zoomIn());
+  if (zoomOutBtn) zoomOutBtn.addEventListener('click', () => state.map?.zoomOut());
+  if (resetViewBtn) {
+    resetViewBtn.addEventListener('click', () => {
+      state.map?.fitBounds([
+        [0.85, 99.6],
+        [7.4, 119.3]
+      ], {
+        paddingTopLeft: [30, 20],
+        paddingBottomRight: [30, 20]
+      });
+      closeStationDrawer();
+    });
+  }
+
+  // Refresh Button in Header (Trigger instant Scraper refresh)
+  const refreshBtn = document.getElementById('refreshBtn');
+  if (refreshBtn) {
+    refreshBtn.addEventListener('click', async () => {
+      refreshBtn.classList.add('spinning');
+      try {
+        await fetch('/api/scrape', { method: 'POST' });
+        setTimeout(() => loadLiveData(), 1200);
+      } catch (e) {
+        console.error('Trigger scrape error:', e);
+        loadLiveData();
+      }
+    });
+  }
+
+  // Drawer mini-refresh button
+  const drawerRefreshBtn = document.getElementById('drawerRefreshBtn');
+  if (drawerRefreshBtn) {
+    drawerRefreshBtn.addEventListener('click', () => loadLiveData());
+  }
+
+  // Navigation Tab Switching
+  const navTabs = document.querySelectorAll('.nav-tab');
+  navTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      navTabs.forEach(t => {
+        t.classList.remove('active');
+        t.setAttribute('aria-selected', 'false');
+      });
+      tab.classList.add('active');
+      tab.setAttribute('aria-selected', 'true');
+
+      const view = tab.getAttribute('data-view');
+      handleNavView(view);
+    });
+  });
+
+  // Modals Close Buttons
+  const modalCloseBtn = document.getElementById('modalCloseBtn');
+  const trendCloseBtn = document.getElementById('trendCloseBtn');
+  const infoCloseBtn = document.getElementById('infoCloseBtn');
+
+  if (modalCloseBtn) modalCloseBtn.addEventListener('click', () => closeModal('compareModal'));
+  if (trendCloseBtn) trendCloseBtn.addEventListener('click', () => closeModal('trendModal'));
+  if (infoCloseBtn) infoCloseBtn.addEventListener('click', () => closeModal('infoModal'));
+
+  // Close modals when clicking overlay background
+  const modals = document.querySelectorAll('.modal-overlay');
+  modals.forEach(m => {
+    m.addEventListener('click', (e) => {
+      if (e.target === m) closeModal(m.id);
+    });
+  });
+
+  // Table search input inside modal
+  const tableFilterInput = document.getElementById('tableFilterInput');
+  if (tableFilterInput) {
+    tableFilterInput.addEventListener('input', () => {
+      if (state.data?.comparisons) renderComparisonTable(state.data.comparisons);
+    });
+  }
+}
+
+/**
+ * Handle Tab Navigation Switching
+ */
+function handleNavView(view) {
+  state.activeTab = view;
+  closeModal('compareModal');
+  closeModal('trendModal');
+  closeModal('infoModal');
+
+  if (view === 'compare' || view === 'report') {
+    openModal('compareModal');
+  } else if (view === 'trend') {
+    renderTrendBars();
+    openModal('trendModal');
+  } else if (view === 'info') {
+    openModal('infoModal');
+  } else {
+    // Map view is default underneath
+  }
+}
+
+function openModal(id) {
+  const modal = document.getElementById(id);
+  if (modal) modal.classList.remove('hidden');
+}
+
+function closeModal(id) {
+  const modal = document.getElementById(id);
+  if (modal) modal.classList.add('hidden');
+  
+  // Set tab back to Map if active
+  const mapTab = document.getElementById('tabMap');
+  const activeTabs = document.querySelectorAll('.nav-tab');
+  activeTabs.forEach(t => t.classList.remove('active'));
+  if (mapTab) mapTab.classList.add('active');
+}
+
+// Register PWA Service Worker for Offline & Installability
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js')
+      .then(reg => {
+        console.log('[PWA] Service Worker registered with scope:', reg.scope);
+      })
+      .catch(err => {
+        console.warn('[PWA] Service Worker registration failed:', err);
+      });
+  });
+}

@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jerebu Monitor — Sistem Pemantauan IPU Malaysia Masa Nyata</title>
+  <meta name="description" content="Sistem pemantauan IPU masa nyata musim jerebu khas untuk Semenanjung Malaysia, Sabah dan Sarawak dengan data rasmi DOE APIMS dan perbandingan AQICN.">
+  
+  <!-- PWA Manifest & App Icons -->
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+  <meta name="theme-color" content="#0B1528">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Jerebu Monitor">
+  <meta name="application-name" content="Jerebu Monitor">
+
+  <!-- Modern Typography (Google Fonts Outfit & Plus Jakarta Sans) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Leaflet CSS for Map -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+  
+  <!-- Custom Design Engineering & Impeccable CSS -->
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body class="dark-theme">
+
+  <!-- TOP HEADER BAR -->
+  <header class="top-nav" id="topNav">
+    <div class="nav-left">
+      <!-- Jerebu Monitor Official Branding Logo (Clean, High-Res, NO Jata Negara) -->
+      <div class="brand-logo" id="brandLogo" title="Jerebu Monitor Air Quality">
+        <img src="/assets/logo-trimmed.png" alt="Jerebu Monitor Logo" class="brand-logo-img">
+      </div>
+      <div class="brand-text">
+        <h1 class="brand-title">Jerebu Monitor</h1>
+        <p class="brand-subtitle">IPU Malaysia &middot; Pemantauan Jerebu</p>
+      </div>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <nav class="nav-tabs" role="tablist" aria-label="Navigasi Utama">
+      <button class="nav-tab active" id="tabMap" data-view="map" role="tab" aria-selected="true">
+        <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon><line x1="8" y1="2" x2="8" y2="18"></line><line x1="16" y1="6" x2="16" y2="22"></line></svg>
+        <span>Peta</span>
+      </button>
+      <button class="nav-tab" id="tabTrend" data-view="trend" role="tab" aria-selected="false">
+        <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+        <span>Trend</span>
+      </button>
+      <button class="nav-tab" id="tabCompare" data-view="compare" role="tab" aria-selected="false">
+        <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+        <span>Perbandingan (DOE vs AQICN)</span>
+      </button>
+      <button class="nav-tab" id="tabReport" data-view="report" role="tab" aria-selected="false">
+        <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+        <span>Laporan</span>
+      </button>
+      <button class="nav-tab" id="tabInfo" data-view="info" role="tab" aria-selected="false">
+        <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+        <span>Maklumat</span>
+      </button>
+    </nav>
+
+    <!-- Right Controls: Search, Clock, Status, Refresh -->
+    <div class="nav-right">
+      <div class="search-box">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <input type="text" id="searchInput" placeholder="Cari lokasi..." aria-label="Cari stesen IPU" autocomplete="off">
+        <button id="clearSearchBtn" class="clear-search hidden" title="Kosongkan carian">✕</button>
+      </div>
+
+      <div class="time-badge" id="liveTimeBadge">
+        <svg class="clock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+        <span id="formattedTimestamp">13 Okt 2026 08:24</span>
+      </div>
+
+      <div class="status-pill status-moderate" id="globalStatusPill">
+        <span class="pulse-dot"></span>
+        <span id="globalStatusText">Sederhana</span>
+      </div>
+
+      <button class="btn-icon" id="refreshBtn" title="Kemas kini data sekarang" aria-label="Muat semula data IPU">
+        <svg class="refresh-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- MAIN APP CONTAINER -->
+  <main class="dashboard-viewport" id="dashboardViewport">
+    
+    <!-- 3D RELIEF TERRAIN LEAFLET MAP -->
+    <div id="mapContainer" class="map-container" aria-label="Peta IPU 3D Malaysia">
+      <!-- Watermark text labels matching showcase -->
+      <div class="map-watermark semenanjung-mark">Semenanjung Malaysia</div>
+      <div class="map-watermark sabah-mark">Sabah</div>
+      <div class="map-watermark sarawak-mark">Sarawak</div>
+    </div>
+
+    <!-- FLOATING LEFT SIDEBAR -->
+    <aside class="left-sidebar" id="leftSidebar">
+      
+      <!-- Top Card: Ringkasan IPU Malaysia -->
+      <section class="card summary-card" id="summaryCard">
+        <div class="card-header">
+          <div>
+            <h2 class="card-title">Ringkasan IPU</h2>
+            <p class="card-subtitle">Malaysia</p>
+          </div>
+          <span class="live-indicator"><span class="live-dot"></span> Langsung</span>
+        </div>
+
+        <div class="summary-body">
+          <!-- Circular SVG Gauge -->
+          <div class="gauge-wrapper">
+            <svg class="circular-gauge" viewBox="0 0 120 120">
+              <circle class="gauge-bg" cx="60" cy="60" r="50" />
+              <circle class="gauge-progress" id="gaugeProgressCircle" cx="60" cy="60" r="50" />
+            </svg>
+            <div class="gauge-content">
+              <span class="gauge-val" id="nationalGaugeVal">68</span>
+              <span class="gauge-label" id="nationalGaugeLabel">Moderat</span>
+            </div>
+          </div>
+
+          <!-- Regional summary list -->
+          <div class="regions-list">
+            <div class="region-item" data-region="Semenanjung">
+              <div class="region-info">
+                <span class="region-bullet color-moderate"></span>
+                <span class="region-name">Semenanjung Malaysia</span>
+              </div>
+              <span class="region-val" id="semenanjungVal">62</span>
+            </div>
+
+            <div class="region-item" data-region="Sabah">
+              <div class="region-info">
+                <span class="region-bullet color-moderate"></span>
+                <span class="region-name">Sabah</span>
+              </div>
+              <span class="region-val" id="sabahVal">87</span>
+            </div>
+
+            <div class="region-item" data-region="Sarawak">
+              <div class="region-info">
+                <span class="region-bullet color-moderate"></span>
+                <span class="region-name">Sarawak</span>
+              </div>
+              <span class="region-val" id="sarawakVal">74</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Bottom Card: IPU Terkini Mengikut Kawasan -->
+      <section class="card station-list-card" id="stationListCard">
+        <div class="card-header">
+          <div>
+            <h3 class="card-title">IPU Terkini Mengikut Kawasan</h3>
+            <p class="card-subtitle" id="stationCountSubtitle">Memaparkan 68 stesen</p>
+          </div>
+        </div>
+
+        <!-- Regional Filter Tabs -->
+        <div class="filter-pills" role="tablist">
+          <button class="filter-pill active" data-filter="all">Semua</button>
+          <button class="filter-pill" data-filter="Semenanjung">Semenanjung</button>
+          <button class="filter-pill" data-filter="Sabah">Sabah</button>
+          <button class="filter-pill" data-filter="Sarawak">Sarawak</button>
+        </div>
+
+        <!-- Scrollable Station Items List -->
+        <div class="station-items-list" id="stationItemsList" role="list">
+          <!-- Dynamically populated via app.js -->
+        </div>
+      </section>
+
+    </aside>
+
+    <!-- FLOATING MAP CONTROLS (RIGHT) -->
+    <div class="map-control-cluster">
+      <button class="map-ctrl-btn" id="zoomInBtn" title="Zum Masuk" aria-label="Zum Masuk">+</button>
+      <button class="map-ctrl-btn" id="zoomOutBtn" title="Zum Keluar" aria-label="Zum Keluar">−</button>
+      <button class="map-ctrl-btn" id="resetViewBtn" title="Pusatkan Peta Malaysia" aria-label="Pusatkan Peta">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="locate-icon"><polygon points="3 11 22 2 13 21 11 13 3 11"></polygon></svg>
+      </button>
+    </div>
+
+    <!-- BOTTOM RIGHT COLLAPSIBLE LEGEND: "Peta IPU" -->
+    <div class="legend-card" id="legendCard">
+      <button class="legend-header" id="legendToggleBtn" aria-expanded="true" aria-controls="legendContent">
+        <span class="legend-title">Peta IPU</span>
+        <svg class="chevron-icon" id="legendChevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"></polyline></svg>
+      </button>
+      <div class="legend-content" id="legendContent">
+        <div class="legend-row">
+          <div class="legend-badge bg-good">Baik</div>
+          <span class="legend-range">0 – 50</span>
+        </div>
+        <div class="legend-row">
+          <div class="legend-badge bg-moderate">Sederhana</div>
+          <span class="legend-range">51 – 100</span>
+        </div>
+        <div class="legend-row">
+          <div class="legend-badge bg-unhealthy">Tidak Sihat</div>
+          <span class="legend-range">101 – 200</span>
+        </div>
+        <div class="legend-row">
+          <div class="legend-badge bg-very-unhealthy">Sangat Tidak Sihat</div>
+          <span class="legend-range">201 – 300</span>
+        </div>
+        <div class="legend-row">
+          <div class="legend-badge bg-hazardous">Berbahaya</div>
+          <span class="legend-range">301+</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- STATION DETAIL MODAL / DRAWER (Exact match to Mobile & Tablet showcase) -->
+    <div class="station-drawer" id="stationDrawer" aria-hidden="true">
+      <div class="drawer-header">
+        <button class="drawer-back-btn" id="drawerBackBtn" aria-label="Tutup panel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        </button>
+        <div class="drawer-titles">
+          <h2 class="drawer-station-name" id="drawerStationName">Kuala Lumpur</h2>
+          <span class="drawer-station-state" id="drawerStationState">WP Kuala Lumpur</span>
+        </div>
+        <div class="drawer-status-pill bg-moderate" id="drawerStatusPill">Sederhana</div>
+      </div>
+
+      <div class="drawer-body">
+        
+        <!-- Big Circular IPU Display -->
+        <div class="drawer-gauge-section">
+          <div class="drawer-circular-gauge">
+            <svg viewBox="0 0 100 100" class="drawer-circle-svg">
+              <circle class="circle-bg" cx="50" cy="50" r="42" />
+              <circle class="circle-bar" id="drawerGaugeCircle" cx="50" cy="50" r="42" />
+            </svg>
+            <div class="drawer-gauge-inner">
+              <span class="drawer-api-val" id="drawerApiVal">62</span>
+              <span class="drawer-api-unit">IPU</span>
+            </div>
+          </div>
+          <div class="drawer-health-msg">
+            <h4 class="health-msg-title" id="drawerHealthTitle">Pencemaran udara Sederhana</h4>
+            <p class="health-msg-desc" id="drawerHealthDesc">Kualiti udara bagi kebanyakan individu adalah memuaskan. Aktiviti luar boleh diteruskan seperti biasa.</p>
+          </div>
+        </div>
+
+        <!-- Side-by-Side Live Comparison Box (DOE APIMS vs AQICN) -->
+        <div class="side-by-side-card">
+          <div class="sbs-header">
+            <h4>⚖️ Perbandingan Side-by-Side (Masa Nyata)</h4>
+            <span class="badge-tag">Stesen Berpadanan</span>
+          </div>
+          <div class="sbs-comparison-grid">
+            <div class="sbs-col doe-col">
+              <div class="sbs-source">DOE APIMS (JAS)</div>
+              <div class="sbs-val" id="sbsDoeVal">62</div>
+              <div class="sbs-standard">Indeks Malaysia</div>
+            </div>
+            <div class="sbs-vs">
+              <span class="vs-text">vs</span>
+              <span class="delta-tag" id="sbsDeltaTag">+3 Δ</span>
+            </div>
+            <div class="sbs-col aqicn-col">
+              <div class="sbs-source">AQICN (WAQI)</div>
+              <div class="sbs-val" id="sbsAqicnVal">65</div>
+              <div class="sbs-standard">US-EPA Standard</div>
+            </div>
+          </div>
+          <p class="sbs-note" id="sbsNote">Perbezaan berpunca daripada selang masa pengiraan (DOE: 24-jam purata vs AQICN: NowCast EPA).</p>
+        </div>
+
+        <!-- Komponen Utama Table (µg/m³) -->
+        <div class="pollutants-section">
+          <div class="section-title-row">
+            <h3 class="section-title">Komponen Utama (µg/m³)</h3>
+            <span class="section-subtitle">Pecahan Pencemar</span>
+          </div>
+          <div class="pollutants-grid">
+            <div class="pollutant-card">
+              <div class="p-dot" style="background: #3B82F6;"></div>
+              <div class="p-meta">
+                <span class="p-name">PM2.5</span>
+                <span class="p-val" id="pPM25">32</span>
+              </div>
+            </div>
+            <div class="pollutant-card">
+              <div class="p-dot" style="background: #22C55E;"></div>
+              <div class="p-meta">
+                <span class="p-name">PM10</span>
+                <span class="p-val" id="pPM10">58</span>
+              </div>
+            </div>
+            <div class="pollutant-card">
+              <div class="p-dot" style="background: #EAB308;"></div>
+              <div class="p-meta">
+                <span class="p-name">SO₂</span>
+                <span class="p-val" id="pSO2">6</span>
+              </div>
+            </div>
+            <div class="pollutant-card">
+              <div class="p-dot" style="background: #EC4899;"></div>
+              <div class="p-meta">
+                <span class="p-name">NO₂</span>
+                <span class="p-val" id="pNO2">20</span>
+              </div>
+            </div>
+            <div class="pollutant-card">
+              <div class="p-dot" style="background: #8B5CF6;"></div>
+              <div class="p-meta">
+                <span class="p-name">O₃</span>
+                <span class="p-val" id="pO3">48</span>
+              </div>
+            </div>
+            <div class="pollutant-card">
+              <div class="p-dot" style="background: #06B6D4;"></div>
+              <div class="p-meta">
+                <span class="p-name">CO (mg/m³)</span>
+                <span class="p-val" id="pCO">0.6</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="drawer-footer">
+          <span class="footer-time" id="drawerRecordTime">Dikemas kini pada: 13 Okt 2026, 08:00</span>
+          <button class="footer-refresh" id="drawerRefreshBtn" title="Kemas kini stesen">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mini-spin"><path d="M23 4v6h-6M1 20v-6h6M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- SIDE-BY-SIDE FULL COMPARISON VIEW MODAL -->
+    <div class="modal-overlay hidden" id="compareModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-container">
+        <div class="modal-header">
+          <div>
+            <h2 class="modal-title" id="modalTitle">⚖️ Perbandingan Side-by-Side: DOE APIMS vs AQICN</h2>
+            <p class="modal-subtitle">Semakan silang indeks kualiti udara bagi Semenanjung Malaysia, Sabah dan Sarawak</p>
+          </div>
+          <button class="modal-close-btn" id="modalCloseBtn" aria-label="Tutup modal">✕</button>
+        </div>
+
+        <div class="modal-body">
+          <div class="comparison-info-banner">
+            <div class="info-pill-item">
+              <strong>🏛️ Jabatan Alam Sekitar (DOE APIMS):</strong> Menggunakan kaedah Indeks Pencemaran Udara (IPU) Malaysia berasaskan purata bergerak 24-jam/1-jam dengan nilai pencemar dominan.
+            </div>
+            <div class="info-pill-item">
+              <strong>🌐 World Air Quality Index (AQICN):</strong> Menggunakan algoritma US-EPA NowCast AQI yang memberi bobot lebih tinggi kepada fluktuasi PM2.5 masa nyata serta-merta.
+            </div>
+          </div>
+
+          <div class="table-actions">
+            <input type="text" id="tableFilterInput" class="table-search" placeholder="Cari stesen dalam jadual...">
+            <div class="table-stats-pill" id="tableStatsPill">68 stesen berpadanan</div>
+          </div>
+
+          <div class="table-wrapper">
+            <table class="comparison-table">
+              <thead>
+                <tr>
+                  <th>Stesen (Lokasi)</th>
+                  <th>Wilayah / Negeri</th>
+                  <th>DOE APIMS (IPU)</th>
+                  <th>AQICN (AQI)</th>
+                  <th>Perbezaan (Δ)</th>
+                  <th>Status DOE</th>
+                </tr>
+              </thead>
+              <tbody id="comparisonTableBody">
+                <!-- Populated dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TREND VIEW MODAL -->
+    <div class="modal-overlay hidden" id="trendModal" role="dialog" aria-modal="true">
+      <div class="modal-container">
+        <div class="modal-header">
+          <div>
+            <h2 class="modal-title">📈 Analisis Trend IPU 24 Jam</h2>
+            <p class="modal-subtitle">Pergerakan Indeks Pencemaran Udara Mengikut Zon Semasa Musim Jerebu</p>
+          </div>
+          <button class="modal-close-btn" id="trendCloseBtn">✕</button>
+        </div>
+        <div class="modal-body">
+          <div class="trend-cards-grid">
+            <div class="trend-box">
+              <h4>Semenanjung Malaysia</h4>
+              <div class="trend-stat-row">
+                <span class="trend-current-val" id="trendSemVal">62</span>
+                <span class="trend-badge bg-moderate">Stabil</span>
+              </div>
+              <p class="trend-desc">Angin monsun barat daya membawa jerebu sederhana ke pantai barat.</p>
+            </div>
+            <div class="trend-box">
+              <h4>Sabah</h4>
+              <div class="trend-stat-row">
+                <span class="trend-current-val" id="trendSabVal">87</span>
+                <span class="trend-badge bg-moderate">Sederhana</span>
+              </div>
+              <p class="trend-desc">Kawasan pedalaman mencatatkan peningkatan zarahan terampai.</p>
+            </div>
+            <div class="trend-box">
+              <h4>Sarawak</h4>
+              <div class="trend-stat-row">
+                <span class="trend-current-val" id="trendSarVal">74</span>
+                <span class="trend-badge bg-moderate">Terkawal</span>
+              </div>
+              <p class="trend-desc">Hujan setempat membantu mengurangkan ketumpatan jerebu di bahagian barat.</p>
+            </div>
+          </div>
+          <div class="chart-placeholder-card">
+            <h4>Graf Simulasi IPU Mengikut Jam (00:00 - 23:00)</h4>
+            <div class="bar-chart-flex" id="barChartFlex">
+              <!-- Dynamically generated bars -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAKLUMAT VIEW MODAL -->
+    <div class="modal-overlay hidden" id="infoModal" role="dialog" aria-modal="true">
+      <div class="modal-container">
+        <div class="modal-header">
+          <div>
+            <h2 class="modal-title">ℹ️ Panduan Kesihatan & Maklumat IPU</h2>
+            <p class="modal-subtitle">Garis panduan rasmi Jabatan Alam Sekitar Malaysia semasa musim jerebu</p>
+          </div>
+          <button class="modal-close-btn" id="infoCloseBtn">✕</button>
+        </div>
+        <div class="modal-body">
+          <div class="info-guide-grid">
+            <div class="guide-card border-good">
+              <h4 class="color-good">0 – 50: Baik</h4>
+              <p>Kualiti udara adalah bersih dan tiada sekatan aktiviti fizikal di luar rumah.</p>
+            </div>
+            <div class="guide-card border-moderate">
+              <h4 class="color-moderate">51 – 100: Sederhana</h4>
+              <p>Tiada kesan buruk kesihatan bagi populasi am. Individu sangat sensitif dinasihatkan memantau simptom.</p>
+            </div>
+            <div class="guide-card border-unhealthy">
+              <h4 class="color-unhealthy">101 – 200: Tidak Sihat</h4>
+              <p>Golongan berisiko tinggi (kanak-kanak, warga emas, pesakit asma) perlu mengehadkan aktiviti luar dan memakai pelitup muka.</p>
+            </div>
+            <div class="guide-card border-very-unhealthy">
+              <h4 class="color-very-unhealthy">201 – 300: Sangat Tidak Sihat</h4>
+              <p>Semua individu dinasihatkan mengelakkan aktiviti fizikal luar. Sekolah boleh ditutup mengikut SOP KPM.</p>
+            </div>
+            <div class="guide-card border-hazardous">
+              <h4 class="color-hazardous">301+: Berbahaya</h4>
+              <p>Amaran kecemasan jerebu. Orang ramai mesti kekal di dalam rumah dan menutup pintu/tingkap.</p>
+            </div>
+          </div>
+
+          <!-- PWA & Brand Identity Showcase Card -->
+          <div class="pwa-identity-card">
+            <div class="pwa-card-left">
+              <img src="/icons/icon-192x192.png" alt="Jerebu Monitor App Icon" class="pwa-app-icon-img">
+              <div class="pwa-card-info">
+                <h3 class="pwa-app-title">Jerebu Monitor PWA</h3>
+                <p class="pwa-app-desc">Aplikasi Web Progresif (PWA) yang boleh dipasang terus ke skrin utama telefon pintar (Android &amp; iOS) serta komputer desktop.</p>
+                <div class="pwa-badges-row">
+                  <span class="pwa-badge">📱 Installable PWA</span>
+                  <span class="pwa-badge">🔄 Kemas Kini Setiap Jam</span>
+                  <span class="pwa-badge">🇲🇾 Khas Malaysia (DOE APIMS)</span>
+                </div>
+              </div>
+            </div>
+            <div class="pwa-card-right">
+              <img src="/assets/logo-trimmed.png" alt="Jerebu Monitor Branding Logo" class="pwa-brand-logo-preview">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Leaflet JS Library -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <!-- Application JS Logic -->
+  <script src="/app.js"></script>
+</body>
+</html>
