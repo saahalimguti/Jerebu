@@ -1,5 +1,5 @@
 // Service Worker for Jerebu Monitor PWA (IPU Malaysia)
-const CACHE_NAME = 'jerebu-monitor-v1.1';
+const CACHE_NAME = 'jerebu-monitor-v1.2';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
@@ -7,8 +7,10 @@ const STATIC_ASSETS = [
   '/app.js',
   '/manifest.json',
   '/favicon.ico',
+  '/assets/brand-emblem.png',
   '/assets/logo-trimmed.png',
   '/assets/logo.png',
+  '/assets/logo-enhanced.png',
   '/assets/app-icon.png',
   '/icons/icon-192x192.png',
   '/icons/icon-512x512.png',
