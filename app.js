@@ -62,8 +62,8 @@ function initMap() {
     [0.6, 99.2],  // Southwest Peninsular (includes Johor & Singapore border)
     [7.6, 119.5]  // Northeast Sabah
   ], {
-    paddingTopLeft: isMobilePortrait ? [75, 12] : [30, 20],
-    paddingBottomRight: isMobilePortrait ? [120, 12] : [30, 20]
+    paddingTopLeft: isMobilePortrait ? [75, 14] : [30, 20],
+    paddingBottomRight: isMobilePortrait ? [170, 14] : [30, 20]
   });
 
   // High-Resolution Satellite Imagery with butter-smooth tile caching
@@ -93,6 +93,23 @@ function initMap() {
   // Initial setup
   handleMapZoom();
   updateHazeFogScale();
+
+  // Ensure Leaflet map tile rendering recalculates true full viewport bounds (PWA standalone & safe areas)
+  const triggerMapResize = () => {
+    if (state.map) {
+      state.map.invalidateSize({ debounceMoveEvents: true });
+    }
+  };
+
+  requestAnimationFrame(triggerMapResize);
+  setTimeout(triggerMapResize, 200);
+  setTimeout(triggerMapResize, 600);
+  setTimeout(triggerMapResize, 1200);
+
+  window.addEventListener('resize', triggerMapResize, { passive: true });
+  window.addEventListener('orientationchange', () => {
+    setTimeout(triggerMapResize, 250);
+  }, { passive: true });
 }
 
 /**
@@ -1241,5 +1258,14 @@ function setupViewportZoomLock() {
         }
       }
     }, { passive: true });
+  }
+
+  // Tap outside summary card (on map) collapses the sheet on mobile portrait
+  if (state.map) {
+    state.map.on('click', () => {
+      if (window.innerWidth <= 768 && leftSidebar && !leftSidebar.classList.contains('sheet-collapsed')) {
+        leftSidebar.classList.add('sheet-collapsed');
+      }
+    });
   }
 }

@@ -536,16 +536,20 @@ body.dark-theme {
 .dashboard-viewport {
   position: relative;
   width: 100vw;
+  width: 100%;
   height: 100vh;
-  padding-top: 64px;
+  height: 100dvh;
+  overflow: hidden;
 }
 
 .map-container {
   position: absolute;
-  top: 64px;
+  top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+  width: 100%;
+  height: 100%;
   background: radial-gradient(circle at 50% 50%, #0d1a33 0%, #050a14 100%);
   z-index: 1;
 }
@@ -2212,15 +2216,15 @@ body.dark-theme {
     height: 30px;
   }
 
-  /* Apple-Style Collapsible Bottom Sheet / Dock */
+  /* Apple-Style Edge-to-Edge Seamless Bottom Sheet / Dock */
   .left-sidebar {
     position: absolute;
     top: auto;
-    bottom: calc(12px + env(safe-area-inset-bottom, 0px));
-    left: 12px;
-    right: 12px;
-    width: auto;
-    max-height: 52vh;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-height: 55vh;
     z-index: 600;
     pointer-events: none;
     transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
@@ -2234,13 +2238,14 @@ body.dark-theme {
   }
 
   .summary-card {
-    padding: 8px 14px 14px 14px;
-    border-radius: 20px;
-    background: rgba(13, 25, 48, 0.92);
+    padding: 8px 16px max(14px, calc(10px + env(safe-area-inset-bottom, 12px))) 16px;
+    border-radius: 22px 22px 0 0;
+    background: rgba(13, 25, 48, 0.95);
     backdrop-filter: blur(28px);
     -webkit-backdrop-filter: blur(28px);
     border: 1px solid rgba(255, 255, 255, 0.14);
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.75);
+    border-bottom: none;
+    box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.75);
     transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
@@ -2304,11 +2309,11 @@ body.dark-theme {
 
   /* Collapsed Mini-Dock Mode (Peek state allows 100% full map visibility) */
   .left-sidebar.sheet-collapsed {
-    transform: translateY(calc(100% - 46px));
+    transform: translateY(calc(100% - 44px - env(safe-area-inset-bottom, 0px)));
   }
   .left-sidebar.sheet-collapsed .summary-card {
-    padding: 6px 14px 8px 14px;
-    border-radius: 16px 16px 0 0;
+    padding-bottom: max(14px, calc(10px + env(safe-area-inset-bottom, 12px)));
+    border-radius: 18px 18px 0 0;
     background: rgba(13, 25, 48, 0.96);
   }
   .left-sidebar.sheet-collapsed .summary-body {
