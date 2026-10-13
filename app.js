@@ -519,6 +519,119 @@ function getCleanStationName(fullName) {
 }
 
 /**
+ * Render Search Autocomplete Dropdown Menu (Instant Filter by Location Name)
+ */
+function renderSearchDropdown(query) {
+  const dropdown = document.getElementById('searchDropdown');
+  if (!dropdown) return;
+
+  const trimmed = (query || '').trim().toLowerCase();
+  if (!trimmed || !state.data?.stations) {
+    dropdown.innerHTML = '';
+    dropdown.classList.add('hidden');
+    return;
+  }
+
+  // Filter stations by name or state
+  const matches = state.data.stations.filter(st => {
+    return st.name.toLowerCase().includes(trimmed) || st.state.toLowerCase().includes(trimmed);
+  });
+
+  // Sort: matching name first (startsWith name, then anywhere in name, then state)
+  matches.sort((a, b) => {
+    const aLower = a.name.toLowerCase();
+    const bLower = b.name.toLowerCase();
+    const aStarts = aLower.startsWith(trimmed);
+    const bStarts = bLower.startsWith(trimmed);
+    if (aStarts && !bStarts) return -1;
+    if (!aStarts && bStarts) return 1;
+    return aLower.localeCompare(bLower);
+  });
+
+  // Limit to top 8 suggestions for responsive mobile dropdown
+  const topMatches = matches.slice(0, 8);
+
+  if (topMatches.length === 0) {
+    dropdown.innerHTML = `<div class="search-no-results">Tiada lokasi dijumpai untuk "<strong>${escapeSearchHtml(query)}</strong>"</div>`;
+    dropdown.classList.remove('hidden');
+    return;
+  }
+
+  const fragment = document.createDocumentFragment();
+  topMatches.forEach(st => {
+    const item = document.createElement('div');
+    item.className = 'search-drop-item';
+    item.setAttribute('role', 'option');
+    item.setAttribute('data-id', st.id);
+
+    const highlightedName = highlightSearchMatch(st.name, trimmed);
+
+    item.innerHTML = `
+      <div class="search-drop-info">
+        <span class="search-drop-name">${highlightedName}</span>
+        <span class="search-drop-meta">${st.state} · ${st.region}</span>
+      </div>
+      <div class="search-drop-badge bg-${st.status_slug}">
+        <span class="search-drop-api">${st.api}</span>
+        <span class="search-drop-unit">IPU</span>
+      </div>
+    `;
+
+    // Handle touch & click selection
+    item.addEventListener('click', (e) => {
+      e.stopPropagation();
+      selectSearchStation(st);
+    });
+
+    fragment.appendChild(item);
+  });
+
+  dropdown.innerHTML = '';
+  dropdown.appendChild(fragment);
+  dropdown.classList.remove('hidden');
+}
+
+function highlightSearchMatch(text, query) {
+  const idx = text.toLowerCase().indexOf(query);
+  if (idx === -1) return escapeSearchHtml(text);
+  const before = text.slice(0, idx);
+  const match = text.slice(idx, idx + query.length);
+  const after = text.slice(idx + query.length);
+  return `${escapeSearchHtml(before)}<mark class="search-highlight">${escapeSearchHtml(match)}</mark>${escapeSearchHtml(after)}`;
+}
+
+function selectSearchStation(st) {
+  const searchInput = document.getElementById('searchInput');
+  const dropdown = document.getElementById('searchDropdown');
+  const clearBtn = document.getElementById('clearSearchBtn');
+
+  if (searchInput) {
+    searchInput.value = st.name;
+    searchInput.blur(); // Dismiss mobile keyboard so user can see map & card
+  }
+  if (clearBtn) clearBtn.classList.remove('hidden');
+  if (dropdown) dropdown.classList.add('hidden');
+
+  state.searchQuery = st.name;
+  if (state.data) renderStationList(state.data.stations);
+
+  // Pan and zoom map to station
+  if (state.map && st.lat && st.lon) {
+    state.map.setView([st.lat, st.lon], 11, { animate: true, duration: 0.8 });
+  }
+
+  // Open the station detail drawer
+  openStationDrawer(st);
+}
+
+function escapeSearchHtml(str) {
+  return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+window.renderSearchDropdown = renderSearchDropdown;
+window.selectSearchStation = selectSearchStation;
+
+/**
  * Render Station Items in Floating Sidebar Card
  */
 function renderStationList(stations) {
@@ -829,9 +942,11 @@ function setupEventListeners() {
     drawerHeader.addEventListener('touchend', handleDragEnd);
   }
 
-  // Search Input in Header
+  // Search Input in Header with Live Dropdown Filter
   const searchInput = document.getElementById('searchInput');
   const clearSearchBtn = document.getElementById('clearSearchBtn');
+  const searchDropdown = document.getElementById('searchDropdown');
+
   if (searchInput) {
     searchInput.addEventListener('input', (e) => {
       state.searchQuery = e.target.value;
@@ -839,18 +954,43 @@ function setupEventListeners() {
         if (state.searchQuery.length > 0) clearSearchBtn.classList.remove('hidden');
         else clearSearchBtn.classList.add('hidden');
       }
+      renderSearchDropdown(state.searchQuery);
       if (state.data) renderStationList(state.data.stations);
+    });
+
+    searchInput.addEventListener('focus', () => {
+      if (searchInput.value.trim().length > 0) {
+        renderSearchDropdown(searchInput.value);
+      }
+    });
+
+    searchInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        if (searchDropdown) searchDropdown.classList.add('hidden');
+      }
     });
   }
 
   if (clearSearchBtn) {
     clearSearchBtn.addEventListener('click', () => {
-      if (searchInput) searchInput.value = '';
+      if (searchInput) {
+        searchInput.value = '';
+        searchInput.focus();
+      }
       state.searchQuery = '';
       clearSearchBtn.classList.add('hidden');
+      if (searchDropdown) searchDropdown.classList.add('hidden');
       if (state.data) renderStationList(state.data.stations);
     });
   }
+
+  // Dismiss search dropdown on click outside
+  document.addEventListener('click', (e) => {
+    const searchBox = document.getElementById('searchBoxContainer') || document.querySelector('.search-box');
+    if (searchBox && searchDropdown && !searchBox.contains(e.target)) {
+      searchDropdown.classList.add('hidden');
+    }
+  });
 
   // Filter Pills (Semua, Semenanjung, Sabah, Sarawak)
   const filterPills = document.querySelectorAll('.filter-pill');

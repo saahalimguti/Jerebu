@@ -1,5 +1,5 @@
 // Service Worker for Jerebu Monitor PWA (IPU Malaysia)
-const CACHE_NAME = 'ipu-malaysia-v1.9-station-drawer-refinement';
+const CACHE_NAME = 'ipu-malaysia-v2.0-search-autocomplete-dropdown';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
