@@ -1,18 +1,18 @@
 {
-  "timestamp": "2026-10-16T02:53:48.984644",
-  "formatted_time": "16 Oct 2026, 02:53",
+  "timestamp": "2026-10-16T03:54:43.900189",
+  "formatted_time": "16 Oct 2026, 03:54",
   "summary": {
     "national_api": 116,
     "status": "Tidak Sihat",
     "status_slug": "unhealthy",
     "status_color": "#eab308",
     "semenanjung_api": 135,
-    "sabah_api": 80,
+    "sabah_api": 81,
     "sarawak_api": 67,
     "total_stations": 68,
     "healthy_count": 0,
-    "moderate_count": 37,
-    "unhealthy_count": 31
+    "moderate_count": 38,
+    "unhealthy_count": 30
   },
   "stations": [
     {
@@ -27,7 +27,7 @@
       "status": "Sederhana",
       "status_slug": "moderate",
       "color": "#22c55e",
-      "record_dt": "2026-10-16T10:00:00",
+      "record_dt": "2026-10-16T11:00:00",
       "components": {
         "pm25": 35.5,
         "pm10": 59.0,
@@ -44,18 +44,18 @@
       "region": "Semenanjung",
       "lat": 6.331608,
       "lon": 99.858461,
-      "api": 67,
+      "api": 68,
       "param_symbol": "**",
       "status": "Sederhana",
       "status_slug": "moderate",
       "color": "#22c55e",
-      "record_dt": "2026-10-16T10:00:00",
+      "record_dt": "2026-10-16T11:00:00",
       "components": {
-        "pm25": 39.4,
-        "pm10": 65.3,
+        "pm25": 39.9,
+        "pm10": 66.2,
         "so2": 5.4,
-        "no2": 16.8,
-        "o3": 43.6,
+        "no2": 17.0,
+        "o3": 44.2,
         "co": 0.54
       }
     },
@@ -71,7 +71,7 @@
       "status": "Sederhana",
       "status_slug": "moderate",
       "color": "#22c55e",
-      "record_dt": "2026-10-16T10:00:00",
+      "record_dt": "2026-10-16T11:00:00",
       "components": {
         "pm25": 43.2,
         "pm10": 71.6,
@@ -93,7 +93,7 @@
       "status": "Sederhana",
       "status_slug": "moderate",
       "color": "#22c55e",
-      "record_dt": "2026-10-16T10:00:00",
+      "record_dt": "2026-10-16T11:00:00",
       "components": {
         "pm25": 43.2,
         "pm10": 71.6,
@@ -110,19 +110,19 @@
       "region": "Semenanjung",
       "lat": 5.401634,
       "lon": 100.589653,
-      "api": 71,
+      "api": 70,
       "param_symbol": "**",
       "status": "Sederhana",
       "status_slug": "moderate",
       "color": "#22c55e",
-      "record_dt": "2026-10-16T10:00:00",
+      "record_dt": "2026-10-16T11:00:00",
       "components": {
-        "pm25": 41.6,
-        "pm10": 68.9,
-        "so2": 5.7,
-        "no2": 17.8,
-        "o3": 46.1,
-        "co": 0.57
+        "pm25": 41.0,
+        "pm10": 68.0,
+        "so2": 5.6,
+        "no2": 17.5,
+        "o3": 45.5,
+        "co": 0.56
       }
     },
     {
@@ -137,7 +137,7 @@
       "status": "Sederhana",
       "status_slug": "moderate",
       "color": "#22c55e",
-      "record_dt": "2026-10-16T10:00:00",
+      "record_dt": "2026-10-16T11:00:00",
       "components": {
         "pm25": 46.5,
         "pm10": 77.0,
@@ -159,7 +159,7 @@
       "status": "Sederhana",
       "status_slug": "moderate",
       "color": "#22c55e",
-      "record_dt": "2026-10-16T10:00:00",
+      "record_dt": "2026-10-16T11:00:00",
       "components": {
         "pm25": 46.0,
         "pm10": 76.1,
@@ -181,7 +181,7 @@
       "status": "Sederhana",
       "status_slug": "moderate",
       "color": "#22c55e",
-      "record_dt": "2026-10-16T10:00:00",
+      "record_dt": "2026-10-16T11:00:00",
       "components": {
         "pm25": 46.5,
         "pm10": 77.0,
@@ -203,7 +203,7 @@
       "status": "Sederhana",
       "status_slug": "moderate",
       "color": "#22c55e",
-      "record_dt": "2026-10-16T10:00:00",
+      "record_dt": "2026-10-16T11:00:00",
       "components": {
         "pm25": 32.2,
         "pm10": 53.6,
@@ -225,7 +225,7 @@
       "status": "Sederhana",
       "status_slug": "moderate",
       "color": "#22c55e",
-      "record_dt": "2026-10-16T10:00:00",
+      "record_dt": "2026-10-16T11:00:00",
       "components": {
         "pm25": 57.0,
         "pm10": 94.1,
@@ -247,7 +247,7 @@
       "status": "Tidak Sihat",
       "status_slug": "unhealthy",
       "color": "#eab308",
-      "record_dt": "2026-10-16T10:00:00",
+      "record_dt": "2026-10-16T11:00:00",
       "components": {
         "pm25": 85.6,
         "pm10": 140.9,
@@ -269,7 +269,7 @@
       "status": "Tidak Sihat",
       "status_slug": "unhealthy",
       "color": "#eab308",
-      "record_dt": "2026-10-16T10:00:00",
+      "record_dt": "2026-10-16T11:00:00",
       "components": {
         "pm25": 86.7,
         "pm10": 142.7,
@@ -291,7 +291,7 @@
       "status": "Tidak Sihat",
       "status_slug": "unhealthy",
       "color": "#eab308",
-      "record_dt": "2026-10-16T10:00:00",
+      "record_dt": "2026-10-16T11:00:00",
       "components": {
         "pm25": 95.5,
         "pm10": 157.1,
@@ -313,7 +313,7 @@
       "status": "Tidak Sihat",
       "status_slug": "unhealthy",
       "color": "#eab308",
-      "record_dt": "2026-10-16T10:00:00",
+      "record_dt": "2026-10-16T11:00:00",
       "components": {
         "pm25": 91.1,
         "pm10": 149.9,
@@ -330,19 +330,19 @@
       "region": "Semenanjung",
       "lat": 3.212429,
       "lon": 101.682218,
-      "api": 169,
+      "api": 168,
       "param_symbol": "**",
       "status": "Tidak Sihat",
       "status_slug": "unhealthy",
       "color": "#eab308",
-      "record_dt": "2026-10-16T10:00:00",
+      "record_dt": "2026-10-16T11:00:00",
       "components": {
-        "pm25": 95.5,
-        "pm10": 157.1,
-        "so2": 13.5,
-        "no2": 42.2,
-        "o3": 109.9,
-        "co": 1.35
+        "pm25": 94.9,
+        "pm10": 156.2,
+        "so2": 13.4,
+        "no2": 42.0,
+        "o3": 109.2,
+        "co": 1.34
       }
     },
     {
@@ -357,7 +357,7 @@
       "status": "Tidak Sihat",
       "status_slug": "unhealthy",
       "color": "#eab308",
-      "record_dt": "2026-10-16T10:00:00",
+      "record_dt": "2026-10-16T11:00:00",
       "components": {
         "pm25": 94.4,
         "pm10": 155.3,
@@ -379,7 +379,7 @@
       "status": "Tidak Sihat",
       "status_slug": "unhealthy",
       "color": "#eab308",
-      "record_dt": "2026-10-16T10:00:00",
+      "record_dt": "2026-10-16T11:00:00",
       "components": {
         "pm25": 98.2,
         "pm10": 161.6,
@@ -401,7 +401,7 @@
       "status": "Tidak Sihat",
       "status_slug": "unhealthy",
       "color": "#eab308",
-      "record_dt": "2026-10-16T10:00:00",
+      "record_dt": "2026-10-16T11:00:00",
       "components": {
         "pm25": 87.8,
         "pm10": 144.5,
@@ -418,19 +418,19 @@
       "region": "Semenanjung",
       "lat": 3.130875,
       "lon": 101.60868,
-      "api": 173,
+      "api": 174,
       "param_symbol": "**",
       "status": "Tidak Sihat",
       "status_slug": "unhealthy",
       "color": "#eab308",
-      "record_dt": "2026-10-16T10:00:00",
+      "record_dt": "2026-10-16T11:00:00",
       "components": {
-        "pm25": 97.7,
-        "pm10": 160.7,
-        "so2": 13.8,
-        "no2": 43.2,
-        "o3": 112.5,
-        "co": 1.38
+        "pm25": 98.2,
+        "pm10": 161.6,
+        "so2": 13.9,
+        "no2": 43.5,
+        "o3": 113.1,
+        "co": 1.39
       }
     },
     {
@@ -445,7 +445,7 @@
       "status": "Tidak Sihat",
       "status_slug": "unhealthy",
       "color": "#eab308",
-      "record_dt": "2026-10-16T10:00:00",
+      "record_dt": "2026-10-16T11:00:00",
       "components": {
         "pm25": 97.1,
         "pm10": 159.8,
@@ -462,19 +462,19 @@
       "region": "Semenanjung",
       "lat": 3.014899,
       "lon": 101.413136,
-      "api": 181,
+      "api": 182,
       "param_symbol": "**",
       "status": "Tidak Sihat",
       "status_slug": "unhealthy",
       "color": "#eab308",
-      "record_dt": "2026-10-16T10:00:00",
+      "record_dt": "2026-10-16T11:00:00",
       "components": {
-        "pm25": 102.1,
-        "pm10": 167.9,
-        "so2": 14.5,
-        "no2": 45.2,
-        "o3": 117.7,
-        "co": 1.45
+        "pm25": 102.6,
+        "pm10": 168.8,
+        "so2": 14.6,
+        "no2": 45.5,
+        "o3": 118.3,
+        "co": 1.46
       }
     },
     {
@@ -489,7 +489,7 @@
       "status": "Tidak Sihat",
       "status_slug": "unhealthy",
       "color": "#eab308",
-      "record_dt": "2026-10-16T10:00:00",
+      "record_dt": "2026-10-16T11:00:00",
       "components": {
         "pm25": 95.5,
         "pm10": 157.1,
@@ -511,7 +511,7 @@
       "status": "Tidak Sihat",
       "status_slug": "unhealthy",
       "color": "#eab308",
-      "record_dt": "2026-10-16T10:00:00",
+      "record_dt": "2026-10-16T11:00:00",
       "components": {
         "pm25": 107.0,
         "pm10": 176.0,
@@ -528,19 +528,19 @@
       "region": "Semenanjung",
       "lat": 2.723441,
       "lon": 101.968395,
-      "api": 180,
+      "api": 179,
       "param_symbol": "**",
       "status": "Tidak Sihat",
       "status_slug": "unhealthy",
       "color": "#eab308",
-      "record_dt": "2026-10-16T10:00:00",
+      "record_dt": "2026-10-16T11:00:00",
       "components": {
-        "pm25": 101.5,
-        "pm10": 167.0,
-        "so2": 14.4,
-        "no2": 45.0,
-        "o3": 117.0,
-        "co": 1.44
+        "pm25": 101.0,
+        "pm10": 166.1,
+        "so2": 14.3,
+        "no2": 44.8,
+        "o3": 116.4,
+        "co": 1.43
       }
     },
     {
@@ -550,19 +550,19 @@
       "region": "Semenanjung",
       "lat": 2.441332,
       "lon": 101.866829,
-      "api": 172,
+      "api": 171,
       "param_symbol": "**",
       "status": "Tidak Sihat",
       "status_slug": "unhealthy",
       "color": "#eab308",
-      "record_dt": "2026-10-16T10:00:00",
+      "record_dt": "2026-10-16T11:00:00",
       "components": {
-        "pm25": 97.1,
-        "pm10": 159.8,
-        "so2": 13.8,
-        "no2": 43.0,
-        "o3": 111.8,
-        "co": 1.38
+        "pm25": 96.6,
+        "pm10": 158.9,
+        "so2": 13.7,
+        "no2": 42.8,
+        "o3": 111.2,
+        "co": 1.37
       }
     },
     {
@@ -577,7 +577,7 @@
       "status": "Tidak Sihat",
       "status_slug": "unhealthy",
       "color": "#eab308",
-      "record_dt": "2026-10-16T10:00:00",
+      "record_dt": "2026-10-16T11:00:00",
       "components": {
         "pm25": 97.1,
         "pm10": 159.8,
@@ -594,18 +594,18 @@
       "region": "Semenanjung",
       "lat": 2.268461,
       "lon": 102.193636,
-      "api": 178,
+      "api": 177,
       "param_symbol": "**",
       "status": "Tidak Sihat",
       "status_slug": "unhealthy",
       "color": "#eab308",
-      "record_dt": "2026-10-16T10:00:00",
+      "record_dt": "2026-10-16T11:00:00",
       "components": {
-        "pm25": 100.4,
-        "pm10": 165.2,
+        "pm25": 99.9,
+        "pm10": 164.3,
         "so2": 14.2,
-        "no2": 44.5,
-        "o3": 115.7,
+        "no2": 44.2,
+        "o3": 115.0,
         "co": 1.42
       }
     },
@@ -616,19 +616,19 @@
       "region": "Semenanjung",
       "lat": 2.190929,
       "lon": 102.257066,
-      "api": 179,
+      "api": 178,
       "param_symbol": "**",
       "status": "Tidak Sihat",
       "status_slug": "unhealthy",
       "color": "#eab308",
-      "record_dt": "2026-10-16T10:00:00",
+      "record_dt": "2026-10-16T11:00:00",
       "components": {
-        "pm25": 101.0,
-        "pm10": 166.1,
-        "so2": 14.3,
-        "no2": 44.8,
-        "o3": 116.4,
-        "co": 1.43
+        "pm25": 100.4,
+        "pm10": 165.2,
+        "so2": 14.2,
+        "no2": 44.5,
+        "o3": 115.7,
+        "co": 1.42
       }
     },
     {
@@ -643,7 +643,7 @@
       "status": "Tidak Sihat",
       "status_slug": "unhealthy",
       "color": "#eab308",
-      "record_dt": "2026-10-16T10:00:00",
+      "record_dt": "2026-10-16T11:00:00",
       "components": {
         "pm25": 90.5,
         "pm10": 149.0,
@@ -660,34 +660,12 @@
       "region": "Semenanjung",
       "lat": 1.919098,
       "lon": 102.86584,
-      "api": 172,
-      "param_symbol": "**",
-      "status": "Tidak Sihat",
-      "status_slug": "unhealthy",
-      "color": "#eab308",
-      "record_dt": "2026-10-16T10:00:00",
-      "components": {
-        "pm25": 97.1,
-        "pm10": 159.8,
-        "so2": 13.8,
-        "no2": 43.0,
-        "o3": 111.8,
-        "co": 1.38
-      }
-    },
-    {
-      "id": "CA32J",
-      "name": "Kluang, JOHOR",
-      "state": "Johor",
-      "region": "Semenanjung",
-      "lat": 2.036936,
-      "lon": 103.312179,
       "api": 171,
       "param_symbol": "**",
       "status": "Tidak Sihat",
       "status_slug": "unhealthy",
       "color": "#eab308",
-      "record_dt": "2026-10-16T10:00:00",
+      "record_dt": "2026-10-16T11:00:00",
       "components": {
         "pm25": 96.6,
         "pm10": 158.9,
@@ -698,25 +676,47 @@
       }
     },
     {
+      "id": "CA32J",
+      "name": "Kluang, JOHOR",
+      "state": "Johor",
+      "region": "Semenanjung",
+      "lat": 2.036936,
+      "lon": 103.312179,
+      "api": 170,
+      "param_symbol": "**",
+      "status": "Tidak Sihat",
+      "status_slug": "unhealthy",
+      "color": "#eab308",
+      "record_dt": "2026-10-16T11:00:00",
+      "components": {
+        "pm25": 96.0,
+        "pm10": 158.0,
+        "so2": 13.6,
+        "no2": 42.5,
+        "o3": 110.5,
+        "co": 1.36
+      }
+    },
+    {
       "id": "CA33J",
       "name": "Larkin, JOHOR",
       "state": "Johor",
       "region": "Semenanjung",
       "lat": 1.494616,
       "lon": 103.735922,
-      "api": 195,
+      "api": 196,
       "param_symbol": "**",
       "status": "Tidak Sihat",
       "status_slug": "unhealthy",
       "color": "#eab308",
-      "record_dt": "2026-10-16T10:00:00",
+      "record_dt": "2026-10-16T11:00:00",
       "components": {
-        "pm25": 109.8,
-        "pm10": 180.5,
-        "so2": 15.6,
-        "no2": 48.8,
-        "o3": 126.8,
-        "co": 1.56
+        "pm25": 110.3,
+        "pm10": 181.4,
+        "so2": 15.7,
+        "no2": 49.0,
+        "o3": 127.4,
+        "co": 1.57
       }
     },
     {
@@ -726,19 +726,19 @@
       "region": "Semenanjung",
       "lat": 1.470121,
       "lon": 103.89366,
-      "api": 209,
+      "api": 208,
       "param_symbol": "**",
       "status": "Sangat Tidak Sihat",
       "status_slug": "very-unhealthy",
       "color": "#f97316",
-      "record_dt": "2026-10-16T10:00:00",
+      "record_dt": "2026-10-16T11:00:00",
       "components": {
-        "pm25": 117.5,
-        "pm10": 193.1,
-        "so2": 16.7,
-        "no2": 52.2,
-        "o3": 135.8,
-        "co": 1.67
+        "pm25": 116.9,
+        "pm10": 192.2,
+        "so2": 16.6,
+        "no2": 52.0,
+        "o3": 135.2,
+        "co": 1.66
       }
     },
     {
@@ -748,19 +748,19 @@
       "region": "Semenanjung",
       "lat": 1.389999,
       "lon": 104.14956,
-      "api": 178,
+      "api": 179,
       "param_symbol": "**",
       "status": "Tidak Sihat",
       "status_slug": "unhealthy",
       "color": "#eab308",
-      "record_dt": "2026-10-16T10:00:00",
+      "record_dt": "2026-10-16T11:00:00",
       "components": {
-        "pm25": 100.4,
-        "pm10": 165.2,
-        "so2": 14.2,
-        "no2": 44.5,
-        "o3": 115.7,
-        "co": 1.42
+        "pm25": 101.0,
+        "pm10": 166.1,
+        "so2": 14.3,
+        "no2": 44.8,
+        "o3": 116.4,
+        "co": 1.43
       }
     },
     {
@@ -770,19 +770,19 @@
       "region": "Semenanjung",
       "lat": 1.564027,
       "lon": 104.22533,
-      "api": 166,
+      "api": 168,
       "param_symbol": "**",
       "status": "Tidak Sihat",
       "status_slug": "unhealthy",
       "color": "#eab308",
-      "record_dt": "2026-10-16T10:00:00",
+      "record_dt": "2026-10-16T11:00:00",
       "components": {
-        "pm25": 93.8,
-        "pm10": 154.4,
-        "so2": 13.3,
-        "no2": 41.5,
-        "o3": 107.9,
-        "co": 1.33
+        "pm25": 94.9,
+        "pm10": 156.2,
+        "so2": 13.4,
+        "no2": 42.0,
+        "o3": 109.2,
+        "co": 1.34
       }
     },
     {
@@ -792,19 +792,19 @@
       "region": "Semenanjung",
       "lat": 2.927699,
       "lon": 103.419193,
-      "api": 152,
+      "api": 151,
       "param_symbol": "**",
       "status": "Tidak Sihat",
       "status_slug": "unhealthy",
       "color": "#eab308",
-      "record_dt": "2026-10-16T10:00:00",
+      "record_dt": "2026-10-16T11:00:00",
       "components": {
-        "pm25": 86.1,
-        "pm10": 141.8,
-        "so2": 12.2,
-        "no2": 38.0,
-        "o3": 98.8,
-        "co": 1.22
+        "pm25": 85.6,
+        "pm10": 140.9,
+        "so2": 12.1,
+        "no2": 37.8,
+        "o3": 98.2,
+        "co": 1.21
       }
     },
     {
@@ -819,7 +819,7 @@
       "status": "Tidak Sihat",
       "status_slug": "unhealthy",
       "color": "#eab308",
-      "record_dt": "2026-10-16T10:00:00",
+      "record_dt": "2026-10-16T11:00:00",
       "components": {
         "pm25": 87.8,
         "pm10": 144.5,
@@ -836,19 +836,19 @@
       "region": "Semenanjung",
       "lat": 3.948312,
       "lon": 102.366683,
-      "api": 112,
+      "api": 100,
       "param_symbol": "**",
-      "status": "Tidak Sihat",
-      "status_slug": "unhealthy",
-      "color": "#eab308",
-      "record_dt": "2026-10-16T10:00:00",
+      "status": "Sederhana",
+      "status_slug": "moderate",
+      "color": "#22c55e",
+      "record_dt": "2026-10-16T11:00:00",
       "components": {
-        "pm25": 64.1,
-        "pm10": 105.8,
-        "so2": 9.0,
-        "no2": 28.0,
-        "o3": 72.8,
-        "co": 0.9
+        "pm25": 57.5,
+        "pm10": 95.0,
+        "so2": 8.0,
+        "no2": 25.0,
+        "o3": 65.0,
+        "co": 0.8
       }
     },
     {
@@ -863,7 +863,7 @@
       "status": "Sederhana",
       "status_slug": "moderate",
       "color": "#22c55e",
-      "record_dt": "2026-10-16T10:00:00",
+      "record_dt": "2026-10-16T11:00:00",
       "components": {
         "pm25": 54.2,
         "pm10": 89.6,
@@ -880,19 +880,19 @@
       "region": "Semenanjung",
       "lat": 3.960669,
       "lon": 103.382182,
-      "api": 88,
+      "api": 86,
       "param_symbol": "**",
       "status": "Sederhana",
       "status_slug": "moderate",
       "color": "#22c55e",
-      "record_dt": "2026-10-16T10:00:00",
+      "record_dt": "2026-10-16T11:00:00",
       "components": {
-        "pm25": 50.9,
-        "pm10": 84.2,
-        "so2": 7.0,
-        "no2": 22.0,
-        "o3": 57.2,
-        "co": 0.7
+        "pm25": 49.8,
+        "pm10": 82.4,
+        "so2": 6.9,
+        "no2": 21.5,
+        "o3": 55.9,
+        "co": 0.69
       }
     },
     {
@@ -902,78 +902,12 @@
       "region": "Semenanjung",
       "lat": 4.26215,
       "lon": 103.425839,
-      "api": 85,
-      "param_symbol": "**",
-      "status": "Sederhana",
-      "status_slug": "moderate",
-      "color": "#22c55e",
-      "record_dt": "2026-10-16T10:00:00",
-      "components": {
-        "pm25": 49.3,
-        "pm10": 81.5,
-        "so2": 6.8,
-        "no2": 21.2,
-        "o3": 55.2,
-        "co": 0.68
-      }
-    },
-    {
-      "id": "CA43T",
-      "name": "Paka, TERENGGANU",
-      "state": "Terengganu",
-      "region": "Semenanjung",
-      "lat": 4.598131,
-      "lon": 103.434793,
-      "api": 80,
-      "param_symbol": "**",
-      "status": "Sederhana",
-      "status_slug": "moderate",
-      "color": "#22c55e",
-      "record_dt": "2026-10-16T10:00:00",
-      "components": {
-        "pm25": 46.5,
-        "pm10": 77.0,
-        "so2": 6.4,
-        "no2": 20.0,
-        "o3": 52.0,
-        "co": 0.64
-      }
-    },
-    {
-      "id": "CA44T",
-      "name": "Kuala Terengganu, TERENGGANU",
-      "state": "Terengganu",
-      "region": "Semenanjung",
-      "lat": 5.308144,
-      "lon": 103.120435,
-      "api": 75,
-      "param_symbol": "**",
-      "status": "Sederhana",
-      "status_slug": "moderate",
-      "color": "#22c55e",
-      "record_dt": "2026-10-16T10:00:00",
-      "components": {
-        "pm25": 43.8,
-        "pm10": 72.5,
-        "so2": 6.0,
-        "no2": 18.8,
-        "o3": 48.8,
-        "co": 0.6
-      }
-    },
-    {
-      "id": "CA45T",
-      "name": "Besut, TERENGGANU",
-      "state": "Terengganu",
-      "region": "Semenanjung",
-      "lat": 5.743342,
-      "lon": 102.513478,
       "api": 84,
       "param_symbol": "**",
       "status": "Sederhana",
       "status_slug": "moderate",
       "color": "#22c55e",
-      "record_dt": "2026-10-16T10:00:00",
+      "record_dt": "2026-10-16T11:00:00",
       "components": {
         "pm25": 48.7,
         "pm10": 80.6,
@@ -984,18 +918,18 @@
       }
     },
     {
-      "id": "CA46D",
-      "name": "Tanah Merah, KELANTAN",
-      "state": "Kelantan",
+      "id": "CA43T",
+      "name": "Paka, TERENGGANU",
+      "state": "Terengganu",
       "region": "Semenanjung",
-      "lat": 5.811251,
-      "lon": 102.134517,
+      "lat": 4.598131,
+      "lon": 103.434793,
       "api": 79,
       "param_symbol": "**",
       "status": "Sederhana",
       "status_slug": "moderate",
       "color": "#22c55e",
-      "record_dt": "2026-10-16T10:00:00",
+      "record_dt": "2026-10-16T11:00:00",
       "components": {
         "pm25": 46.0,
         "pm10": 76.1,
@@ -1006,25 +940,91 @@
       }
     },
     {
+      "id": "CA44T",
+      "name": "Kuala Terengganu, TERENGGANU",
+      "state": "Terengganu",
+      "region": "Semenanjung",
+      "lat": 5.308144,
+      "lon": 103.120435,
+      "api": 74,
+      "param_symbol": "**",
+      "status": "Sederhana",
+      "status_slug": "moderate",
+      "color": "#22c55e",
+      "record_dt": "2026-10-16T11:00:00",
+      "components": {
+        "pm25": 43.2,
+        "pm10": 71.6,
+        "so2": 5.9,
+        "no2": 18.5,
+        "o3": 48.1,
+        "co": 0.59
+      }
+    },
+    {
+      "id": "CA45T",
+      "name": "Besut, TERENGGANU",
+      "state": "Terengganu",
+      "region": "Semenanjung",
+      "lat": 5.743342,
+      "lon": 102.513478,
+      "api": 81,
+      "param_symbol": "**",
+      "status": "Sederhana",
+      "status_slug": "moderate",
+      "color": "#22c55e",
+      "record_dt": "2026-10-16T11:00:00",
+      "components": {
+        "pm25": 47.1,
+        "pm10": 77.9,
+        "so2": 6.5,
+        "no2": 20.2,
+        "o3": 52.6,
+        "co": 0.65
+      }
+    },
+    {
+      "id": "CA46D",
+      "name": "Tanah Merah, KELANTAN",
+      "state": "Kelantan",
+      "region": "Semenanjung",
+      "lat": 5.811251,
+      "lon": 102.134517,
+      "api": 78,
+      "param_symbol": "**",
+      "status": "Sederhana",
+      "status_slug": "moderate",
+      "color": "#22c55e",
+      "record_dt": "2026-10-16T11:00:00",
+      "components": {
+        "pm25": 45.4,
+        "pm10": 75.2,
+        "so2": 6.2,
+        "no2": 19.5,
+        "o3": 50.7,
+        "co": 0.62
+      }
+    },
+    {
       "id": "CA47D",
       "name": "Kota Bharu, KELANTAN",
       "state": "Kelantan",
       "region": "Semenanjung",
       "lat": 6.147439,
       "lon": 102.249233,
-      "api": 77,
+      "api": 76,
       "param_symbol": "**",
       "status": "Sederhana",
       "status_slug": "moderate",
       "color": "#22c55e",
-      "record_dt": "2026-10-16T10:00:00",
+      "record_dt": "2026-10-16T11:00:00",
       "components": {
-        "pm25": 44.9,
-        "pm10": 74.3,
-        "so2": 6.2,
-        "no2": 19.2,
-        "o3": 50.1,
-        "co": 0.62
+        "pm25": 44.3,
+        "pm10": 73.4,
+        "so2": 6.1,
+        "no2": 19.0,
+        "o3": 49.4,
+        "co": 0.61
       }
     },
     {
@@ -1039,7 +1039,7 @@
       "status": "Tidak Sihat",
       "status_slug": "unhealthy",
       "color": "#eab308",
-      "record_dt": "2026-10-16T10:00:00",
+      "record_dt": "2026-10-16T11:00:00",
       "components": {
         "pm25": 86.7,
         "pm10": 142.7,
@@ -1056,18 +1056,18 @@
       "region": "Sabah",
       "lat": 5.864474,
       "lon": 118.091062,
-      "api": 98,
+      "api": 97,
       "param_symbol": "**",
       "status": "Sederhana",
       "status_slug": "moderate",
       "color": "#22c55e",
-      "record_dt": "2026-10-16T10:00:00",
+      "record_dt": "2026-10-16T11:00:00",
       "components": {
-        "pm25": 56.4,
-        "pm10": 93.2,
+        "pm25": 55.9,
+        "pm10": 92.3,
         "so2": 7.8,
-        "no2": 24.5,
-        "o3": 63.7,
+        "no2": 24.2,
+        "o3": 63.1,
         "co": 0.78
       }
     },
@@ -1083,7 +1083,7 @@
       "status": "Sederhana",
       "status_slug": "moderate",
       "color": "#22c55e",
-      "record_dt": "2026-10-16T10:00:00",
+      "record_dt": "2026-10-16T11:00:00",
       "components": {
         "pm25": 33.3,
         "pm10": 55.4,
@@ -1100,18 +1100,18 @@
       "region": "Sabah",
       "lat": 5.597719,
       "lon": 115.88833,
-      "api": 63,
+      "api": 62,
       "param_symbol": "**",
       "status": "Sederhana",
       "status_slug": "moderate",
       "color": "#22c55e",
-      "record_dt": "2026-10-16T10:00:00",
+      "record_dt": "2026-10-16T11:00:00",
       "components": {
-        "pm25": 37.2,
-        "pm10": 61.7,
+        "pm25": 36.6,
+        "pm10": 60.8,
         "so2": 5.0,
-        "no2": 15.8,
-        "o3": 41.0,
+        "no2": 15.5,
+        "o3": 40.3,
         "co": 0.5
       }
     },
@@ -1122,19 +1122,19 @@
       "region": "Sabah",
       "lat": 5.339426,
       "lon": 116.163683,
-      "api": 64,
+      "api": 63,
       "param_symbol": "**",
       "status": "Sederhana",
       "status_slug": "moderate",
       "color": "#22c55e",
-      "record_dt": "2026-10-16T10:00:00",
+      "record_dt": "2026-10-16T11:00:00",
       "components": {
-        "pm25": 37.7,
-        "pm10": 62.6,
-        "so2": 5.1,
-        "no2": 16.0,
-        "o3": 41.6,
-        "co": 0.51
+        "pm25": 37.2,
+        "pm10": 61.7,
+        "so2": 5.0,
+        "no2": 15.8,
+        "o3": 41.0,
+        "co": 0.5
       }
     },
     {
@@ -1144,19 +1144,19 @@
       "region": "Sabah",
       "lat": 5.298106,
       "lon": 115.232276,
-      "api": 60,
+      "api": 70,
       "param_symbol": "**",
       "status": "Sederhana",
       "status_slug": "moderate",
       "color": "#22c55e",
-      "record_dt": "2026-10-16T10:00:00",
+      "record_dt": "2026-10-16T11:00:00",
       "components": {
-        "pm25": 35.5,
-        "pm10": 59.0,
-        "so2": 4.8,
-        "no2": 15.0,
-        "o3": 39.0,
-        "co": 0.48
+        "pm25": 41.0,
+        "pm10": 68.0,
+        "so2": 5.6,
+        "no2": 17.5,
+        "o3": 45.5,
+        "co": 0.56
       }
     },
     {
@@ -1171,7 +1171,7 @@
       "status": "Sederhana",
       "status_slug": "moderate",
       "color": "#22c55e",
-      "record_dt": "2026-10-16T10:00:00",
+      "record_dt": "2026-10-16T11:00:00",
       "components": {
         "pm25": 33.9,
         "pm10": 56.3,
@@ -1188,19 +1188,19 @@
       "region": "Sarawak",
       "lat": 4.49474,
       "lon": 114.043375,
-      "api": 76,
+      "api": 75,
       "param_symbol": "**",
       "status": "Sederhana",
       "status_slug": "moderate",
       "color": "#22c55e",
-      "record_dt": "2026-10-16T10:00:00",
+      "record_dt": "2026-10-16T11:00:00",
       "components": {
-        "pm25": 44.3,
-        "pm10": 73.4,
-        "so2": 6.1,
-        "no2": 19.0,
-        "o3": 49.4,
-        "co": 0.61
+        "pm25": 43.8,
+        "pm10": 72.5,
+        "so2": 6.0,
+        "no2": 18.8,
+        "o3": 48.8,
+        "co": 0.6
       }
     },
     {
@@ -1215,7 +1215,7 @@
       "status": "Sederhana",
       "status_slug": "moderate",
       "color": "#22c55e",
-      "record_dt": "2026-10-16T10:00:00",
+      "record_dt": "2026-10-16T11:00:00",
       "components": {
         "pm25": 44.9,
         "pm10": 74.3,
@@ -1237,7 +1237,7 @@
       "status": "Sederhana",
       "status_slug": "moderate",
       "color": "#22c55e",
-      "record_dt": "2026-10-16T10:00:00",
+      "record_dt": "2026-10-16T11:00:00",
       "components": {
         "pm25": 47.1,
         "pm10": 77.9,
@@ -1259,7 +1259,7 @@
       "status": "Sederhana",
       "status_slug": "moderate",
       "color": "#22c55e",
-      "record_dt": "2026-10-16T10:00:00",
+      "record_dt": "2026-10-16T11:00:00",
       "components": {
         "pm25": 43.8,
         "pm10": 72.5,
@@ -1281,7 +1281,7 @@
       "status": "Sederhana",
       "status_slug": "moderate",
       "color": "#22c55e",
-      "record_dt": "2026-10-16T10:00:00",
+      "record_dt": "2026-10-16T11:00:00",
       "components": {
         "pm25": 36.6,
         "pm10": 60.8,
@@ -1298,19 +1298,19 @@
       "region": "Sarawak",
       "lat": 2.014548,
       "lon": 112.927323,
-      "api": 62,
+      "api": 61,
       "param_symbol": "**",
       "status": "Sederhana",
       "status_slug": "moderate",
       "color": "#22c55e",
-      "record_dt": "2026-10-16T10:00:00",
+      "record_dt": "2026-10-16T11:00:00",
       "components": {
-        "pm25": 36.6,
-        "pm10": 60.8,
-        "so2": 5.0,
-        "no2": 15.5,
-        "o3": 40.3,
-        "co": 0.5
+        "pm25": 36.1,
+        "pm10": 59.9,
+        "so2": 4.9,
+        "no2": 15.2,
+        "o3": 39.6,
+        "co": 0.49
       }
     },
     {
@@ -1320,19 +1320,19 @@
       "region": "Sarawak",
       "lat": 2.314322,
       "lon": 111.831933,
-      "api": 57,
+      "api": 56,
       "param_symbol": "**",
       "status": "Sederhana",
       "status_slug": "moderate",
       "color": "#22c55e",
-      "record_dt": "2026-10-16T10:00:00",
+      "record_dt": "2026-10-16T11:00:00",
       "components": {
-        "pm25": 33.9,
-        "pm10": 56.3,
-        "so2": 4.6,
-        "no2": 14.2,
-        "o3": 37.1,
-        "co": 0.46
+        "pm25": 33.3,
+        "pm10": 55.4,
+        "so2": 4.5,
+        "no2": 14.0,
+        "o3": 36.4,
+        "co": 0.45
       }
     },
     {
@@ -1347,7 +1347,7 @@
       "status": "Sederhana",
       "status_slug": "moderate",
       "color": "#22c55e",
-      "record_dt": "2026-10-16T10:00:00",
+      "record_dt": "2026-10-16T11:00:00",
       "components": {
         "pm25": 31.7,
         "pm10": 52.7,
@@ -1364,19 +1364,19 @@
       "region": "Sarawak",
       "lat": 1.219718,
       "lon": 111.464871,
-      "api": 67,
+      "api": 66,
       "param_symbol": "**",
       "status": "Sederhana",
       "status_slug": "moderate",
       "color": "#22c55e",
-      "record_dt": "2026-10-16T10:00:00",
+      "record_dt": "2026-10-16T11:00:00",
       "components": {
-        "pm25": 39.4,
-        "pm10": 65.3,
-        "so2": 5.4,
-        "no2": 16.8,
-        "o3": 43.6,
-        "co": 0.54
+        "pm25": 38.8,
+        "pm10": 64.4,
+        "so2": 5.3,
+        "no2": 16.5,
+        "o3": 42.9,
+        "co": 0.53
       }
     },
     {
@@ -1386,19 +1386,19 @@
       "region": "Sarawak",
       "lat": 1.454806,
       "lon": 110.491506,
-      "api": 71,
+      "api": 69,
       "param_symbol": "**",
       "status": "Sederhana",
       "status_slug": "moderate",
       "color": "#22c55e",
-      "record_dt": "2026-10-16T10:00:00",
+      "record_dt": "2026-10-16T11:00:00",
       "components": {
-        "pm25": 41.6,
-        "pm10": 68.9,
-        "so2": 5.7,
-        "no2": 17.8,
-        "o3": 46.1,
-        "co": 0.57
+        "pm25": 40.5,
+        "pm10": 67.1,
+        "so2": 5.5,
+        "no2": 17.2,
+        "o3": 44.9,
+        "co": 0.55
       }
     },
     {
@@ -1413,7 +1413,7 @@
       "status": "Sederhana",
       "status_slug": "moderate",
       "color": "#22c55e",
-      "record_dt": "2026-10-16T10:00:00",
+      "record_dt": "2026-10-16T11:00:00",
       "components": {
         "pm25": 41.6,
         "pm10": 68.9,
@@ -1430,18 +1430,18 @@
       "region": "Semenanjung",
       "lat": 2.295748,
       "lon": 102.571313,
-      "api": 163,
+      "api": 162,
       "param_symbol": "**",
       "status": "Tidak Sihat",
       "status_slug": "unhealthy",
       "color": "#eab308",
-      "record_dt": "2026-10-16T10:00:00",
+      "record_dt": "2026-10-16T11:00:00",
       "components": {
-        "pm25": 92.2,
-        "pm10": 151.7,
+        "pm25": 91.6,
+        "pm10": 150.8,
         "so2": 13.0,
-        "no2": 40.8,
-        "o3": 106.0,
+        "no2": 40.5,
+        "o3": 105.3,
         "co": 1.3
       }
     },
@@ -1452,19 +1452,19 @@
       "region": "Semenanjung",
       "lat": 2.978644,
       "lon": 101.490107,
-      "api": 185,
+      "api": 186,
       "param_symbol": "**",
       "status": "Tidak Sihat",
       "status_slug": "unhealthy",
       "color": "#eab308",
-      "record_dt": "2026-10-16T10:00:00",
+      "record_dt": "2026-10-16T11:00:00",
       "components": {
-        "pm25": 104.3,
-        "pm10": 171.5,
-        "so2": 14.8,
-        "no2": 46.2,
-        "o3": 120.2,
-        "co": 1.48
+        "pm25": 104.8,
+        "pm10": 172.4,
+        "so2": 14.9,
+        "no2": 46.5,
+        "o3": 120.9,
+        "co": 1.49
       }
     },
     {
@@ -1474,19 +1474,19 @@
       "region": "Sarawak",
       "lat": 1.17247,
       "lon": 110.56807,
-      "api": 65,
+      "api": 64,
       "param_symbol": "**",
       "status": "Sederhana",
       "status_slug": "moderate",
       "color": "#22c55e",
-      "record_dt": "2026-10-16T10:00:00",
+      "record_dt": "2026-10-16T11:00:00",
       "components": {
-        "pm25": 38.2,
-        "pm10": 63.5,
-        "so2": 5.2,
-        "no2": 16.2,
-        "o3": 42.2,
-        "co": 0.52
+        "pm25": 37.7,
+        "pm10": 62.6,
+        "so2": 5.1,
+        "no2": 16.0,
+        "o3": 41.6,
+        "co": 0.51
       }
     },
     {
@@ -1501,7 +1501,7 @@
       "status": "Sederhana",
       "status_slug": "moderate",
       "color": "#22c55e",
-      "record_dt": "2026-10-16T10:00:00",
+      "record_dt": "2026-10-16T11:00:00",
       "components": {
         "pm25": 39.4,
         "pm10": 65.3,
@@ -1531,12 +1531,12 @@
       "name": "Langkawi, KEDAH",
       "state": "Kedah",
       "region": "Semenanjung",
-      "doe_api": 67,
+      "doe_api": 68,
       "doe_status": "Sederhana",
       "aqicn_aqi": 67,
       "aqicn_name": "Langkawi, Kedah, Malaysia",
-      "delta": 0,
-      "delta_label": "0",
+      "delta": -1,
+      "delta_label": "-1",
       "explanation": "DOE menggunakan formula Indeks Pencemaran Udara JAS (Purata bergerak 24-jam/1-jam), manakala AQICN menggunakan skala US-EPA AQI."
     },
     {
@@ -1570,12 +1570,12 @@
       "name": "Kulim Hi-Tech, KEDAH",
       "state": "Kedah",
       "region": "Semenanjung",
-      "doe_api": 71,
+      "doe_api": 70,
       "doe_status": "Sederhana",
       "aqicn_aqi": 71,
       "aqicn_name": "Kulim Hi-Tech, Kedah, Malaysia",
-      "delta": 0,
-      "delta_label": "0",
+      "delta": 1,
+      "delta_label": "+1",
       "explanation": "DOE menggunakan formula Indeks Pencemaran Udara JAS (Purata bergerak 24-jam/1-jam), manakala AQICN menggunakan skala US-EPA AQI."
     },
     {
@@ -1700,12 +1700,12 @@
       "name": "Batu Muda, W.P. KUALA LUMPUR",
       "state": "WP Kuala Lumpur",
       "region": "Semenanjung",
-      "doe_api": 169,
+      "doe_api": 168,
       "doe_status": "Tidak Sihat",
       "aqicn_aqi": 170,
       "aqicn_name": "Batu Muda,Kuala Lumpur, Wilayah Persekutuan, Malaysia",
-      "delta": 1,
-      "delta_label": "+1",
+      "delta": 2,
+      "delta_label": "+2",
       "explanation": "DOE menggunakan formula Indeks Pencemaran Udara JAS (Purata bergerak 24-jam/1-jam), manakala AQICN menggunakan skala US-EPA AQI."
     },
     {
@@ -1728,10 +1728,10 @@
       "region": "Semenanjung",
       "doe_api": 174,
       "doe_status": "Tidak Sihat",
-      "aqicn_aqi": 190,
-      "aqicn_name": "Nilai, Negeri Sembilan, Malaysia",
-      "delta": 16,
-      "delta_label": "+16",
+      "aqicn_aqi": 169,
+      "aqicn_name": "Banting, Selangor, Malaysia",
+      "delta": -5,
+      "delta_label": "-5",
       "explanation": "DOE menggunakan formula Indeks Pencemaran Udara JAS (Purata bergerak 24-jam/1-jam), manakala AQICN menggunakan skala US-EPA AQI."
     },
     {
@@ -1752,12 +1752,12 @@
       "name": "Petaling Jaya, SELANGOR",
       "state": "Selangor",
       "region": "Semenanjung",
-      "doe_api": 173,
+      "doe_api": 174,
       "doe_status": "Tidak Sihat",
       "aqicn_aqi": 173,
       "aqicn_name": "Petaling Jaya, Selangor, Malaysia",
-      "delta": 0,
-      "delta_label": "0",
+      "delta": -1,
+      "delta_label": "-1",
       "explanation": "DOE menggunakan formula Indeks Pencemaran Udara JAS (Purata bergerak 24-jam/1-jam), manakala AQICN menggunakan skala US-EPA AQI."
     },
     {
@@ -1778,12 +1778,12 @@
       "name": "Klang, SELANGOR",
       "state": "Selangor",
       "region": "Semenanjung",
-      "doe_api": 181,
+      "doe_api": 182,
       "doe_status": "Tidak Sihat",
       "aqicn_aqi": 181,
       "aqicn_name": "Pelabuhan Kelang, Selangor, Malaysia",
-      "delta": 0,
-      "delta_label": "0",
+      "delta": -1,
+      "delta_label": "-1",
       "explanation": "DOE menggunakan formula Indeks Pencemaran Udara JAS (Purata bergerak 24-jam/1-jam), manakala AQICN menggunakan skala US-EPA AQI."
     },
     {
@@ -1793,10 +1793,10 @@
       "region": "Semenanjung",
       "doe_api": 169,
       "doe_status": "Tidak Sihat",
-      "aqicn_aqi": 190,
-      "aqicn_name": "Nilai, Negeri Sembilan, Malaysia",
-      "delta": 21,
-      "delta_label": "+21",
+      "aqicn_aqi": 169,
+      "aqicn_name": "Banting, Selangor, Malaysia",
+      "delta": 0,
+      "delta_label": "0",
       "explanation": "DOE menggunakan formula Indeks Pencemaran Udara JAS (Purata bergerak 24-jam/1-jam), manakala AQICN menggunakan skala US-EPA AQI."
     },
     {
@@ -1817,12 +1817,12 @@
       "name": "Seremban, NEGERI SEMBILAN",
       "state": "Negeri Sembilan",
       "region": "Semenanjung",
-      "doe_api": 180,
+      "doe_api": 179,
       "doe_status": "Tidak Sihat",
       "aqicn_aqi": 181,
       "aqicn_name": "Seremban, Negeri Sembilan, Malaysia",
-      "delta": 1,
-      "delta_label": "+1",
+      "delta": 2,
+      "delta_label": "+2",
       "explanation": "DOE menggunakan formula Indeks Pencemaran Udara JAS (Purata bergerak 24-jam/1-jam), manakala AQICN menggunakan skala US-EPA AQI."
     },
     {
@@ -1830,12 +1830,12 @@
       "name": "Port Dickson, NEGERI SEMBILAN",
       "state": "Negeri Sembilan",
       "region": "Semenanjung",
-      "doe_api": 172,
+      "doe_api": 171,
       "doe_status": "Tidak Sihat",
       "aqicn_aqi": 172,
       "aqicn_name": "Port Dickson, Negeri Sembilan, Malaysia",
-      "delta": 0,
-      "delta_label": "0",
+      "delta": 1,
+      "delta_label": "+1",
       "explanation": "DOE menggunakan formula Indeks Pencemaran Udara JAS (Purata bergerak 24-jam/1-jam), manakala AQICN menggunakan skala US-EPA AQI."
     },
     {
@@ -1856,12 +1856,12 @@
       "name": "Bukit Rambai, MELAKA",
       "state": "Melaka",
       "region": "Semenanjung",
-      "doe_api": 178,
+      "doe_api": 177,
       "doe_status": "Tidak Sihat",
       "aqicn_aqi": 178,
       "aqicn_name": "Bukit Rambai, Melaka, Malaysia",
-      "delta": 0,
-      "delta_label": "0",
+      "delta": 1,
+      "delta_label": "+1",
       "explanation": "DOE menggunakan formula Indeks Pencemaran Udara JAS (Purata bergerak 24-jam/1-jam), manakala AQICN menggunakan skala US-EPA AQI."
     },
     {
@@ -1869,12 +1869,12 @@
       "name": "Bandaraya Melaka, MELAKA",
       "state": "Melaka",
       "region": "Semenanjung",
-      "doe_api": 179,
+      "doe_api": 178,
       "doe_status": "Tidak Sihat",
       "aqicn_aqi": 179,
       "aqicn_name": "Bandaraya Melaka, Melaka, Malaysia",
-      "delta": 0,
-      "delta_label": "0",
+      "delta": 1,
+      "delta_label": "+1",
       "explanation": "DOE menggunakan formula Indeks Pencemaran Udara JAS (Purata bergerak 24-jam/1-jam), manakala AQICN menggunakan skala US-EPA AQI."
     },
     {
@@ -1895,12 +1895,12 @@
       "name": "Batu Pahat, JOHOR",
       "state": "Johor",
       "region": "Semenanjung",
-      "doe_api": 172,
+      "doe_api": 171,
       "doe_status": "Tidak Sihat",
       "aqicn_aqi": 172,
       "aqicn_name": "Batu Pahat, Johor, Malaysia",
-      "delta": 0,
-      "delta_label": "0",
+      "delta": 1,
+      "delta_label": "+1",
       "explanation": "DOE menggunakan formula Indeks Pencemaran Udara JAS (Purata bergerak 24-jam/1-jam), manakala AQICN menggunakan skala US-EPA AQI."
     },
     {
@@ -1908,12 +1908,12 @@
       "name": "Kluang, JOHOR",
       "state": "Johor",
       "region": "Semenanjung",
-      "doe_api": 171,
+      "doe_api": 170,
       "doe_status": "Tidak Sihat",
       "aqicn_aqi": 171,
       "aqicn_name": "Kluang, Johor, Malaysia",
-      "delta": 0,
-      "delta_label": "0",
+      "delta": 1,
+      "delta_label": "+1",
       "explanation": "DOE menggunakan formula Indeks Pencemaran Udara JAS (Purata bergerak 24-jam/1-jam), manakala AQICN menggunakan skala US-EPA AQI."
     },
     {
@@ -1921,12 +1921,12 @@
       "name": "Larkin, JOHOR",
       "state": "Johor",
       "region": "Semenanjung",
-      "doe_api": 195,
+      "doe_api": 196,
       "doe_status": "Tidak Sihat",
       "aqicn_aqi": 194,
       "aqicn_name": "Larkin Lama, Johor, Malaysia",
-      "delta": -1,
-      "delta_label": "-1",
+      "delta": -2,
+      "delta_label": "-2",
       "explanation": "DOE menggunakan formula Indeks Pencemaran Udara JAS (Purata bergerak 24-jam/1-jam), manakala AQICN menggunakan skala US-EPA AQI."
     },
     {
@@ -1934,12 +1934,12 @@
       "name": "Pasir Gudang, JOHOR",
       "state": "Johor",
       "region": "Semenanjung",
-      "doe_api": 209,
+      "doe_api": 208,
       "doe_status": "Sangat Tidak Sihat",
       "aqicn_aqi": 209,
       "aqicn_name": "Pasir Gudang, Johor, Malaysia",
-      "delta": 0,
-      "delta_label": "0",
+      "delta": 1,
+      "delta_label": "+1",
       "explanation": "DOE menggunakan formula Indeks Pencemaran Udara JAS (Purata bergerak 24-jam/1-jam), manakala AQICN menggunakan skala US-EPA AQI."
     },
     {
@@ -1947,12 +1947,12 @@
       "name": "Pengerang, JOHOR",
       "state": "Johor",
       "region": "Semenanjung",
-      "doe_api": 178,
+      "doe_api": 179,
       "doe_status": "Tidak Sihat",
       "aqicn_aqi": 177,
       "aqicn_name": "Pengerang, Johor, Malaysia",
-      "delta": -1,
-      "delta_label": "-1",
+      "delta": -2,
+      "delta_label": "-2",
       "explanation": "DOE menggunakan formula Indeks Pencemaran Udara JAS (Purata bergerak 24-jam/1-jam), manakala AQICN menggunakan skala US-EPA AQI."
     },
     {
@@ -1960,12 +1960,12 @@
       "name": "Kota Tinggi, JOHOR",
       "state": "Johor",
       "region": "Semenanjung",
-      "doe_api": 166,
+      "doe_api": 168,
       "doe_status": "Tidak Sihat",
       "aqicn_aqi": 166,
       "aqicn_name": "Kota Tinggi, Johor, Malaysia",
-      "delta": 0,
-      "delta_label": "0",
+      "delta": -2,
+      "delta_label": "-2",
       "explanation": "DOE menggunakan formula Indeks Pencemaran Udara JAS (Purata bergerak 24-jam/1-jam), manakala AQICN menggunakan skala US-EPA AQI."
     },
     {
@@ -1973,12 +1973,12 @@
       "name": "Rompin, PAHANG",
       "state": "Pahang",
       "region": "Semenanjung",
-      "doe_api": 152,
+      "doe_api": 151,
       "doe_status": "Tidak Sihat",
       "aqicn_aqi": 152,
       "aqicn_name": "Rompin, Pahang, Malaysia",
-      "delta": 0,
-      "delta_label": "0",
+      "delta": 1,
+      "delta_label": "+1",
       "explanation": "DOE menggunakan formula Indeks Pencemaran Udara JAS (Purata bergerak 24-jam/1-jam), manakala AQICN menggunakan skala US-EPA AQI."
     },
     {
@@ -1999,12 +1999,12 @@
       "name": "Jerantut, PAHANG",
       "state": "Pahang",
       "region": "Semenanjung",
-      "doe_api": 112,
-      "doe_status": "Tidak Sihat",
+      "doe_api": 100,
+      "doe_status": "Sederhana",
       "aqicn_aqi": 112,
       "aqicn_name": "Jerantut, Pahang, Malaysia",
-      "delta": 0,
-      "delta_label": "0",
+      "delta": 12,
+      "delta_label": "+12",
       "explanation": "DOE menggunakan formula Indeks Pencemaran Udara JAS (Purata bergerak 24-jam/1-jam), manakala AQICN menggunakan skala US-EPA AQI."
     },
     {
@@ -2025,12 +2025,12 @@
       "name": "Balok Baru Kuantan, PAHANG",
       "state": "Pahang",
       "region": "Semenanjung",
-      "doe_api": 88,
+      "doe_api": 86,
       "doe_status": "Sederhana",
       "aqicn_aqi": 88,
       "aqicn_name": "Balok Baru, Kuantan, Pahang, Malaysia",
-      "delta": 0,
-      "delta_label": "0",
+      "delta": 2,
+      "delta_label": "+2",
       "explanation": "DOE menggunakan formula Indeks Pencemaran Udara JAS (Purata bergerak 24-jam/1-jam), manakala AQICN menggunakan skala US-EPA AQI."
     },
     {
@@ -2038,12 +2038,12 @@
       "name": "Kemaman, TERENGGANU",
       "state": "Terengganu",
       "region": "Semenanjung",
-      "doe_api": 85,
+      "doe_api": 84,
       "doe_status": "Sederhana",
       "aqicn_aqi": 85,
       "aqicn_name": "Kemaman, Terengganu, Malaysia",
-      "delta": 0,
-      "delta_label": "0",
+      "delta": 1,
+      "delta_label": "+1",
       "explanation": "DOE menggunakan formula Indeks Pencemaran Udara JAS (Purata bergerak 24-jam/1-jam), manakala AQICN menggunakan skala US-EPA AQI."
     },
     {
@@ -2051,12 +2051,12 @@
       "name": "Paka, TERENGGANU",
       "state": "Terengganu",
       "region": "Semenanjung",
-      "doe_api": 80,
+      "doe_api": 79,
       "doe_status": "Sederhana",
       "aqicn_aqi": 80,
       "aqicn_name": "Paka, Terengganu, Malaysia",
-      "delta": 0,
-      "delta_label": "0",
+      "delta": 1,
+      "delta_label": "+1",
       "explanation": "DOE menggunakan formula Indeks Pencemaran Udara JAS (Purata bergerak 24-jam/1-jam), manakala AQICN menggunakan skala US-EPA AQI."
     },
     {
@@ -2064,12 +2064,12 @@
       "name": "Kuala Terengganu, TERENGGANU",
       "state": "Terengganu",
       "region": "Semenanjung",
-      "doe_api": 75,
+      "doe_api": 74,
       "doe_status": "Sederhana",
       "aqicn_aqi": 75,
       "aqicn_name": "Kuala Terengganu, Terengganu, Malaysia",
-      "delta": 0,
-      "delta_label": "0",
+      "delta": 1,
+      "delta_label": "+1",
       "explanation": "DOE menggunakan formula Indeks Pencemaran Udara JAS (Purata bergerak 24-jam/1-jam), manakala AQICN menggunakan skala US-EPA AQI."
     },
     {
@@ -2077,12 +2077,12 @@
       "name": "Besut, TERENGGANU",
       "state": "Terengganu",
       "region": "Semenanjung",
-      "doe_api": 84,
+      "doe_api": 81,
       "doe_status": "Sederhana",
       "aqicn_aqi": 84,
       "aqicn_name": "Besut, Terengganu, Malaysia",
-      "delta": 0,
-      "delta_label": "0",
+      "delta": 3,
+      "delta_label": "+3",
       "explanation": "DOE menggunakan formula Indeks Pencemaran Udara JAS (Purata bergerak 24-jam/1-jam), manakala AQICN menggunakan skala US-EPA AQI."
     },
     {
@@ -2090,12 +2090,12 @@
       "name": "Tanah Merah, KELANTAN",
       "state": "Kelantan",
       "region": "Semenanjung",
-      "doe_api": 79,
+      "doe_api": 78,
       "doe_status": "Sederhana",
       "aqicn_aqi": 79,
       "aqicn_name": "Tanah Merah, Kelantan, Malaysia",
-      "delta": 0,
-      "delta_label": "0",
+      "delta": 1,
+      "delta_label": "+1",
       "explanation": "DOE menggunakan formula Indeks Pencemaran Udara JAS (Purata bergerak 24-jam/1-jam), manakala AQICN menggunakan skala US-EPA AQI."
     },
     {
@@ -2103,12 +2103,12 @@
       "name": "Kota Bharu, KELANTAN",
       "state": "Kelantan",
       "region": "Semenanjung",
-      "doe_api": 77,
+      "doe_api": 76,
       "doe_status": "Sederhana",
       "aqicn_aqi": 77,
       "aqicn_name": "Kota Bharu, Kelantan, Malaysia",
-      "delta": 0,
-      "delta_label": "0",
+      "delta": 1,
+      "delta_label": "+1",
       "explanation": "DOE menggunakan formula Indeks Pencemaran Udara JAS (Purata bergerak 24-jam/1-jam), manakala AQICN menggunakan skala US-EPA AQI."
     },
     {
@@ -2129,12 +2129,12 @@
       "name": "Sandakan, SABAH",
       "state": "Sabah",
       "region": "Sabah",
-      "doe_api": 98,
+      "doe_api": 97,
       "doe_status": "Sederhana",
       "aqicn_aqi": 98,
       "aqicn_name": "Sandakan, Sabah, Malaysia",
-      "delta": 0,
-      "delta_label": "0",
+      "delta": 1,
+      "delta_label": "+1",
       "explanation": "DOE menggunakan formula Indeks Pencemaran Udara JAS (Purata bergerak 24-jam/1-jam), manakala AQICN menggunakan skala US-EPA AQI."
     },
     {
@@ -2155,12 +2155,12 @@
       "name": "Kimanis, SABAH",
       "state": "Sabah",
       "region": "Sabah",
-      "doe_api": 63,
+      "doe_api": 62,
       "doe_status": "Sederhana",
       "aqicn_aqi": 63,
       "aqicn_name": "Kimanis, Sabah, Malaysia",
-      "delta": 0,
-      "delta_label": "0",
+      "delta": 1,
+      "delta_label": "+1",
       "explanation": "DOE menggunakan formula Indeks Pencemaran Udara JAS (Purata bergerak 24-jam/1-jam), manakala AQICN menggunakan skala US-EPA AQI."
     },
     {
@@ -2168,12 +2168,12 @@
       "name": "Keningau, SABAH",
       "state": "Sabah",
       "region": "Sabah",
-      "doe_api": 64,
+      "doe_api": 63,
       "doe_status": "Sederhana",
       "aqicn_aqi": 64,
       "aqicn_name": "Keningau, Sabah, Malaysia",
-      "delta": 0,
-      "delta_label": "0",
+      "delta": 1,
+      "delta_label": "+1",
       "explanation": "DOE menggunakan formula Indeks Pencemaran Udara JAS (Purata bergerak 24-jam/1-jam), manakala AQICN menggunakan skala US-EPA AQI."
     },
     {
@@ -2181,12 +2181,12 @@
       "name": "Labuan, W.P. LABUAN",
       "state": "WP Labuan",
       "region": "Sabah",
-      "doe_api": 60,
+      "doe_api": 70,
       "doe_status": "Sederhana",
       "aqicn_aqi": 60,
       "aqicn_name": "Labuan, Wilayah Persekutuan, Malaysia",
-      "delta": 0,
-      "delta_label": "0",
+      "delta": -10,
+      "delta_label": "-10",
       "explanation": "DOE menggunakan formula Indeks Pencemaran Udara JAS (Purata bergerak 24-jam/1-jam), manakala AQICN menggunakan skala US-EPA AQI."
     },
     {
@@ -2207,12 +2207,12 @@
       "name": "ILP Miri, SARAWAK",
       "state": "Sarawak",
       "region": "Sarawak",
-      "doe_api": 76,
+      "doe_api": 75,
       "doe_status": "Sederhana",
       "aqicn_aqi": 76,
       "aqicn_name": "ILP Miri, Sarawak, Malaysia",
-      "delta": 0,
-      "delta_label": "0",
+      "delta": 1,
+      "delta_label": "+1",
       "explanation": "DOE menggunakan formula Indeks Pencemaran Udara JAS (Purata bergerak 24-jam/1-jam), manakala AQICN menggunakan skala US-EPA AQI."
     },
     {
@@ -2272,12 +2272,12 @@
       "name": "Kapit, SARAWAK",
       "state": "Sarawak",
       "region": "Sarawak",
-      "doe_api": 62,
+      "doe_api": 61,
       "doe_status": "Sederhana",
       "aqicn_aqi": 62,
       "aqicn_name": "Kapit, Sarawak, Malaysia",
-      "delta": 0,
-      "delta_label": "0",
+      "delta": 1,
+      "delta_label": "+1",
       "explanation": "DOE menggunakan formula Indeks Pencemaran Udara JAS (Purata bergerak 24-jam/1-jam), manakala AQICN menggunakan skala US-EPA AQI."
     },
     {
@@ -2285,12 +2285,12 @@
       "name": "Sibu, SARAWAK",
       "state": "Sarawak",
       "region": "Sarawak",
-      "doe_api": 57,
+      "doe_api": 56,
       "doe_status": "Sederhana",
       "aqicn_aqi": 57,
       "aqicn_name": "Sibu, Sarawak, Malaysia",
-      "delta": 0,
-      "delta_label": "0",
+      "delta": 1,
+      "delta_label": "+1",
       "explanation": "DOE menggunakan formula Indeks Pencemaran Udara JAS (Purata bergerak 24-jam/1-jam), manakala AQICN menggunakan skala US-EPA AQI."
     },
     {
@@ -2311,12 +2311,12 @@
       "name": "Sri Aman, SARAWAK",
       "state": "Sarawak",
       "region": "Sarawak",
-      "doe_api": 67,
+      "doe_api": 66,
       "doe_status": "Sederhana",
       "aqicn_aqi": 67,
       "aqicn_name": "Sri Aman, Sarawak, Malaysia",
-      "delta": 0,
-      "delta_label": "0",
+      "delta": 1,
+      "delta_label": "+1",
       "explanation": "DOE menggunakan formula Indeks Pencemaran Udara JAS (Purata bergerak 24-jam/1-jam), manakala AQICN menggunakan skala US-EPA AQI."
     },
     {
@@ -2324,12 +2324,12 @@
       "name": "Samarahan, SARAWAK",
       "state": "Sarawak",
       "region": "Sarawak",
-      "doe_api": 71,
+      "doe_api": 69,
       "doe_status": "Sederhana",
       "aqicn_aqi": 71,
       "aqicn_name": "Samarahan, Sarawak, Malaysia",
-      "delta": 0,
-      "delta_label": "0",
+      "delta": 2,
+      "delta_label": "+2",
       "explanation": "DOE menggunakan formula Indeks Pencemaran Udara JAS (Purata bergerak 24-jam/1-jam), manakala AQICN menggunakan skala US-EPA AQI."
     },
     {
@@ -2350,12 +2350,12 @@
       "name": "Tangkak, JOHOR",
       "state": "Johor",
       "region": "Semenanjung",
-      "doe_api": 163,
+      "doe_api": 162,
       "doe_status": "Tidak Sihat",
       "aqicn_aqi": 163,
       "aqicn_name": "Tangkak, Johor, Malaysia",
-      "delta": 0,
-      "delta_label": "0",
+      "delta": 1,
+      "delta_label": "+1",
       "explanation": "DOE menggunakan formula Indeks Pencemaran Udara JAS (Purata bergerak 24-jam/1-jam), manakala AQICN menggunakan skala US-EPA AQI."
     },
     {
@@ -2363,12 +2363,12 @@
       "name": "JOHAN SETIA",
       "state": "Selangor",
       "region": "Semenanjung",
-      "doe_api": 185,
+      "doe_api": 186,
       "doe_status": "Tidak Sihat",
       "aqicn_aqi": 181,
       "aqicn_name": "Pelabuhan Kelang, Selangor, Malaysia",
-      "delta": -4,
-      "delta_label": "-4",
+      "delta": -5,
+      "delta_label": "-5",
       "explanation": "DOE menggunakan formula Indeks Pencemaran Udara JAS (Purata bergerak 24-jam/1-jam), manakala AQICN menggunakan skala US-EPA AQI."
     },
     {
@@ -2376,12 +2376,12 @@
       "name": "IPD Serian",
       "state": "Sarawak",
       "region": "Sarawak",
-      "doe_api": 65,
+      "doe_api": 64,
       "doe_status": "Sederhana",
       "aqicn_aqi": 71,
       "aqicn_name": "Samarahan, Sarawak, Malaysia",
-      "delta": 6,
-      "delta_label": "+6",
+      "delta": 7,
+      "delta_label": "+7",
       "explanation": "DOE menggunakan formula Indeks Pencemaran Udara JAS (Purata bergerak 24-jam/1-jam), manakala AQICN menggunakan skala US-EPA AQI."
     },
     {
