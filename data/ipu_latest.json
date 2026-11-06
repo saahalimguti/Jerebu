@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-11-06T21:13:12.859981",
-  "formatted_time": "06 Nov 2026, 21:13",
+  "timestamp": "2026-11-06T21:59:06.110235",
+  "formatted_time": "06 Nov 2026, 21:59",
   "summary": {
     "national_api": 43,
     "status": "Baik",
@@ -1144,19 +1144,19 @@
       "region": "Sabah",
       "lat": 5.298106,
       "lon": 115.232276,
-      "api": 54,
+      "api": 53,
       "param_symbol": "**",
       "status": "Sederhana",
       "status_slug": "moderate",
       "color": "#22c55e",
       "record_dt": "2026-11-07T05:00:00",
       "components": {
-        "pm25": 32.2,
-        "pm10": 53.6,
-        "so2": 4.3,
-        "no2": 13.5,
-        "o3": 35.1,
-        "co": 0.43
+        "pm25": 31.7,
+        "pm10": 52.7,
+        "so2": 4.2,
+        "no2": 13.2,
+        "o3": 34.5,
+        "co": 0.42
       }
     },
     {
@@ -1572,10 +1572,10 @@
       "region": "Semenanjung",
       "doe_api": 37,
       "doe_status": "Baik",
-      "aqicn_aqi": 36,
+      "aqicn_aqi": 37,
       "aqicn_name": "Kulim Hi-Tech, Kedah, Malaysia",
-      "delta": -1,
-      "delta_label": "-1",
+      "delta": 0,
+      "delta_label": "0",
       "explanation": "DOE menggunakan formula Indeks Pencemaran Udara JAS (Purata bergerak 24-jam/1-jam), manakala AQICN menggunakan skala US-EPA AQI."
     },
     {
@@ -1585,10 +1585,10 @@
       "region": "Semenanjung",
       "doe_api": 53,
       "doe_status": "Sederhana",
-      "aqicn_aqi": 66,
+      "aqicn_aqi": 67,
       "aqicn_name": "Perai, Pulau Pinang, Malaysia",
-      "delta": 13,
-      "delta_label": "+13",
+      "delta": 14,
+      "delta_label": "+14",
       "explanation": "DOE menggunakan formula Indeks Pencemaran Udara JAS (Purata bergerak 24-jam/1-jam), manakala AQICN menggunakan skala US-EPA AQI."
     },
     {
@@ -1598,10 +1598,10 @@
       "region": "Semenanjung",
       "doe_api": 67,
       "doe_status": "Sederhana",
-      "aqicn_aqi": 66,
+      "aqicn_aqi": 67,
       "aqicn_name": "Perai, Pulau Pinang, Malaysia",
-      "delta": -1,
-      "delta_label": "-1",
+      "delta": 0,
+      "delta_label": "0",
       "explanation": "DOE menggunakan formula Indeks Pencemaran Udara JAS (Purata bergerak 24-jam/1-jam), manakala AQICN menggunakan skala US-EPA AQI."
     },
     {
@@ -1611,10 +1611,10 @@
       "region": "Semenanjung",
       "doe_api": 42,
       "doe_status": "Baik",
-      "aqicn_aqi": 41,
+      "aqicn_aqi": 42,
       "aqicn_name": "Minden, Pulau Pinang, Malaysia",
-      "delta": -1,
-      "delta_label": "-1",
+      "delta": 0,
+      "delta_label": "0",
       "explanation": "DOE menggunakan formula Indeks Pencemaran Udara JAS (Purata bergerak 24-jam/1-jam), manakala AQICN menggunakan skala US-EPA AQI."
     },
     {
@@ -1624,10 +1624,10 @@
       "region": "Semenanjung",
       "doe_api": 29,
       "doe_status": "Baik",
-      "aqicn_aqi": 41,
+      "aqicn_aqi": 42,
       "aqicn_name": "Minden, Pulau Pinang, Malaysia",
-      "delta": 12,
-      "delta_label": "+12",
+      "delta": 13,
+      "delta_label": "+13",
       "explanation": "DOE menggunakan formula Indeks Pencemaran Udara JAS (Purata bergerak 24-jam/1-jam), manakala AQICN menggunakan skala US-EPA AQI."
     },
     {
@@ -1650,10 +1650,10 @@
       "region": "Semenanjung",
       "doe_api": 64,
       "doe_status": "Sederhana",
-      "aqicn_aqi": 53,
-      "aqicn_name": "S K Jalan Pegoh, Ipoh, Perak, Malaysia",
-      "delta": -11,
-      "delta_label": "-11",
+      "aqicn_aqi": 64,
+      "aqicn_name": "Jalan Tasek, Ipoh, Perak, Malaysia",
+      "delta": 0,
+      "delta_label": "0",
       "explanation": "DOE menggunakan formula Indeks Pencemaran Udara JAS (Purata bergerak 24-jam/1-jam), manakala AQICN menggunakan skala US-EPA AQI."
     },
     {
@@ -1715,10 +1715,10 @@
       "region": "Semenanjung",
       "doe_api": 53,
       "doe_status": "Sederhana",
-      "aqicn_aqi": 70,
-      "aqicn_name": "Batu Muda,Kuala Lumpur, Wilayah Persekutuan, Malaysia",
-      "delta": 17,
-      "delta_label": "+17",
+      "aqicn_aqi": 53,
+      "aqicn_name": "Cheras,Kuala Lumpur, Wilayah Persekutuan, Malaysia",
+      "delta": 0,
+      "delta_label": "0",
       "explanation": "DOE menggunakan formula Indeks Pencemaran Udara JAS (Purata bergerak 24-jam/1-jam), manakala AQICN menggunakan skala US-EPA AQI."
     },
     {
@@ -1754,10 +1754,10 @@
       "region": "Semenanjung",
       "doe_api": 54,
       "doe_status": "Sederhana",
-      "aqicn_aqi": 53,
+      "aqicn_aqi": 54,
       "aqicn_name": "Petaling Jaya, Selangor, Malaysia",
-      "delta": -1,
-      "delta_label": "-1",
+      "delta": 0,
+      "delta_label": "0",
       "explanation": "DOE menggunakan formula Indeks Pencemaran Udara JAS (Purata bergerak 24-jam/1-jam), manakala AQICN menggunakan skala US-EPA AQI."
     },
     {
@@ -1819,10 +1819,10 @@
       "region": "Semenanjung",
       "doe_api": 30,
       "doe_status": "Baik",
-      "aqicn_aqi": 31,
+      "aqicn_aqi": 30,
       "aqicn_name": "Seremban, Negeri Sembilan, Malaysia",
-      "delta": 1,
-      "delta_label": "+1",
+      "delta": 0,
+      "delta_label": "0",
       "explanation": "DOE menggunakan formula Indeks Pencemaran Udara JAS (Purata bergerak 24-jam/1-jam), manakala AQICN menggunakan skala US-EPA AQI."
     },
     {
@@ -1832,10 +1832,10 @@
       "region": "Semenanjung",
       "doe_api": 43,
       "doe_status": "Baik",
-      "aqicn_aqi": 42,
+      "aqicn_aqi": 43,
       "aqicn_name": "Port Dickson, Negeri Sembilan, Malaysia",
-      "delta": -1,
-      "delta_label": "-1",
+      "delta": 0,
+      "delta_label": "0",
       "explanation": "DOE menggunakan formula Indeks Pencemaran Udara JAS (Purata bergerak 24-jam/1-jam), manakala AQICN menggunakan skala US-EPA AQI."
     },
     {
@@ -1845,10 +1845,10 @@
       "region": "Semenanjung",
       "doe_api": 46,
       "doe_status": "Baik",
-      "aqicn_aqi": 47,
+      "aqicn_aqi": 46,
       "aqicn_name": "Alor Gajah, Melaka, Malaysia",
-      "delta": 1,
-      "delta_label": "+1",
+      "delta": 0,
+      "delta_label": "0",
       "explanation": "DOE menggunakan formula Indeks Pencemaran Udara JAS (Purata bergerak 24-jam/1-jam), manakala AQICN menggunakan skala US-EPA AQI."
     },
     {
@@ -1871,10 +1871,10 @@
       "region": "Semenanjung",
       "doe_api": 47,
       "doe_status": "Baik",
-      "aqicn_aqi": 49,
+      "aqicn_aqi": 47,
       "aqicn_name": "Bandaraya Melaka, Melaka, Malaysia",
-      "delta": 2,
-      "delta_label": "+2",
+      "delta": 0,
+      "delta_label": "0",
       "explanation": "DOE menggunakan formula Indeks Pencemaran Udara JAS (Purata bergerak 24-jam/1-jam), manakala AQICN menggunakan skala US-EPA AQI."
     },
     {
@@ -1884,10 +1884,10 @@
       "region": "Semenanjung",
       "doe_api": 38,
       "doe_status": "Baik",
-      "aqicn_aqi": 39,
+      "aqicn_aqi": 38,
       "aqicn_name": "Segamat, Johor, Malaysia",
-      "delta": 1,
-      "delta_label": "+1",
+      "delta": 0,
+      "delta_label": "0",
       "explanation": "DOE menggunakan formula Indeks Pencemaran Udara JAS (Purata bergerak 24-jam/1-jam), manakala AQICN menggunakan skala US-EPA AQI."
     },
     {
@@ -2053,10 +2053,10 @@
       "region": "Semenanjung",
       "doe_api": 23,
       "doe_status": "Baik",
-      "aqicn_aqi": 22,
+      "aqicn_aqi": 23,
       "aqicn_name": "Paka, Terengganu, Malaysia",
-      "delta": -1,
-      "delta_label": "-1",
+      "delta": 0,
+      "delta_label": "0",
       "explanation": "DOE menggunakan formula Indeks Pencemaran Udara JAS (Purata bergerak 24-jam/1-jam), manakala AQICN menggunakan skala US-EPA AQI."
     },
     {
@@ -2092,10 +2092,10 @@
       "region": "Semenanjung",
       "doe_api": 27,
       "doe_status": "Baik",
-      "aqicn_aqi": 28,
+      "aqicn_aqi": 27,
       "aqicn_name": "Tanah Merah, Kelantan, Malaysia",
-      "delta": 1,
-      "delta_label": "+1",
+      "delta": 0,
+      "delta_label": "0",
       "explanation": "DOE menggunakan formula Indeks Pencemaran Udara JAS (Purata bergerak 24-jam/1-jam), manakala AQICN menggunakan skala US-EPA AQI."
     },
     {
@@ -2105,10 +2105,10 @@
       "region": "Semenanjung",
       "doe_api": 30,
       "doe_status": "Baik",
-      "aqicn_aqi": 29,
+      "aqicn_aqi": 30,
       "aqicn_name": "Kota Bharu, Kelantan, Malaysia",
-      "delta": -1,
-      "delta_label": "-1",
+      "delta": 0,
+      "delta_label": "0",
       "explanation": "DOE menggunakan formula Indeks Pencemaran Udara JAS (Purata bergerak 24-jam/1-jam), manakala AQICN menggunakan skala US-EPA AQI."
     },
     {
@@ -2181,12 +2181,12 @@
       "name": "Labuan, W.P. LABUAN",
       "state": "WP Labuan",
       "region": "Sabah",
-      "doe_api": 54,
+      "doe_api": 53,
       "doe_status": "Sederhana",
-      "aqicn_aqi": 53,
+      "aqicn_aqi": 54,
       "aqicn_name": "Labuan, Wilayah Persekutuan, Malaysia",
-      "delta": -1,
-      "delta_label": "-1",
+      "delta": 1,
+      "delta_label": "+1",
       "explanation": "DOE menggunakan formula Indeks Pencemaran Udara JAS (Purata bergerak 24-jam/1-jam), manakala AQICN menggunakan skala US-EPA AQI."
     },
     {
